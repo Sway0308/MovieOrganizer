@@ -23,10 +23,21 @@ namespace Category.Standard.Handlers
                 var brackets = JsonConvert.DeserializeObject<IList<Bracket>>(bracketJson);
                 CategorizeBrackets = new List<Bracket>(brackets);
             }
+
+            if (!File.Exists(ExtensionPath))
+                Extensions = new List<string>();
+            else
+            {
+                var json = File.ReadAllText(ExtensionPath);
+                var brackets = JsonConvert.DeserializeObject<IList<string>>(json);
+                Extensions = new List<string>(brackets);
+            }
         }
 
         private string FilePath => DirPath + "Bracket.json";
-        public IList<Bracket> CategorizeBrackets { get; }
+        private string ExtensionPath => DirPath + "extension.json";
+        private IList<Bracket> CategorizeBrackets { get; }
+        private IList<string> Extensions { get; }
 
         public IList<string> EmptyFileDirs { get; } = new List<string>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
@@ -50,7 +61,10 @@ namespace Category.Standard.Handlers
                 var model = ExtractFilmInfo(file);
                 FilmInfos.Add(model);
             }
+        }
 
+        protected override void AfterRecusiveSearch(string path)
+        {
             IntergrateAndExportBrackets();
         }
 
