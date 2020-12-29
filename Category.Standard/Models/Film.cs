@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Category.Standard.Models
@@ -19,6 +20,7 @@ namespace Category.Standard.Models
         public string Identification { get; set; } = string.Empty;
         public IList<string> Actors { get; } = new List<string>();
         public IList<string> Categories { get; } = new List<string>();
+        [JsonIgnore]
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         public void AddBrackets(IEnumerable<Bracket> brackets)
@@ -27,6 +29,14 @@ namespace Category.Standard.Models
             {
                 Brackets.Add(item);
             }
+        }
+
+        public string ToCsvFormat()
+        {
+            return FilePath + "," + FileName + "," + ExtensionName
+                 + "," + Distributor + "," + Identification
+                 + "," + string.Join("|", Actors)
+                 + "," + string.Join("|", Categories);
         }
     }
 }

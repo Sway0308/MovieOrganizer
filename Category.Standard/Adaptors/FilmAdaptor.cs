@@ -42,19 +42,12 @@ namespace Category.Standard.Adaptors
             var str = new StringBuilder();
             str.AppendLine(title);
             foreach (var item in Handler.FilmInfos)
-            {                
-                for(var i = 0; i < props.Length; i++)
-                {
-                    var prop = props[i];
-                    var value = prop.GetValue(item, null);
-                    content[i] = value.ToString();
-                }
-
-                str.AppendLine(string.Join(",", content));
+            {
+                str.AppendLine(item.ToCsvFormat());
             }
 
             var filePath = Path.Combine(csvPath, "film.csv");
-            File.WriteAllText(filePath, str.ToString());
+            File.WriteAllText(filePath, str.ToString(), Encoding.UTF8);
         }
     }
 }
