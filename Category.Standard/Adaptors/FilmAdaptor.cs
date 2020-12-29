@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Handlers;
+using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using System;
 using System.IO;
@@ -7,11 +8,16 @@ using System.Text;
 
 namespace Category.Standard.Adaptors
 {
-    public class FilmAdaptor
+    public class FilmAdaptor : IServiceAdaptor
     {
         private readonly FilmHandler Handler = new FilmHandler();
 
-        public void Categorize(string path)
+        public void Execute(string inputParam)
+        {
+            Categorize(inputParam);
+        }
+
+        private void Categorize(string path)
         {
             Handler.RecusiveSearch(path);
             Console.WriteLine($"Empty dir count: {Handler.EmptyFileDirs.Count}");
