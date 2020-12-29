@@ -10,7 +10,7 @@ namespace Category.Standard.Handlers
 {
     public class FilmHandler : DirRecursiveHandler
     {
-        private readonly string DirPath = AppDomain.CurrentDomain.BaseDirectory + "App_Data/";
+        private readonly string DirPath = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
         public FilmHandler()
         {
             Directory.CreateDirectory(DirPath);
@@ -71,7 +71,7 @@ namespace Category.Standard.Handlers
         private Film ExtractFilmInfo(string file)
         {
             var model = new Film(file);
-            var brackets = ExtractBrackets(model.FileName);
+            var brackets = ExtractBrackets(model.FileName).ToList();
             model.AddBrackets(brackets);
             if (model.Brackets.Any(x => x.Type == Configs.CategoryType.Distributor))
             {
@@ -106,7 +106,7 @@ namespace Category.Standard.Handlers
 
         private IEnumerable<Bracket> ExtractBrackets(string fileName)
         {
-            if (!fileName.Contains("(") || !fileName.Contains(")"))
+            if (!fileName.StartsWith("(") || !fileName.Contains("(") || !fileName.Contains(")"))
                 yield break;
 
             var leftBracket = fileName.IndexOf("(");
@@ -114,9 +114,9 @@ namespace Category.Standard.Handlers
             if (leftBracket < 0 || rightBracket < 0)
                 yield break;
 
-            var innerText = fileName.Substring(leftBracket + 1, rightBracket - leftBracket + 1);
+            var innerText = fileName.Substring(leftBracket, rightBracket + 1);
             yield return DefineBracket(innerText);
-            var nextFileName = fileName.Substring(rightBracket);
+            var nextFileName = fileName.Substring(rightBracket + 1);
             ExtractBrackets(nextFileName);
         }
 
@@ -140,8 +140,8 @@ namespace Category.Standard.Handlers
 
             if (CategorizeBrackets.Any())
             {
-                var s = JsonConvert.SerializeObject(CategorizeBrackets);
-                File.WriteAllText(s, FilePath);
+                var s = JsonConvert.SerializeObject(CategorizeBrackets, Formatting.Indented);
+                File.WriteAllText(FilePath, s);
             }
         }
     }

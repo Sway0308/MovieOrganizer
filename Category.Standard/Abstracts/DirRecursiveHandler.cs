@@ -29,7 +29,7 @@ namespace Category.Standard.Abstracts
                 ProcessDirs(innerDirs);
                 foreach (var dir in innerDirs)
                 {
-                    RecusiveSearch(dir);
+                    DoRecusiveSearch(dir);
                 }
             }
 
