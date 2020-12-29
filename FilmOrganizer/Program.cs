@@ -1,7 +1,7 @@
-﻿using MovieOrganizer.Adaptors;
+﻿using Category.Standard.Adaptors;
 using System;
 
-namespace MovieOrganizer
+namespace FilmOrganizer
 {
     public static class Program
     {

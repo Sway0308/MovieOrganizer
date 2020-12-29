@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieOrganizer", "MovieOrganizer\MovieOrganizer.csproj", "{5DBC755B-3239-4CC7-82C4-810B30EF496A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmOrganizer", "FilmOrganizer\FilmOrganizer.csproj", "{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category.Standard", "Category.Standard\Category.Standard.csproj", "{CAC0BD79-8B74-4900-8B91-62D65B261245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC0BD79-8B74-4900-8B91-62D65B261245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC0BD79-8B74-4900-8B91-62D65B261245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC0BD79-8B74-4900-8B91-62D65B261245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC0BD79-8B74-4900-8B91-62D65B261245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
