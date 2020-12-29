@@ -56,7 +56,7 @@ namespace Category.Standard.Handlers
                 return;
             }
 
-            foreach (var file in files)
+            foreach (var file in files.Where(x => Extensions.Contains(Path.GetExtension(x))))
             {
                 var model = ExtractFilmInfo(file);
                 FilmInfos.Add(model);
