@@ -1,4 +1,5 @@
-﻿using Category.Standard.Handlers;
+﻿using Category.Standard.Configs;
+using Category.Standard.Handlers;
 using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using System;
@@ -22,23 +23,23 @@ namespace Category.Standard.Adaptors
             Handler.RecusiveSearch(path);
             Console.WriteLine($"Empty dir count: {Handler.EmptyFileDirs.Count}");
             Console.WriteLine($"All films count: {Handler.FilmInfos.Count}");
+            Console.WriteLine("============================================");
             if (Handler.FilmInfos.Count == 0)
                 return;
 
-            Console.WriteLine("Export films to csv? (Path/N)");
+            Console.WriteLine("Export films to csv? (Y/N)");
             var command = Console.ReadLine();
             if (string.Equals(command, "N", StringComparison.InvariantCultureIgnoreCase))
                 return;
             
-            ExportToCsv(command);
+            ExportToCsv();
         }
 
-        private void ExportToCsv(string csvPath)
+        private void ExportToCsv()
         {
             var props = typeof(Film).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
             var title = string.Join(",", props.Select(x => x.Name));
 
-            var content = new string[props.Length];
             var str = new StringBuilder();
             str.AppendLine(title);
             foreach (var item in Handler.FilmInfos)
@@ -46,8 +47,10 @@ namespace Category.Standard.Adaptors
                 str.AppendLine(item.ToCsvFormat());
             }
 
-            var filePath = Path.Combine(csvPath, "film.csv");
+            var filePath = Path.Combine(BaseConstants.AppDataPath, "film.csv");
             File.WriteAllText(filePath, str.ToString(), Encoding.UTF8);
+            Console.WriteLine("done export csv");
+            Console.WriteLine("============================================");
         }
     }
 }

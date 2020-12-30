@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Abstracts;
+using Category.Standard.Configs;
 using Category.Standard.Models;
 using Newtonsoft.Json;
 using System;
@@ -10,17 +11,19 @@ namespace Category.Standard.Handlers
 {
     public class FilmHandler : DirRecursiveHandler
     {
-        private readonly string DirPath = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
+        private readonly string BracketPath = Path.Combine(BaseConstants.AppDataPath, "Bracket.json");
+        private readonly string ExtensionPath = Path.Combine(BaseConstants.AppDataPath, "extension.json");
+
         public FilmHandler()
         {
-            Directory.CreateDirectory(DirPath);
+            Directory.CreateDirectory(BaseConstants.AppDataPath);
 
-            if (!File.Exists(FilePath))
+            if (!File.Exists(BracketPath))
                 CategorizeBrackets = new List<Bracket>();
             else
             {
-                var bracketJson = File.ReadAllText(FilePath);
-                var brackets = JsonConvert.DeserializeObject<IList<Bracket>>(bracketJson);
+                var json = File.ReadAllText(BracketPath);
+                var brackets = JsonConvert.DeserializeObject<IList<Bracket>>(json);
                 CategorizeBrackets = new List<Bracket>(brackets);
             }
 
@@ -34,8 +37,6 @@ namespace Category.Standard.Handlers
             }
         }
 
-        private string FilePath => DirPath + "Bracket.json";
-        private string ExtensionPath => DirPath + "extension.json";
         private IList<Bracket> CategorizeBrackets { get; }
         private IList<string> Extensions { get; }
 
@@ -71,19 +72,19 @@ namespace Category.Standard.Handlers
         private Film ExtractFilmInfo(string file)
         {
             var model = new Film(file);
-            var brackets = ExtractBrackets(model.FileName).ToList();
+            var brackets = ExtractBrackets(model.FileName);
             model.AddBrackets(brackets);
-            if (model.Brackets.Any(x => x.Type == Configs.CategoryType.Distributor))
+            if (model.Brackets.Any(x => x.Type == CategoryType.Distributor))
             {
-                model.Distributor = model.Brackets.First(x => x.Type == Configs.CategoryType.Distributor).Text;
+                model.Distributor = model.Brackets.First(x => x.Type == CategoryType.Distributor).Text;
             }
 
-            if (model.Brackets.Any(x => x.Type == Configs.CategoryType.Identification))
+            if (model.Brackets.Any(x => x.Type == CategoryType.Identification))
             {
-                model.Identification = model.Brackets.First(x => x.Type == Configs.CategoryType.Identification).Text;
+                model.Identification = model.Brackets.First(x => x.Type == CategoryType.Identification).Text;
             }
 
-            if (model.Brackets.All(x => x.Type == Configs.CategoryType.Undefined))
+            if (model.Brackets.All(x => x.Type == CategoryType.Undefined))
             {
                 if (model.Brackets.Count >= 2)
                 {
@@ -106,7 +107,7 @@ namespace Category.Standard.Handlers
 
         private IEnumerable<Bracket> ExtractBrackets(string fileName)
         {
-            if (!fileName.StartsWith("(") || !fileName.Contains("(") || !fileName.Contains(")"))
+            if (!fileName.Contains("(") || !fileName.Contains(")"))
                 yield break;
 
             var leftBracket = fileName.IndexOf("(");
@@ -114,9 +115,9 @@ namespace Category.Standard.Handlers
             if (leftBracket < 0 || rightBracket < 0)
                 yield break;
 
-            var innerText = fileName.Substring(leftBracket, rightBracket + 1);
+            var innerText = fileName.Substring(leftBracket, rightBracket - leftBracket + 1);
             yield return DefineBracket(innerText);
-            var nextFileName = fileName.Substring(rightBracket + 1);
+            var nextFileName = fileName.Replace(innerText, string.Empty);
             ExtractBrackets(nextFileName);
         }
 
@@ -131,7 +132,7 @@ namespace Category.Standard.Handlers
 
         private void IntergrateAndExportBrackets()
         {
-            var brackets = FilmInfos.SelectMany(x => x.Brackets);
+            var brackets = FilmInfos.SelectMany(x => x.Brackets).OrderBy(x => new { x.Type, x.Text });
             foreach (var bracket in brackets)
             {
                 if (!CategorizeBrackets.Any(x => x.Text.Equals(bracket.Text)))
@@ -141,7 +142,7 @@ namespace Category.Standard.Handlers
             if (CategorizeBrackets.Any())
             {
                 var s = JsonConvert.SerializeObject(CategorizeBrackets, Formatting.Indented);
-                File.WriteAllText(FilePath, s);
+                File.WriteAllText(BracketPath, s);
             }
         }
     }
