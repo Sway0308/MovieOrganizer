@@ -1,6 +1,6 @@
 ﻿using Category.Standard.Abstracts;
+using Category.Standard.Configs;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +22,8 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\extension.json";
-            
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(Extensions.Distinct()));
+            var filePath = Path.Combine(BaseConstants.AppDataPath, "extension.json");
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(Extensions.Distinct(), Formatting.Indented));
         }
     }
 }
