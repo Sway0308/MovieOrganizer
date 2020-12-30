@@ -33,10 +33,18 @@ namespace Category.Standard.Models
 
         public string ToCsvFormat()
         {
-            return FilePath + "," + FileName + "," + ExtensionName
-                 + "," + Distributor + "," + Identification
-                 + "," + string.Join("|", Actors)
-                 + "," + string.Join("|", Categories);
+            return FilePath 
+                + "," + FileName 
+                + "," + ExtensionName
+                + "," + Distributor 
+                + "," + Identification
+                + "," + string.Join("|", Actors)
+                + "," + string.Join("|", Categories);
+        }
+
+        public override string ToString()
+        {
+            return FileName;
         }
     }
 }
