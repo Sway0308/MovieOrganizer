@@ -1,6 +1,7 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
+using Gatchan.Base.Standard.Base;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,7 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            foreach (var item in Extensions.TempExtensions.Where(x => !Extensions.FilmExtensions.Contains(x)).Distinct())
+            foreach (var item in Extensions.TempExtensions.Where(x => !x.SameTextOr(Extensions.FilmExtensions.ToArray())).Distinct())
             {
                 Extensions.OtherExtensions.Add(item);
             }

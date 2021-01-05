@@ -15,6 +15,7 @@ namespace FilmSearcher
                .Build();
             var exportPath = config["ExportPath"];
             BaseConstants.SetExportPath(exportPath);
+            Console.WriteLine("chcp 65001");
             Execute();
         }
 
@@ -26,7 +27,7 @@ namespace FilmSearcher
             Console.WriteLine("2. Search distributor?");
             var choice = Console.ReadLine();
 
-            if (!choice.SameText("exit"))
+            if (choice.SameText("exit"))
                 return;
             if (!choice.SameTextOr("1", "2"))
                 Execute();

@@ -47,7 +47,7 @@ namespace Category.Standard.Models
 
         public override bool Equals(object obj)
         {
-            return this.FilePath.SameText((obj as Film).FilePath);
+            return this.FilePath.SameText((obj as Film)?.FilePath);
         }
     }
 }

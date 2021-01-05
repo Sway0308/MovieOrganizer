@@ -22,7 +22,8 @@ namespace Category.Standard.Handlers
         private Film ExtractFilmInfo(string file)
         {
             var model = new Film(file);
-            var brackets = ExtractBrackets(model.FileName);
+            var brackets = new List<Bracket>();
+            ExtractBrackets(model.FileName, brackets);
             model.AddBrackets(brackets);
             if (model.Brackets.Any(x => x.Type == CategoryType.Distributor))
             {
@@ -55,20 +56,20 @@ namespace Category.Standard.Handlers
             return model;
         }
 
-        private IEnumerable<Bracket> ExtractBrackets(string fileName)
+        private void ExtractBrackets(string fileName, IList<Bracket> brackets)
         {
             if (!fileName.Contains("(") || !fileName.Contains(")"))
-                yield break;
+                return;
 
             var leftBracket = fileName.IndexOf("(");
             var rightBracket = fileName.IndexOf(")");
             if (leftBracket < 0 || rightBracket < 0)
-                yield break;
+                return;
 
             var innerText = fileName.Substring(leftBracket, rightBracket - leftBracket + 1);
-            yield return DefineBracket(innerText);
+            brackets.Add(DefineBracket(innerText));
             var nextFileName = fileName.Replace(innerText, string.Empty);
-            ExtractBrackets(nextFileName);
+            ExtractBrackets(nextFileName, brackets);
         }
 
         private Bracket DefineBracket(string text)
