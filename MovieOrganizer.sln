@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieOrganizer", "MovieOrganizer\MovieOrganizer.csproj", "{5DBC755B-3239-4CC7-82C4-810B30EF496A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmOrganizer", "FilmOrganizer\FilmOrganizer.csproj", "{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Category.Standard", "Category.Standard\Category.Standard.csproj", "{CAC0BD79-8B74-4900-8B91-62D65B261245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gatchan.Base.Standard", "Gatchan.Base.Standard\Gatchan.Base.Standard.csproj", "{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gatchan.Base.Standard", "Gatchan.Base.Standard\Gatchan.Base.Standard.csproj", "{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{AB001F66-5106-46B4-BD71-9DD1B4DDDAEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmSearcher", "FilmSearcher\FilmSearcher.csproj", "{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DBC755B-3239-4CC7-82C4-810B30EF496A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{996583C6-30A7-43C4-A73D-D58D5DDD9E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +31,10 @@ Global
 		{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

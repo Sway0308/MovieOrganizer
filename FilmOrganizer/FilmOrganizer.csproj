@@ -58,6 +58,10 @@
       <Project>{cac0bd79-8b74-4900-8b91-62d65b261245}</Project>
       <Name>Category.Standard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gatchan.Base.Standard\Gatchan.Base.Standard.csproj">
+      <Project>{8f0cba10-5d25-4c99-8da8-85d0cb05e236}</Project>
+      <Name>Gatchan.Base.Standard</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

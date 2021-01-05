@@ -10,21 +10,12 @@ namespace Category.Standard.Handlers
 {
     public partial class FilmHandler
     {
-        private readonly string DistributorCatPath = Path.Combine(BaseConstants.AppDataPath, "DistributorCat.json");
+        private string DistributorCatPath => BaseConstants.DistributorCatPath;
         private IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
 
         private void InitDistributorCat()
         {
-            DistributorCats.Clear();
-            if (!File.Exists(DistributorCatPath))
-                return;
-
-            var json = File.ReadAllText(DistributorCatPath);
-            var disCats = JsonConvert.DeserializeObject<IList<DistributorCat>>(json);
-            foreach (var disCat in disCats)
-            {
-                DistributorCats.Add(disCat);
-            }
+            BaseConstants.LoadInfos(DistributorCatPath, DistributorCats);
         }
 
         private void ExportDistributorCats()

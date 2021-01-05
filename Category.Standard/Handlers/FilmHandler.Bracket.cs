@@ -10,22 +10,13 @@ namespace Category.Standard.Handlers
 {
     public partial class FilmHandler
     {
-        private readonly string BracketPath = Path.Combine(BaseConstants.AppDataPath, "Bracket.json");
+        private string BracketPath => BaseConstants.BracketPath;
 
         private IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         private void InitBrackets()
         {
-            Brackets.Clear();
-            if (!File.Exists(BracketPath))
-                return;
-            
-            var json = File.ReadAllText(BracketPath);
-            var brackets = JsonConvert.DeserializeObject<IList<Bracket>>(json);
-            foreach (var bracket in brackets)
-            {
-                Brackets.Add(bracket);
-            }
+            BaseConstants.LoadInfos(BracketPath, Brackets);
         }
 
         private Film ExtractFilmInfo(string file)

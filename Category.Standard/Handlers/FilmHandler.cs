@@ -1,7 +1,6 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Category.Standard.Handlers
 {
     public partial class FilmHandler : DirRecursiveHandler
     {
-        private readonly string ExtensionPath = Path.Combine(BaseConstants.AppDataPath, "extension.json");
+        private string ExtensionPath => BaseConstants.ExtensionPath;
 
         public FilmHandler()
         {
@@ -18,18 +17,10 @@ namespace Category.Standard.Handlers
 
             InitBrackets();
             InitDistributorCat();
-
-            if (!File.Exists(ExtensionPath))
-                Extensions = new List<string>();
-            else
-            {
-                var json = File.ReadAllText(ExtensionPath);
-                var exts = JsonConvert.DeserializeObject<IList<string>>(json);
-                Extensions = new List<string>(exts);
-            }
+            Extensions = BaseConstants.LoadInfo<Extension>(ExtensionPath);
         }
 
-        private IList<string> Extensions { get; }
+        private Extension Extensions { get; }
         public IList<string> EmptyFileDirs { get; } = new List<string>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
 
@@ -47,7 +38,7 @@ namespace Category.Standard.Handlers
                 return;
             }
 
-            foreach (var file in files.Where(x => Extensions.Contains(Path.GetExtension(x))))
+            foreach (var file in files.Where(x => Extensions.FilmExtensions.Contains(Path.GetExtension(x))))
             {
                 var model = ExtractFilmInfo(file);
                 FilmInfos.Add(model);

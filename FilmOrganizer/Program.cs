@@ -1,6 +1,7 @@
 ﻿using Category.Standard.Adaptors;
 using Category.Standard.Interfaces;
 using System;
+using Gatchan.Base.Standard.Base;
 
 namespace FilmOrganizer
 {
@@ -20,7 +21,7 @@ namespace FilmOrganizer
 
             Console.WriteLine("Enter Path");
             var path = Console.ReadLine();
-            if (string.Equals(path, "exit", StringComparison.InvariantCultureIgnoreCase))
+            if (path.SameText("exit"))
                 return;
 
             Console.WriteLine("Start Process");
@@ -29,13 +30,13 @@ namespace FilmOrganizer
             adaptor.Execute(path);
             Console.WriteLine("============================================");
             Console.WriteLine("End Process");
-            Console.WriteLine("");
+            Console.WriteLine();
             Execute();
         }
 
         private static IServiceAdaptor CreateServiceAdaptor(string param)
         {
-            if (param.Equals("1", StringComparison.InvariantCultureIgnoreCase))
+            if (param.SameText("1"))
                 return new ExtensionAdaptor(); 
             else
                 return new FilmAdaptor();
