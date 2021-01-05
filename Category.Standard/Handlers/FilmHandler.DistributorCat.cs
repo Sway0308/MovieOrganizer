@@ -11,7 +11,7 @@ namespace Category.Standard.Handlers
     public partial class FilmHandler
     {
         private string DistributorCatPath => BaseConstants.DistributorCatPath;
-        private IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
+        public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
 
         private void InitDistributorCat()
         {
