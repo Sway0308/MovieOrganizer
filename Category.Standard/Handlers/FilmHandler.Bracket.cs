@@ -12,7 +12,7 @@ namespace Category.Standard.Handlers
     {
         private string BracketPath => BaseConstants.BracketPath;
 
-        private IList<Bracket> Brackets { get; } = new List<Bracket>();
+        public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         private void InitBrackets()
         {

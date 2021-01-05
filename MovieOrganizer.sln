@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{AB00
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmSearcher", "FilmSearcher\FilmSearcher.csproj", "{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indexing", "Indexing", "{57183931-A9D5-44B6-9D23-0313BF5DA456}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmIndex.Job", "Indexing\FilmIndex.Job\FilmIndex.Job.csproj", "{9829F457-774D-46DC-B2C8-13C40B58B203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmIndex.Host", "Indexing\FilmIndex.Host\FilmIndex.Host.csproj", "{55FE354F-6DEE-4F46-8FFD-879C9992445A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +41,22 @@ Global
 		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6150DD34-A424-4D6B-8DF6-C700D6CAE5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9829F457-774D-46DC-B2C8-13C40B58B203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9829F457-774D-46DC-B2C8-13C40B58B203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9829F457-774D-46DC-B2C8-13C40B58B203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9829F457-774D-46DC-B2C8-13C40B58B203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FE354F-6DEE-4F46-8FFD-879C9992445A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FE354F-6DEE-4F46-8FFD-879C9992445A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FE354F-6DEE-4F46-8FFD-879C9992445A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FE354F-6DEE-4F46-8FFD-879C9992445A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8F0CBA10-5D25-4C99-8DA8-85D0CB05E236} = {AB001F66-5106-46B4-BD71-9DD1B4DDDAEA}
+		{9829F457-774D-46DC-B2C8-13C40B58B203} = {57183931-A9D5-44B6-9D23-0313BF5DA456}
+		{55FE354F-6DEE-4F46-8FFD-879C9992445A} = {57183931-A9D5-44B6-9D23-0313BF5DA456}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C4495EA-A879-47E4-87EE-7F509EA285EC}

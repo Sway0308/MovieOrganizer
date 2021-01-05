@@ -1,5 +1,4 @@
-﻿using Category.Standard.Models;
-using Gatchan.Base.Standard.Base;
+﻿using Gatchan.Base.Standard.Base;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,12 +8,19 @@ namespace Category.Standard.Configs
 {
     public static class BaseConstants
     {
-        public static string AppDataPath { get; } = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
+        private static string ExportPath = AppDomain.CurrentDomain.BaseDirectory;
+        public static string AppDataPath { get; } = ExportPath + "App_Data\\";
         public static string ExtensionPath { get; } = Path.Combine(AppDataPath, "extension.json");
         public static string FilmPath { get; } = Path.Combine(AppDataPath, "film.json");
         public static string DistributorCatPath { get; } = Path.Combine(AppDataPath, "distributorCat.json");
         public static string BracketPath { get; } = Path.Combine(AppDataPath, "bracket.json");
         public static string EmptyDirPath { get; } = Path.Combine(AppDataPath, "emptyDir.json");
+
+        public static void SetExportPath(string exportPath)
+        {
+            ExportPath = exportPath;
+            Directory.CreateDirectory(ExportPath);
+        }
 
         public static T LoadInfo<T>(string filePath) where T : new()
         {

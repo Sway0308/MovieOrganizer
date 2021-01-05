@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Gatchan.Base.Standard.Base;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
@@ -42,6 +43,11 @@ namespace Category.Standard.Models
         public override string ToString()
         {
             return FileName;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.FilePath.SameText((obj as Film).FilePath);
         }
     }
 }
