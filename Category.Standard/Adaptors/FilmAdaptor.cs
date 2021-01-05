@@ -63,8 +63,7 @@ namespace Category.Standard.Adaptors
         private void ExportToJson()
         {
             var str = JsonConvert.SerializeObject(Handler.FilmInfos, Formatting.Indented);
-            var filePath = Path.Combine(BaseConstants.AppDataPath, "film.json");
-            File.WriteAllText(filePath, str, Encoding.UTF8);
+            File.WriteAllText(BaseConstants.FilmPath, str, Encoding.UTF8);
         }
     }
 }
