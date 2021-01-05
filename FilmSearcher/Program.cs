@@ -1,6 +1,8 @@
 ﻿using System;
 using Category.Standard.Adaptors;
+using Category.Standard.Configs;
 using Gatchan.Base.Standard.Base;
+using Microsoft.Extensions.Configuration;
 
 namespace FilmSearcher
 {
@@ -8,6 +10,11 @@ namespace FilmSearcher
     {
         static void Main(string[] args)
         {
+            IConfiguration config = new ConfigurationBuilder()
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .Build();
+            var exportPath = config["ExportPath"];
+            BaseConstants.SetExportPath(exportPath);
             Execute();
         }
 

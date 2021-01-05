@@ -26,6 +26,7 @@ namespace Category.Standard.Handlers
 
         protected override void BeforeRecusiveSearch(string path)
         {
+            Directory.CreateDirectory(BaseConstants.AppDataPath);
             EmptyFileDirs.Clear();
             FilmInfos.Clear();
         }
