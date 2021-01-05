@@ -1,18 +1,15 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
-using Gatchan.Base.Standard.Base;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor
     {
-        private readonly string FilmPath = Path.Combine(BaseConstants.AppDataPath, "film.json");
-        private readonly string DistributorCatPath = Path.Combine(BaseConstants.AppDataPath, "DistributorCat.json");
+        private string FilmPath => BaseConstants.FilmPath;
+        private string DistributorCatPath => BaseConstants.DistributorCatPath;
 
         public CatalogAdaptor()
         {

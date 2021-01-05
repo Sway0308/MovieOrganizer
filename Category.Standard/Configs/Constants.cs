@@ -8,18 +8,16 @@ namespace Category.Standard.Configs
 {
     public static class BaseConstants
     {
-        private static string ExportPath = AppDomain.CurrentDomain.BaseDirectory;
-        public static string AppDataPath { get; } = ExportPath + "App_Data\\";
-        public static string ExtensionPath { get; } = Path.Combine(AppDataPath, "extension.json");
-        public static string FilmPath { get; } = Path.Combine(AppDataPath, "film.json");
-        public static string DistributorCatPath { get; } = Path.Combine(AppDataPath, "distributorCat.json");
-        public static string BracketPath { get; } = Path.Combine(AppDataPath, "bracket.json");
-        public static string EmptyDirPath { get; } = Path.Combine(AppDataPath, "emptyDir.json");
+        public static string AppDataPath { get; private set; } = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
+        public static string ExtensionPath => Path.Combine(AppDataPath, "extension.json");
+        public static string FilmPath => Path.Combine(AppDataPath, "film.json");
+        public static string DistributorCatPath => Path.Combine(AppDataPath, "distributorCat.json");
+        public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
+        public static string EmptyDirPath => Path.Combine(AppDataPath, "emptyDir.json");
 
         public static void SetExportPath(string exportPath)
         {
-            ExportPath = exportPath;
-            Directory.CreateDirectory(ExportPath);
+            AppDataPath = exportPath;
         }
 
         public static T LoadInfo<T>(string filePath) where T : new()
