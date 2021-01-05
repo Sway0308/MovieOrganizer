@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace Category.Standard.Abstracts
+namespace Gatchan.Base.Standard.Abstracts
 {
     public abstract class DirRecursiveHandler
     {

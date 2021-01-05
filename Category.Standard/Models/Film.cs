@@ -10,16 +10,14 @@ namespace Category.Standard.Models
         {
             FilePath = filePath;
             FileName = Path.GetFileNameWithoutExtension(filePath);
-            ExtensionName = Path.GetExtension(filePath);
         }
 
         public string FilePath { get; }
         public string FileName { get; }
-        public string ExtensionName { get; }
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
         public IList<string> Actors { get; } = new List<string>();
-        public IList<string> Categories { get; } = new List<string>();
+        public IList<string> Genres { get; } = new List<string>();
         [JsonIgnore]
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
@@ -34,12 +32,11 @@ namespace Category.Standard.Models
         public string ToCsvFormat()
         {
             return FilePath 
-                + "," + FileName 
-                + "," + ExtensionName
+                + "," + FileName
                 + "," + Distributor 
                 + "," + Identification
                 + "," + string.Join("|", Actors)
-                + "," + string.Join("|", Categories);
+                + "," + string.Join("|", Genres);
         }
 
         public override string ToString()

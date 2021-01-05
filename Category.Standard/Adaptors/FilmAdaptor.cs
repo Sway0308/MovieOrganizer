@@ -2,6 +2,8 @@
 using Category.Standard.Handlers;
 using Category.Standard.Interfaces;
 using Category.Standard.Models;
+using Gatchan.Base.Standard.Base;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
@@ -23,16 +25,21 @@ namespace Category.Standard.Adaptors
             Handler.RecusiveSearch(path);
             Console.WriteLine($"Empty dir count: {Handler.EmptyFileDirs.Count}");
             Console.WriteLine($"All films count: {Handler.FilmInfos.Count}");
-            Console.WriteLine("============================================");
+            Console.WriteLine();
             if (Handler.FilmInfos.Count == 0)
                 return;
 
-            Console.WriteLine("Export films to csv? (Y/N)");
+            Console.WriteLine("Export? (Y/N)");
             var command = Console.ReadLine();
-            if (string.Equals(command, "N", StringComparison.InvariantCultureIgnoreCase))
+            if (command.SameText("N"))
                 return;
-            
-            ExportToCsv();
+
+            Console.WriteLine("1. json, 2. csv (1/2)");
+            var file = Console.ReadLine();
+            if (file.SameText("1"))
+                ExportToJson();
+            else if (file.SameText("2"))
+                ExportToCsv();
         }
 
         private void ExportToCsv()
@@ -51,6 +58,13 @@ namespace Category.Standard.Adaptors
             File.WriteAllText(filePath, str.ToString(), Encoding.UTF8);
             Console.WriteLine("done export csv");
             Console.WriteLine("============================================");
+        }
+
+        private void ExportToJson()
+        {
+            var str = JsonConvert.SerializeObject(Handler.FilmInfos, Formatting.Indented);
+            var filePath = Path.Combine(BaseConstants.AppDataPath, "film.json");
+            File.WriteAllText(filePath, str, Encoding.UTF8);
         }
     }
 }
