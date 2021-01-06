@@ -47,12 +47,12 @@ namespace FilmSearcher.App
             // 
             this.ListBoxFilm.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ListBoxFilm.FormattingEnabled = true;
+            this.ListBoxFilm.HorizontalScrollbar = true;
             this.ListBoxFilm.ItemHeight = 21;
             this.ListBoxFilm.Location = new System.Drawing.Point(12, 73);
             this.ListBoxFilm.Name = "ListBoxFilm";
             this.ListBoxFilm.Size = new System.Drawing.Size(713, 613);
             this.ListBoxFilm.TabIndex = 2;
-            this.ListBoxFilm.DataSourceChanged += new System.EventHandler(this.ListBoxFilm_DataSourceChanged);
             this.ListBoxFilm.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // LabTotal
