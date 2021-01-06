@@ -1,5 +1,6 @@
 ﻿using Category.Standard.Handlers;
 using FilmIndex.Job;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -10,16 +11,30 @@ namespace FilmIndex.Host
     {
         public void Start()
         {
-            var exportPath = ConfigurationManager.AppSettings["ExportPath"];
-            var paths = new List<string>();
+            Console.WriteLine("FilmIndexHost Starting...");
+            var appDataPath = ConfigurationManager.AppSettings["ExportPath"];
+            Console.WriteLine($"AppDataPath: {appDataPath}");
+            var filmPaths = new List<string>();
             var searchPaths = ConfigurationManager.GetSection("indexInfo/searchPath") as NameValueCollection;
             for (int i = 0; i < searchPaths.Count; i++)
             {
-                paths.Add(searchPaths[i]);
+                filmPaths.Add(searchPaths[i]);
+                Console.WriteLine($"SearchPath: {searchPaths[i]}");
             }
 
-            var indexJob = new IndexJob { ExportPath = exportPath, FilmHandler = new FilmHandler(), FilmPaths = paths };
+            var paths = new List<string>();
+            var samplePaths = ConfigurationManager.GetSection("indexInfo/samplePath") as NameValueCollection;
+            for (int i = 0; i < samplePaths.Count; i++)
+            {
+                paths.Add(samplePaths[i]);
+                Console.WriteLine($"SamplePath: {samplePaths[i]}");
+            }
+
+            var indexJob = new IndexJob { AppDataPath = appDataPath, FilmPaths = filmPaths, SamplePaths = paths };
+            Console.WriteLine($"Start Indexing...");
             indexJob.Execute();
+            Console.WriteLine($"End Indexing...");
+            Console.ReadKey();
         }
     }
 }

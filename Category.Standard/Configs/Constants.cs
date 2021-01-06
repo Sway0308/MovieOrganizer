@@ -12,12 +12,11 @@ namespace Category.Standard.Configs
         public static string ExtensionPath => Path.Combine(AppDataPath, "extension.json");
         public static string FilmPath => Path.Combine(AppDataPath, "film.json");
         public static string DistributorCatPath => Path.Combine(AppDataPath, "distributorCat.json");
-        public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string EmptyDirPath => Path.Combine(AppDataPath, "emptyDir.json");
 
-        public static void SetExportPath(string exportPath)
+        public static void SetExportPath(string appDataPath)
         {
-            AppDataPath = exportPath;
+            AppDataPath = appDataPath;
         }
 
         public static T LoadInfo<T>(string filePath) where T : new()

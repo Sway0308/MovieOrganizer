@@ -2,22 +2,29 @@
 using Category.Standard.Handlers;
 using Category.Standard.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
+using Gatchan.Base.Standard.Base;
 
 namespace FilmIndex.Job
 {
     public class IndexJob : IJobExecuter
     {
-        public string ExportPath { get; set; }
+        public string AppDataPath { get; set; }
         public IList<string> FilmPaths { get; set; }
-        public FilmHandler FilmHandler { get; set; }
+        public IList<string> SamplePaths { get; set; }
 
         public void Execute()
         {
-            BaseConstants.SetExportPath(ExportPath);
-            foreach (var path in FilmPaths)
+            BaseConstants.SetExportPath(AppDataPath);
+            for (int i = 0; i < FilmPaths.Count; i++)
             {
-                FilmHandler.RecusiveSearch(path);
-                FilmHandler.ExportJson();
+                var path = FilmPaths[i];
+                var isRecongnized = SamplePaths.Any(x => x.SameText(path));
+                var exportAndIncludeSource = i != 0;
+
+                var filmHandler = new FilmHandler(exportAndIncludeSource, isRecongnized);
+                filmHandler.RecusiveSearch(path);
+                filmHandler.ExportJson();
             }
         }
     }

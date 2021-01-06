@@ -1,13 +1,15 @@
-﻿using Category.Standard.Handlers;
+﻿using Category.Standard.Configs;
+using Category.Standard.Handlers;
 using Category.Standard.Interfaces;
 using Gatchan.Base.Standard.Base;
 using System;
+using System.IO;
 
 namespace Category.Standard.Adaptors
 {
     public class FilmAdaptor : IServiceAdaptor
     {
-        private readonly FilmHandler Handler = new FilmHandler();
+        private readonly FilmHandler Handler = new FilmHandler(false, true);
 
         public void Execute(string inputParam)
         {
@@ -16,6 +18,7 @@ namespace Category.Standard.Adaptors
 
         private void Categorize(string path)
         {
+            Directory.CreateDirectory(BaseConstants.AppDataPath);
             Handler.RecusiveSearch(path);
             if (Handler.FilmInfos.Count == 0)
             {
@@ -28,11 +31,6 @@ namespace Category.Standard.Adaptors
             if (!command.SameText("Y"))
                 return;
 
-            ExportToJson();
-        }
-
-        private void ExportToJson()
-        {
             Handler.ExportJson();
         }
     }
