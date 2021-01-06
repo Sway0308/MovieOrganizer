@@ -33,7 +33,7 @@ namespace Category.Standard.Handlers
 
         protected override void ProcessFiles(string path, IEnumerable<string> files)
         {
-            if (!files.Any())
+            if (!files.Any() && !Directory.EnumerateDirectories(path).Any())
             {
                 EmptyFileDirs.Add(path);
                 return;

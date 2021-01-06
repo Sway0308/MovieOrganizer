@@ -24,7 +24,11 @@ namespace Category.Standard.Handlers
             {
                 var distributor = model.Brackets.ElementAt(0).Text;
                 var identify = model.Brackets.ElementAt(1).Text;
-                var category = identify.Substring(0, identify.IndexOf('-'));
+
+                var index = identify.IndexOf('-');
+                if (index < 0)
+                    continue;
+                var category = identify.Substring(0, index) + ")";
                 if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
                     DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
             }
