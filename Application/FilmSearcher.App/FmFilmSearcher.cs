@@ -1,6 +1,5 @@
 ﻿using Category.Standard.Adaptors;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -47,6 +46,11 @@ namespace FilmSearcher.App
             Process prc =  Process.GetCurrentProcess();
             prc.StartInfo.FileName = dirPath.FullName;
             prc.Start();
+        }
+
+        private void ListBoxFilm_DataSourceChanged(object sender, EventArgs e)
+        {
+            LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
         }
     }
 }

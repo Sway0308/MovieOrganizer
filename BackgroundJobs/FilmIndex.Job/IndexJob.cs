@@ -4,6 +4,7 @@ using Category.Standard.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using Gatchan.Base.Standard.Base;
+using Category.Standard.Adaptors;
 
 namespace FilmIndex.Job
 {
@@ -26,6 +27,11 @@ namespace FilmIndex.Job
                 filmHandler.RecusiveSearch(path);
                 filmHandler.ExportJson();
             }
+
+            var categoryAdaptor = new CatalogAdaptor(AppDataPath);
+            var bracketHandler = new BracketHandler(categoryAdaptor.FilmInfos, categoryAdaptor.DistributorCats);
+            bracketHandler.ClassifyBrackets();
+            bracketHandler.ExportJson();
         }
     }
 }
