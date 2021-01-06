@@ -1,5 +1,6 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
+using Gatchan.Base.Standard.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,13 @@ namespace Category.Standard.Adaptors
 
         public IEnumerable<string> FindFilms(string keyword)
         {
-            var result = FilmInfos.Where(x => x.FileName.Contains(keyword));
-            return result.Select(x => x.FilePath);
+            var result = FilmInfos.Where(x => x.FileName.Include(keyword));
+            return result.Select(x => x.FilePath).ToList();
         }
 
         public string FindDistributor(string keyword)
         {
-            var result = DistributorCats.Where(x => x.Category.Contains(keyword));
+            var result = DistributorCats.Where(x => x.Category.Include(keyword));
             return result.FirstOrDefault()?.Distributor;
         }
     }

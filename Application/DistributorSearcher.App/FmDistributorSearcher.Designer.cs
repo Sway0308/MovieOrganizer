@@ -36,7 +36,7 @@ namespace DistributorSearcher.App
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(201, 22);
+            this.btnSearch.Location = new System.Drawing.Point(296, 27);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(103, 33);
             this.btnSearch.TabIndex = 5;
@@ -47,10 +47,10 @@ namespace DistributorSearcher.App
             // txtDistributor
             // 
             this.txtDistributor.Font = new System.Drawing.Font("新細明體", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtDistributor.Location = new System.Drawing.Point(321, 12);
+            this.txtDistributor.Location = new System.Drawing.Point(428, 12);
             this.txtDistributor.Name = "txtDistributor";
             this.txtDistributor.ReadOnly = true;
-            this.txtDistributor.Size = new System.Drawing.Size(163, 55);
+            this.txtDistributor.Size = new System.Drawing.Size(265, 55);
             this.txtDistributor.TabIndex = 4;
             // 
             // txtCategory
@@ -58,7 +58,7 @@ namespace DistributorSearcher.App
             this.txtCategory.Font = new System.Drawing.Font("新細明體", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.txtCategory.Location = new System.Drawing.Point(17, 12);
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(163, 55);
+            this.txtCategory.Size = new System.Drawing.Size(262, 55);
             this.txtCategory.TabIndex = 3;
             this.txtCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCategory_KeyPress);
             // 
@@ -66,7 +66,7 @@ namespace DistributorSearcher.App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 78);
+            this.ClientSize = new System.Drawing.Size(719, 78);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtDistributor);
             this.Controls.Add(this.txtCategory);
