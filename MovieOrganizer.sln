@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmIndex.Host", "Backgroun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmIndex.Job", "BackgroundJobs\FilmIndex.Job\FilmIndex.Job.csproj", "{9829F457-774D-46DC-B2C8-13C40B58B203}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjustment.App", "Application\Adjustment.App\Adjustment.App.csproj", "{A1631C41-4014-486F-800C-0176881E8744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{9829F457-774D-46DC-B2C8-13C40B58B203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9829F457-774D-46DC-B2C8-13C40B58B203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9829F457-774D-46DC-B2C8-13C40B58B203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1631C41-4014-486F-800C-0176881E8744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1631C41-4014-486F-800C-0176881E8744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1631C41-4014-486F-800C-0176881E8744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1631C41-4014-486F-800C-0176881E8744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{6FA4B6A8-000E-4DA7-882E-8A5390FD8D36} = {0F953477-810F-4308-8468-8E6A61830D19}
 		{55FE354F-6DEE-4F46-8FFD-879C9992445A} = {57183931-A9D5-44B6-9D23-0313BF5DA456}
 		{9829F457-774D-46DC-B2C8-13C40B58B203} = {57183931-A9D5-44B6-9D23-0313BF5DA456}
+		{A1631C41-4014-486F-800C-0176881E8744} = {0F953477-810F-4308-8468-8E6A61830D19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C4495EA-A879-47E4-87EE-7F509EA285EC}

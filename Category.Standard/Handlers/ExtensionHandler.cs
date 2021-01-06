@@ -23,7 +23,7 @@ namespace Category.Standard.Handlers
         {
             foreach (var file in files)
             {
-                var extension = Path.GetExtension(file);
+                var extension = Path.GetExtension(file).ToLower();
                 Extensions.TempExtensions.Add(extension);
             }
         }

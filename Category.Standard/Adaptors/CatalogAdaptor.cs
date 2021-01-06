@@ -8,17 +8,21 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor
     {
-        private string FilmPath => BaseConstants.FilmPath;
-        private string DistributorCatPath => BaseConstants.DistributorCatPath;
-
         public CatalogAdaptor(string path) : base()
         {
             BaseConstants.SetExportPath(path);
-            BaseConstants.LoadInfos(FilmPath, FilmInfos);
-            BaseConstants.LoadInfos(DistributorCatPath, DistributorCats);
+            BaseConstants.LoadInfos(BaseConstants.FilmPath, FilmInfos);
+            BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, DistributorCats);
+            Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
+            BaseConstants.LoadInfos(BaseConstants.EmptyDirPath, EmptyDirs);
+            BaseConstants.LoadInfos(BaseConstants.BracketPath, Brackets);
         }
+
         public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
+        public Extension Extensions { get; }
+        public IList<string> EmptyDirs { get; } = new List<string>();
+        public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         public IEnumerable<string> FindFilms(string keyword)
         {
