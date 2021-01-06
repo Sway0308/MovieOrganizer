@@ -19,7 +19,6 @@ namespace Category.Standard.Models
         public string Identification { get; set; } = string.Empty;
         public IList<string> Actors { get; } = new List<string>();
         public IList<string> Genres { get; } = new List<string>();
-        [JsonIgnore]
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         public void AddBrackets(IEnumerable<Bracket> brackets)
@@ -30,16 +29,6 @@ namespace Category.Standard.Models
             }
         }
 
-        public string ToCsvFormat()
-        {
-            return FilePath 
-                + "," + FileName
-                + "," + Distributor 
-                + "," + Identification
-                + "," + string.Join("|", Actors)
-                + "," + string.Join("|", Genres);
-        }
-
         public override string ToString()
         {
             return FileName;
@@ -47,16 +36,7 @@ namespace Category.Standard.Models
 
         public override bool Equals(object obj)
         {
-            var dest = (obj as Film);
-            var result = this.FilePath.SameText(dest?.FilePath);
-
-            if (result)
-            {
-                this.FileName = dest.FileName;
-                this.Distributor = dest.Distributor;
-            }
-
-            return result;
+            return this.FilePath.SameText((obj as Film)?.FilePath);
         }
     }
 }

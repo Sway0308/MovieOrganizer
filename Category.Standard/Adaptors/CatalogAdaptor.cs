@@ -17,8 +17,7 @@ namespace Category.Standard.Adaptors
             BaseConstants.LoadInfos(FilmPath, FilmInfos);
             BaseConstants.LoadInfos(DistributorCatPath, DistributorCats);
         }
-
-        private IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
+        public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
 
         public IEnumerable<string> FindFilms(string keyword)

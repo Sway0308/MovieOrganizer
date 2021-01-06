@@ -19,7 +19,7 @@ namespace Category.Standard.Handlers
         /// <summary>
         /// 是否為受認可的範本路徑
         /// </summary>
-        private bool IsRecognizedPath = false;
+        private readonly bool IsRecognizedPath = false;
         /// <summary>
         /// 副檔名資訊
         /// </summary>
@@ -70,27 +70,9 @@ namespace Category.Standard.Handlers
 
         public void ExportJson()
         {
-            ExportList(DistributorCats, BaseConstants.DistributorCatPath);
-            ExportList(FilmInfos, BaseConstants.FilmPath);
-            ExportList(EmptyFileDirs, BaseConstants.EmptyDirPath);
-        }
-
-        private void ExportList<T>(IEnumerable<T> items, string path)
-        {
-            var sources = new List<T>();
-            if (ExportAndIncludeSource)
-            {
-                BaseConstants.LoadInfos(path, sources);
-            }
-
-            foreach (var item in items)
-            {
-                if (!sources.Any(x => x.Equals(item)))
-                    sources.Add(item);
-            }
-
-            var str = JsonConvert.SerializeObject(sources, Formatting.Indented);
-            File.WriteAllText(path, str, Encoding.UTF8);
+            BusinessFunc.ExportList(DistributorCats, BaseConstants.DistributorCatPath, ExportAndIncludeSource);
+            BusinessFunc.ExportList(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
+            BusinessFunc.ExportList(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
     }
 }

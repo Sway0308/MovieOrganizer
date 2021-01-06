@@ -11,6 +11,7 @@ namespace Category.Standard.Configs
         public static string AppDataPath { get; private set; } = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
         public static string ExtensionPath => Path.Combine(AppDataPath, "extension.json");
         public static string FilmPath => Path.Combine(AppDataPath, "film.json");
+        public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string DistributorCatPath => Path.Combine(AppDataPath, "distributorCat.json");
         public static string EmptyDirPath => Path.Combine(AppDataPath, "emptyDir.json");
 
