@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -26,7 +27,7 @@ namespace FilmSearcher.App
             if (string.IsNullOrEmpty(keyword))
                 return;
 
-            var films = new List<string> { @"C:\SourceCode", @"C:\Collaborate" }; //Adaptor.FindFilms(keyword);
+            var films = Adaptor.FindFilms(keyword);
             ListBoxFilm.DataSource = films;
         }
 
@@ -43,7 +44,7 @@ namespace FilmSearcher.App
             var filePath = ListBoxFilm.SelectedItem.ToString();
             var dirPath = Directory.GetParent(filePath);
 
-            System.Diagnostics.Process prc = new System.Diagnostics.Process();
+            Process prc =  Process.GetCurrentProcess();
             prc.StartInfo.FileName = dirPath.FullName;
             prc.Start();
         }
