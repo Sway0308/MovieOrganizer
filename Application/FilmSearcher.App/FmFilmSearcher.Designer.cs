@@ -31,6 +31,7 @@ namespace FilmSearcher.App
         {
             this.TxtKeyword = new System.Windows.Forms.TextBox();
             this.ListBoxFilm = new System.Windows.Forms.ListBox();
+            this.LabTotal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TxtKeyword
@@ -51,13 +52,26 @@ namespace FilmSearcher.App
             this.ListBoxFilm.Name = "ListBoxFilm";
             this.ListBoxFilm.Size = new System.Drawing.Size(713, 352);
             this.ListBoxFilm.TabIndex = 2;
+            this.ListBoxFilm.DataSourceChanged += new System.EventHandler(this.ListBoxFilm_DataSourceChanged);
             this.ListBoxFilm.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            // 
+            // LabTotal
+            // 
+            this.LabTotal.AutoSize = true;
+            this.LabTotal.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.LabTotal.Location = new System.Drawing.Point(12, 435);
+            this.LabTotal.Name = "LabTotal";
+            this.LabTotal.Size = new System.Drawing.Size(56, 16);
+            this.LabTotal.TabIndex = 3;
+            this.LabTotal.Text = "Total: 0";
+            this.LabTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // fmDistributorSearcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 452);
+            this.ClientSize = new System.Drawing.Size(728, 460);
+            this.Controls.Add(this.LabTotal);
             this.Controls.Add(this.ListBoxFilm);
             this.Controls.Add(this.TxtKeyword);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -73,6 +87,7 @@ namespace FilmSearcher.App
 
         private System.Windows.Forms.TextBox TxtKeyword;
         private System.Windows.Forms.ListBox ListBoxFilm;
+        private System.Windows.Forms.Label LabTotal;
     }
 }
 
