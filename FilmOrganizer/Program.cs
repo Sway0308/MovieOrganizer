@@ -1,7 +1,7 @@
 ﻿using Category.Standard.Adaptors;
 using Category.Standard.Interfaces;
-using System;
 using Gatchan.Base.Standard.Base;
+using System;
 
 namespace FilmOrganizer
 {

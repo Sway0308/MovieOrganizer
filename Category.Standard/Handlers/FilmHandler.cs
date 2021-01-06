@@ -11,22 +11,32 @@ namespace Category.Standard.Handlers
 {
     public partial class FilmHandler : DirRecursiveHandler
     {
+        /// <summary>
+        /// 匯出時是否保留來源資料
+        /// </summary>
+        private readonly bool ExportAndIncludeSource = false;
+
+        /// <summary>
+        /// 是否為受認可的範本路徑
+        /// </summary>
+        private bool IsRecognizedPath = false;
+        /// <summary>
+        /// 副檔名資訊
+        /// </summary>
         private readonly Extension Extensions;
 
-        public FilmHandler()
+        public FilmHandler(bool exportAndIncludeSource, bool isRecognizedPath)
         {
-            InitBrackets();
-            InitDistributorCat();
-            Extensions = BaseConstants.LoadInfo<Extension>(ExtensionPath);
+            ExportAndIncludeSource = exportAndIncludeSource;
+            IsRecognizedPath = isRecognizedPath;
+            Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
         }
 
-        private string ExtensionPath => BaseConstants.ExtensionPath;
         public IList<string> EmptyFileDirs { get; } = new List<string>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
 
         protected override void BeforeRecusiveSearch(string path)
         {
-            Directory.CreateDirectory(BaseConstants.AppDataPath);
             EmptyFileDirs.Clear();
             FilmInfos.Clear();
         }
@@ -53,28 +63,26 @@ namespace Category.Standard.Handlers
             return files.Where(x => Extensions.FilmExtensions.Contains(Path.GetExtension(x)));
         }
 
+        protected override void AfterRecusiveSearch(string path)
+        {
+            ClassifyDistributorAndCategory();
+        }
+
         public void ExportJson()
         {
-            ExportBrackets();
-            ExportDistributorCats();
-            ExportFilmInfo();
-            ExportEmptyDirs();
+            ExportList(DistributorCats, BaseConstants.DistributorCatPath);
+            ExportList(FilmInfos, BaseConstants.FilmPath);
+            ExportList(EmptyFileDirs, BaseConstants.EmptyDirPath);
         }
 
-        private void ExportEmptyDirs()
-        {
-            AppendList(EmptyFileDirs, BaseConstants.EmptyDirPath);
-        }
-
-        private void ExportFilmInfo()
-        {
-            AppendList(FilmInfos, BaseConstants.FilmPath);
-        }
-
-        private void AppendList<T>(IList<T> items, string path)
+        private void ExportList<T>(IEnumerable<T> items, string path)
         {
             var sources = new List<T>();
-            BaseConstants.LoadInfos(path, sources);
+            if (ExportAndIncludeSource)
+            {
+                BaseConstants.LoadInfos(path, sources);
+            }
+
             foreach (var item in items)
             {
                 if (!sources.Any(x => x.Equals(item)))

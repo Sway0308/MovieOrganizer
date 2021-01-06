@@ -30,8 +30,14 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            foreach (var item in Extensions.TempExtensions.Where(x => !x.SameTextOr(Extensions.FilmExtensions.ToArray())).Distinct())
+            foreach (var item in Extensions.TempExtensions.Distinct())
             {
+                if (Extensions.FilmExtensions.Any(x => x.SameText(item)))
+                    continue;
+
+                if (Extensions.OtherExtensions.Any(x => x.SameText(item)))
+                    continue;
+
                 Extensions.OtherExtensions.Add(item);
             }
 

@@ -14,7 +14,7 @@ namespace Category.Standard.Models
         }
 
         public string FilePath { get; }
-        public string FileName { get; }
+        public string FileName { get; private set; }
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
         public IList<string> Actors { get; } = new List<string>();
@@ -47,7 +47,16 @@ namespace Category.Standard.Models
 
         public override bool Equals(object obj)
         {
-            return this.FilePath.SameText((obj as Film)?.FilePath);
+            var dest = (obj as Film);
+            var result = this.FilePath.SameText(dest?.FilePath);
+
+            if (result)
+            {
+                this.FileName = dest.FileName;
+                this.Distributor = dest.Distributor;
+            }
+
+            return result;
         }
     }
 }
