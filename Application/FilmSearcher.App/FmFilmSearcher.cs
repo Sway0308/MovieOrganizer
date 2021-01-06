@@ -28,6 +28,7 @@ namespace FilmSearcher.App
 
             var films = Adaptor.FindFilms(keyword);
             ListBoxFilm.DataSource = films;
+            LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
         }
 
         private void TxtKeyword_TextChanged(object sender, EventArgs e)
@@ -46,11 +47,6 @@ namespace FilmSearcher.App
             Process prc =  Process.GetCurrentProcess();
             prc.StartInfo.FileName = dirPath.FullName;
             prc.Start();
-        }
-
-        private void ListBoxFilm_DataSourceChanged(object sender, EventArgs e)
-        {
-            LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
         }
     }
 }

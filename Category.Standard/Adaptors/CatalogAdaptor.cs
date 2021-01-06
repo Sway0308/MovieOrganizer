@@ -21,7 +21,7 @@ namespace Category.Standard.Adaptors
         public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
 
-        public IEnumerable<string> FindFilms(string keyword)
+        public IList<string> FindFilms(string keyword)
         {
             var result = FilmInfos.Where(x => x.FileName.Include(keyword));
             return result.Select(x => x.FilePath).ToList();
