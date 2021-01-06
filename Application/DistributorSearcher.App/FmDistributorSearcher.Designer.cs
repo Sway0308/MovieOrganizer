@@ -29,6 +29,7 @@ namespace DistributorSearcher.App
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmDistributorSearcher));
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtDistributor = new System.Windows.Forms.TextBox();
             this.txtCategory = new System.Windows.Forms.TextBox();
@@ -71,6 +72,7 @@ namespace DistributorSearcher.App
             this.Controls.Add(this.txtDistributor);
             this.Controls.Add(this.txtCategory);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FmDistributorSearcher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "發行商搜尋器";
