@@ -12,8 +12,9 @@ namespace Category.Standard.Configs
         public static string ExtensionPath => Path.Combine(AppDataPath, "extension.json");
         public static string FilmPath => Path.Combine(AppDataPath, "film.json");
         public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
-        public static string DistributorCatPath => Path.Combine(AppDataPath, "distributorCat.json");
-        public static string EmptyDirPath => Path.Combine(AppDataPath, "emptyDir.json");
+        public static string DistributorCatPath => Path.Combine(AppDataPath, "distributor_category.json");
+        public static string EmptyDirPath => Path.Combine(AppDataPath, "empty_dir.json");
+        public static string FilmDefinePath => Path.Combine(AppDataPath, "film_define.json");
 
         public static void SetExportPath(string appDataPath)
         {
@@ -45,7 +46,6 @@ namespace Category.Standard.Configs
     {
         Undefined,
         Distributor,
-        Identification,
-        ExtraInfo
+        Identification
     }
 }
