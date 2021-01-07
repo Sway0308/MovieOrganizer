@@ -39,7 +39,8 @@ namespace DistributorSearcher.App
 
             var distributor = Adaptor.FindDistributor(keyword);
             txtDistributor.Text = distributor;
-            Clipboard.SetText(distributor);
+            if (!string.IsNullOrEmpty(distributor))
+                Clipboard.SetText(distributor);
         }
     }
 }

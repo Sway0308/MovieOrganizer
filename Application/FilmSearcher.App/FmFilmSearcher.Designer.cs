@@ -29,6 +29,7 @@ namespace FilmSearcher.App
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmDistributorSearcher));
             this.TxtKeyword = new System.Windows.Forms.TextBox();
             this.ListBoxFilm = new System.Windows.Forms.ListBox();
             this.LabTotal = new System.Windows.Forms.Label();
@@ -39,27 +40,27 @@ namespace FilmSearcher.App
             this.TxtKeyword.Font = new System.Drawing.Font("新細明體", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.TxtKeyword.Location = new System.Drawing.Point(12, 12);
             this.TxtKeyword.Name = "TxtKeyword";
-            this.TxtKeyword.Size = new System.Drawing.Size(163, 55);
+            this.TxtKeyword.Size = new System.Drawing.Size(265, 55);
             this.TxtKeyword.TabIndex = 0;
             this.TxtKeyword.TextChanged += new System.EventHandler(this.TxtKeyword_TextChanged);
             // 
             // ListBoxFilm
             // 
-            this.ListBoxFilm.Font = new System.Drawing.Font("新細明體", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ListBoxFilm.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ListBoxFilm.FormattingEnabled = true;
-            this.ListBoxFilm.ItemHeight = 29;
+            this.ListBoxFilm.HorizontalScrollbar = true;
+            this.ListBoxFilm.ItemHeight = 16;
             this.ListBoxFilm.Location = new System.Drawing.Point(12, 73);
             this.ListBoxFilm.Name = "ListBoxFilm";
-            this.ListBoxFilm.Size = new System.Drawing.Size(713, 352);
+            this.ListBoxFilm.Size = new System.Drawing.Size(1071, 612);
             this.ListBoxFilm.TabIndex = 2;
-            this.ListBoxFilm.DataSourceChanged += new System.EventHandler(this.ListBoxFilm_DataSourceChanged);
             this.ListBoxFilm.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // LabTotal
             // 
             this.LabTotal.AutoSize = true;
             this.LabTotal.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.LabTotal.Location = new System.Drawing.Point(12, 435);
+            this.LabTotal.Location = new System.Drawing.Point(12, 697);
             this.LabTotal.Name = "LabTotal";
             this.LabTotal.Size = new System.Drawing.Size(56, 16);
             this.LabTotal.TabIndex = 3;
@@ -70,11 +71,12 @@ namespace FilmSearcher.App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 460);
+            this.ClientSize = new System.Drawing.Size(1093, 722);
             this.Controls.Add(this.LabTotal);
             this.Controls.Add(this.ListBoxFilm);
             this.Controls.Add(this.TxtKeyword);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmDistributorSearcher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "影片商搜尋器";
