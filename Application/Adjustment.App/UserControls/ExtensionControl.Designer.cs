@@ -151,6 +151,7 @@ namespace Adjustment.App.UserControls
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ExtensionControl";
             this.Size = new System.Drawing.Size(651, 528);
+            this.Load += new System.EventHandler(this.ExtensionControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
