@@ -36,10 +36,7 @@ namespace Category.Standard.Handlers
             if (DistributorCats.Any(x => bracket.Text.StartsWith(x.Category)))
             {
                 bracket.Type = CategoryType.Identification;
-                return;
             }
-
-            bracket.Type = CategoryType.ExtraInfo;
         }
 
         public void ExportJson()

@@ -1,7 +1,6 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +16,7 @@ namespace Category.Standard.Adaptors
             Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
             BaseConstants.LoadInfos(BaseConstants.EmptyDirPath, EmptyDirs);
             BaseConstants.LoadInfos(BaseConstants.BracketPath, Brackets);
+            FilmDefine = BaseConstants.LoadInfo<FilmDefine>(BaseConstants.FilmDefinePath);
         }
 
         public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
@@ -24,11 +24,12 @@ namespace Category.Standard.Adaptors
         public Extension Extensions { get; }
         public IList<string> EmptyDirs { get; } = new List<string>();
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
+        public FilmDefine FilmDefine { get; }
 
-        public IList<string> FindFilms(string keyword)
+        public IList<Film> FindFilms(string keyword)
         {
             var result = FilmInfos.Where(x => x.FileName.Include(keyword));
-            return result.Select(x => x.FilePath).ToList();
+            return result.ToList();
         }
 
         public string FindDistributor(string keyword)

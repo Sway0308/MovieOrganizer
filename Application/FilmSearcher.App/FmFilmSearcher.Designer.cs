@@ -54,7 +54,7 @@ namespace FilmSearcher.App
             this.ListBoxFilm.Name = "ListBoxFilm";
             this.ListBoxFilm.Size = new System.Drawing.Size(1071, 612);
             this.ListBoxFilm.TabIndex = 2;
-            this.ListBoxFilm.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.ListBoxFilm.DoubleClick += new System.EventHandler(this.ListBoxFilm_DoubleClick);
             // 
             // LabTotal
             // 

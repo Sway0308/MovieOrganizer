@@ -1,5 +1,4 @@
 ﻿using Gatchan.Base.Standard.Base;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
@@ -17,8 +16,6 @@ namespace Category.Standard.Models
         public string FileName { get; private set; }
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
-        public IList<string> Actors { get; } = new List<string>();
-        public IList<string> Genres { get; } = new List<string>();
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
 
         public void AddBrackets(IEnumerable<Bracket> brackets)
@@ -37,6 +34,11 @@ namespace Category.Standard.Models
         public override bool Equals(object obj)
         {
             return this.FilePath.SameText((obj as Film)?.FilePath);
+        }
+
+        public override int GetHashCode()
+        {
+            return FilePath.GetHashCode();
         }
     }
 }

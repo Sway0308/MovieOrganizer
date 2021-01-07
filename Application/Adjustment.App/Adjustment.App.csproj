@@ -70,6 +70,24 @@
     <Compile Include="UserControls\ExtensionControl.Designer.cs">
       <DependentUpon>ExtensionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\FilmDefineControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FilmDefineControl.Designer.cs">
+      <DependentUpon>FilmDefineControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FilmInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FilmInfoControl.Designer.cs">
+      <DependentUpon>FilmInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FilmSearcherControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FilmSearcherControl.Designer.cs">
+      <DependentUpon>FilmSearcherControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FmMain.resx">
       <DependentUpon>FmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +105,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ExtensionControl.resx">
       <DependentUpon>ExtensionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FilmDefineControl.resx">
+      <DependentUpon>FilmDefineControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FilmInfoControl.resx">
+      <DependentUpon>FilmInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FilmSearcherControl.resx">
+      <DependentUpon>FilmSearcherControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

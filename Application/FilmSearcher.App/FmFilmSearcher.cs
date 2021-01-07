@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FilmSearcher.App
@@ -24,10 +25,13 @@ namespace FilmSearcher.App
         {
             var keyword = TxtKeyword.Text;
             if (string.IsNullOrEmpty(keyword))
+            {
+                ListBoxFilm.DataSource = null;
                 return;
+            }
 
             var films = Adaptor.FindFilms(keyword);
-            ListBoxFilm.DataSource = films;
+            ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
         }
 
@@ -36,9 +40,9 @@ namespace FilmSearcher.App
             SearchDistributor();
         }
 
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+        private void ListBoxFilm_DoubleClick(object sender, EventArgs e)
         {
-            if (ListBoxFilm.Items.Count == 0 || ListBoxFilm.SelectedItem == null)
+            if (ListBoxFilm.SelectedItem == null)
                 return;
 
             var filePath = ListBoxFilm.SelectedItem.ToString();
