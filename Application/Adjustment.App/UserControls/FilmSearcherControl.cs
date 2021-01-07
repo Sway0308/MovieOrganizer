@@ -20,6 +20,7 @@ namespace Adjustment.App.UserControls
 
         public FilmSearcherControl(IList<Film> filmInfos) : base()
         {
+            InitializeComponent();
             FilmInfos = filmInfos;
         }
 

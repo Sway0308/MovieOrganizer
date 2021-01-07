@@ -15,6 +15,7 @@ namespace Adjustment.App.UserControls
 
         public EmptyDirsControl(IList<string> emptyDirs) : base()
         {
+            InitializeComponent();
             EmptyDirs = emptyDirs;
         }
 

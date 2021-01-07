@@ -14,9 +14,8 @@ namespace Adjustment.App.UserControls
 
         public ExtensionControl(Extension extensions) : base()
         {
+            InitializeComponent();
             Extensions = extensions;
-            FilmExtensionListBox.DataSource = Extensions.FilmExtensions;
-            OtherExtensionListBox.DataSource = Extensions.OtherExtensions;
         }
 
         private void OneLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -55,6 +54,12 @@ namespace Adjustment.App.UserControls
 
             FilmExtensionListBox.Items.Add(ext);
             OtherExtensionListBox.Items.Remove(ext);
+        }
+
+        private void ExtensionControl_Load(object sender, System.EventArgs e)
+        {
+            FilmExtensionListBox.DataSource = Extensions.FilmExtensions;
+            OtherExtensionListBox.DataSource = Extensions.OtherExtensions;
         }
     }
 }
