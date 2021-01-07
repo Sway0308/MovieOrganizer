@@ -29,9 +29,11 @@ namespace FilmIndex.Job
             }
 
             var categoryAdaptor = new CatalogAdaptor(AppDataPath);
-            var bracketHandler = new BracketHandler(categoryAdaptor.FilmInfos, categoryAdaptor.DistributorCats);
-            bracketHandler.ClassifyBrackets();
-            bracketHandler.ExportJson();
+            var bracketHandler = new BracketHandler();
+            bracketHandler.ClassifyAndExportBrackets(categoryAdaptor.FilmInfos, categoryAdaptor.DistributorCats);
+
+            var classificationHandler = new ClassificationHandler();
+            classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);
         }
     }
 }

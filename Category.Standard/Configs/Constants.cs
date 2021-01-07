@@ -14,7 +14,7 @@ namespace Category.Standard.Configs
         public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string DistributorCatPath => Path.Combine(AppDataPath, "distributor_category.json");
         public static string EmptyDirPath => Path.Combine(AppDataPath, "empty_dir.json");
-        public static string FilmDefinePath => Path.Combine(AppDataPath, "film_define.json");
+        public static string ClassificationDefinePath => Path.Combine(AppDataPath, "classification_define.json");
 
         public static void SetExportPath(string appDataPath)
         {

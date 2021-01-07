@@ -66,7 +66,7 @@ namespace Adjustment.App
             this.tabPageEmptyDirs.Location = new System.Drawing.Point(4, 22);
             this.tabPageEmptyDirs.Name = "tabPageEmptyDirs";
             this.tabPageEmptyDirs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEmptyDirs.Size = new System.Drawing.Size(792, 424);
+            this.tabPageEmptyDirs.Size = new System.Drawing.Size(1037, 703);
             this.tabPageEmptyDirs.TabIndex = 0;
             this.tabPageEmptyDirs.Text = "EmptyDirs";
             this.tabPageEmptyDirs.UseVisualStyleBackColor = true;

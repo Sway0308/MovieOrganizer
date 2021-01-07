@@ -1,7 +1,7 @@
 ﻿
 namespace Adjustment.App.UserControls
 {
-    partial class FilmDefineControl
+    partial class ClassificationDefineControl
     {
         /// <summary> 
         /// 設計工具所需的變數。

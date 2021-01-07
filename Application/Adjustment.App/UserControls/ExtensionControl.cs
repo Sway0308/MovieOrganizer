@@ -7,9 +7,13 @@ namespace Adjustment.App.UserControls
     {
         private readonly Extension Extensions;
 
-        public ExtensionControl(Extension extensions)
+        public ExtensionControl()
         {
             InitializeComponent();
+        }
+
+        public ExtensionControl(Extension extensions) : base()
+        {
             Extensions = extensions;
             FilmExtensionListBox.DataSource = Extensions.FilmExtensions;
             OtherExtensionListBox.DataSource = Extensions.OtherExtensions;

@@ -70,11 +70,11 @@
     <Compile Include="UserControls\ExtensionControl.Designer.cs">
       <DependentUpon>ExtensionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FilmDefineControl.cs">
+    <Compile Include="UserControls\ClassificationDefineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FilmDefineControl.Designer.cs">
-      <DependentUpon>FilmDefineControl.cs</DependentUpon>
+    <Compile Include="UserControls\ClassificationDefineControl.Designer.cs">
+      <DependentUpon>ClassificationDefineControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\FilmInfoControl.cs">
       <SubType>UserControl</SubType>
@@ -106,8 +106,8 @@
     <EmbeddedResource Include="UserControls\ExtensionControl.resx">
       <DependentUpon>ExtensionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FilmDefineControl.resx">
-      <DependentUpon>FilmDefineControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ClassificationDefineControl.resx">
+      <DependentUpon>ClassificationDefineControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FilmInfoControl.resx">
       <DependentUpon>FilmInfoControl.cs</DependentUpon>

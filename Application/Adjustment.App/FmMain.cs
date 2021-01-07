@@ -26,7 +26,7 @@ namespace Adjustment.App
             tabPageEmptyDirs.Controls.Add(new EmptyDirsControl(Adaptor.EmptyDirs) { Dock = DockStyle.Fill });
             tabPageExtension.Controls.Add(new ExtensionControl(Adaptor.Extensions) { Dock = DockStyle.Fill });
 
-            var filmDefine = new FilmDefineControl(Adaptor.FilmDefine) { Dock = DockStyle.Fill };
+            var filmDefine = new ClassificationDefineControl(Adaptor.ClassificationDefine) { Dock = DockStyle.Fill };
             TlDefineSetting.Controls.Add(filmDefine, 0, 0);
             TlDefineSetting.SetColumnSpan(filmDefine, 2);
             TlDefineSetting.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos) { Dock = DockStyle.Fill, IsNotifyRequired = true }, 0, 1);
@@ -37,6 +37,5 @@ namespace Adjustment.App
         {
             FilmInfoControl.ShowFilmInfo(filmInfo);
         }
-
     }
 }

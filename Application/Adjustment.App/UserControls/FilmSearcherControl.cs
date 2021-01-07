@@ -13,9 +13,13 @@ namespace Adjustment.App.UserControls
     {
         private readonly IList<Film> FilmInfos;
 
-        public FilmSearcherControl(IList<Film> filmInfos)
+        public FilmSearcherControl()
         {
             InitializeComponent();
+        }
+
+        public FilmSearcherControl(IList<Film> filmInfos) : base()
+        {
             FilmInfos = filmInfos;
         }
 
@@ -35,7 +39,7 @@ namespace Adjustment.App.UserControls
                 return;
             }
 
-            var films = FilmInfos.Where(x => x.FileName.Include(keyword));
+            var films = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
         }

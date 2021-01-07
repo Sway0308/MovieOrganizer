@@ -1,11 +1,10 @@
 ﻿using Category.Standard.Configs;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
-using Newtonsoft.Json;
+using Gatchan.Base.Standard.Base;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Category.Standard.Handlers
 {
@@ -34,6 +33,7 @@ namespace Category.Standard.Handlers
 
         public IList<string> EmptyFileDirs { get; } = new List<string>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
+        public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
 
         protected override void BeforeRecusiveSearch(string path)
         {
@@ -55,6 +55,28 @@ namespace Category.Standard.Handlers
                 FilmInfos.Add(model);
             }
         }
+        private Film ExtractFilmInfo(string file)
+        {
+            var model = new Film(file);
+            var brackets = new List<Bracket>();
+            ExtractBrackets(model.FileName, brackets);
+            model.AddBrackets(brackets);
+            return model;
+        }
+
+        private void ExtractBrackets(string fileName, IList<Bracket> brackets)
+        {
+            if (!fileName.Contains("(") || !fileName.Contains(")"))
+                return;
+
+            var leftBracket = fileName.IndexOf("(");
+            var rightBracket = fileName.IndexOf(")");
+
+            var innerText = fileName.Substring(leftBracket, rightBracket - leftBracket + 1);
+            brackets.Add(new Bracket { Text = innerText });
+            var nextFileName = fileName.Replace(innerText, string.Empty);
+            ExtractBrackets(nextFileName, brackets);
+        }
 
         private IEnumerable<string> GetValidFiles(IEnumerable<string> files)
         {
@@ -66,6 +88,27 @@ namespace Category.Standard.Handlers
         protected override void AfterRecusiveSearch(string path)
         {
             ClassifyDistributorAndCategory();
+        }
+
+        private void ClassifyDistributorAndCategory()
+        {
+            if (!IsRecognizedPath)
+                return;
+
+            foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
+            {
+                var distributor = model.Brackets.ElementAt(0).Text;
+                var identify = model.Brackets.ElementAt(1).Text;
+                model.Distributor = distributor;
+                model.Identification = identify;
+
+                var index = identify.IndexOf('-');
+                if (index < 0)
+                    continue;
+                var category = identify.Substring(0, index) + ")";
+                if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
+                    DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
+            }
         }
 
         public void ExportJson()

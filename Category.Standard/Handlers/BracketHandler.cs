@@ -8,40 +8,36 @@ namespace Category.Standard.Handlers
 {
     public class BracketHandler
     {
-        private readonly IList<Film> FilmInfos;
-        private readonly IList<DistributorCat> DistributorCats;
-
-        public BracketHandler(IList<Film> filmInfos, IList<DistributorCat> distributorCats)
+        public BracketHandler()
         {
-            FilmInfos = filmInfos;
-            DistributorCats = distributorCats;
         }
 
-        public void ClassifyBrackets()
+        public void ClassifyAndExportBrackets(IList<Film> filmInfos, IList<DistributorCat> distributorCats)
         {
-            foreach (var film in FilmInfos.Where(x => x.Brackets.Count > 0))
+            foreach (var film in filmInfos.Where(x => x.Brackets.Count > 0))
             {
-                film.Brackets.ForEach(x => DefineBracketType(x));
+                film.Brackets.ForEach(x => DefineBracketType(x, distributorCats));
             }
+            ExportJson(filmInfos);
         }
 
-        private void DefineBracketType(Bracket bracket)
+        private void DefineBracketType(Bracket bracket, IList<DistributorCat> distributorCats)
         {
-            if (DistributorCats.Any(x => x.Distributor.SameText(bracket.Text)))
+            if (distributorCats.Any(x => x.Distributor.SameText(bracket.Text)))
             {
                 bracket.Type = CategoryType.Distributor;
                 return;
             }
 
-            if (DistributorCats.Any(x => bracket.Text.StartsWith(x.Category)))
+            if (distributorCats.Any(x => bracket.Text.StartsWith(x.Category)))
             {
                 bracket.Type = CategoryType.Identification;
             }
         }
 
-        public void ExportJson()
+        private void ExportJson(IList<Film> filmInfos)
         {
-            var list = FilmInfos.SelectMany(x => x.Brackets).OrderBy(x => x.Text).ThenByDescending(x => x.Type);
+            var list = filmInfos.SelectMany(x => x.Brackets).OrderBy(x => x.Text).ThenByDescending(x => x.Type);
             BusinessFunc.ExportList(list, BaseConstants.BracketPath, false);
         }
     }
