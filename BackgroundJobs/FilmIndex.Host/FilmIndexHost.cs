@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace FilmIndex.Host
 {
@@ -31,8 +32,12 @@ namespace FilmIndex.Host
 
             var indexJob = new IndexJob { AppDataPath = appDataPath, FilmPaths = filmPaths, SamplePaths = paths };
             Console.WriteLine($"Start Indexing...");
+            var sw = new Stopwatch();
+            sw.Start();
             indexJob.Execute();
+            sw.Stop();
             Console.WriteLine($"End Indexing...");
+            Console.WriteLine($"Time elapse: {sw.ElapsedMilliseconds}");
             Console.ReadKey();
         }
     }
