@@ -114,6 +114,7 @@ namespace Adjustment.App.UserControls
             // 
             this.FilmExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FilmExtensionListBox.FormattingEnabled = true;
+            this.FilmExtensionListBox.HorizontalScrollbar = true;
             this.FilmExtensionListBox.ItemHeight = 12;
             this.FilmExtensionListBox.Location = new System.Drawing.Point(3, 3);
             this.FilmExtensionListBox.Name = "FilmExtensionListBox";
@@ -125,6 +126,7 @@ namespace Adjustment.App.UserControls
             // 
             this.OtherExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OtherExtensionListBox.FormattingEnabled = true;
+            this.OtherExtensionListBox.HorizontalScrollbar = true;
             this.OtherExtensionListBox.ItemHeight = 12;
             this.OtherExtensionListBox.Location = new System.Drawing.Point(403, 3);
             this.OtherExtensionListBox.Name = "OtherExtensionListBox";

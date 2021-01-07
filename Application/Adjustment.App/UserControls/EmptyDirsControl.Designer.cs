@@ -36,6 +36,7 @@ namespace Adjustment.App.UserControls
             // 
             this.EmptyDirListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EmptyDirListBox.FormattingEnabled = true;
+            this.EmptyDirListBox.HorizontalScrollbar = true;
             this.EmptyDirListBox.ItemHeight = 12;
             this.EmptyDirListBox.Location = new System.Drawing.Point(0, 0);
             this.EmptyDirListBox.Name = "EmptyDirListBox";

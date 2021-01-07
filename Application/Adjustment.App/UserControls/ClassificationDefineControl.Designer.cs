@@ -30,13 +30,13 @@ namespace Adjustment.App.UserControls
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TxtActor = new System.Windows.Forms.TextBox();
+            this.TxtGenre = new System.Windows.Forms.TextBox();
             this.LbDistributor = new System.Windows.Forms.ListBox();
             this.LbGenre = new System.Windows.Forms.ListBox();
             this.LbActor = new System.Windows.Forms.ListBox();
             this.BtnAddDistributor = new System.Windows.Forms.Button();
             this.TxtDistributor = new System.Windows.Forms.TextBox();
-            this.TxtGenre = new System.Windows.Forms.TextBox();
-            this.TxtActor = new System.Windows.Forms.TextBox();
             this.BtnDelDistributor = new System.Windows.Forms.Button();
             this.BtnAddGenre = new System.Windows.Forms.Button();
             this.BtnDelGenre = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel1.Controls.Add(this.TxtActor, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.TxtGenre, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.LbDistributor, 0, 0);
@@ -77,15 +77,36 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.Size = new System.Drawing.Size(837, 580);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // TxtActor
+            // 
+            this.TxtActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtActor.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TxtActor.Location = new System.Drawing.Point(558, 532);
+            this.TxtActor.Name = "TxtActor";
+            this.tableLayoutPanel1.SetRowSpan(this.TxtActor, 2);
+            this.TxtActor.Size = new System.Drawing.Size(222, 36);
+            this.TxtActor.TabIndex = 8;
+            // 
+            // TxtGenre
+            // 
+            this.TxtGenre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtGenre.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TxtGenre.Location = new System.Drawing.Point(280, 532);
+            this.TxtGenre.Name = "TxtGenre";
+            this.tableLayoutPanel1.SetRowSpan(this.TxtGenre, 2);
+            this.TxtGenre.Size = new System.Drawing.Size(222, 36);
+            this.TxtGenre.TabIndex = 7;
+            // 
             // LbDistributor
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.LbDistributor, 2);
             this.LbDistributor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbDistributor.FormattingEnabled = true;
+            this.LbDistributor.HorizontalScrollbar = true;
             this.LbDistributor.ItemHeight = 12;
             this.LbDistributor.Location = new System.Drawing.Point(3, 3);
             this.LbDistributor.Name = "LbDistributor";
-            this.LbDistributor.Size = new System.Drawing.Size(272, 514);
+            this.LbDistributor.Size = new System.Drawing.Size(271, 514);
             this.LbDistributor.TabIndex = 0;
             // 
             // LbGenre
@@ -93,8 +114,9 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.SetColumnSpan(this.LbGenre, 2);
             this.LbGenre.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbGenre.FormattingEnabled = true;
+            this.LbGenre.HorizontalScrollbar = true;
             this.LbGenre.ItemHeight = 12;
-            this.LbGenre.Location = new System.Drawing.Point(281, 3);
+            this.LbGenre.Location = new System.Drawing.Point(280, 3);
             this.LbGenre.Name = "LbGenre";
             this.LbGenre.Size = new System.Drawing.Size(272, 514);
             this.LbGenre.TabIndex = 1;
@@ -104,15 +126,16 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.SetColumnSpan(this.LbActor, 2);
             this.LbActor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbActor.FormattingEnabled = true;
+            this.LbActor.HorizontalScrollbar = true;
             this.LbActor.ItemHeight = 12;
-            this.LbActor.Location = new System.Drawing.Point(559, 3);
+            this.LbActor.Location = new System.Drawing.Point(558, 3);
             this.LbActor.Name = "LbActor";
-            this.LbActor.Size = new System.Drawing.Size(275, 514);
+            this.LbActor.Size = new System.Drawing.Size(276, 514);
             this.LbActor.TabIndex = 2;
             // 
             // BtnAddDistributor
             // 
-            this.BtnAddDistributor.Location = new System.Drawing.Point(231, 523);
+            this.BtnAddDistributor.Location = new System.Drawing.Point(230, 523);
             this.BtnAddDistributor.Name = "BtnAddDistributor";
             this.BtnAddDistributor.Size = new System.Drawing.Size(44, 23);
             this.BtnAddDistributor.TabIndex = 6;
@@ -126,32 +149,12 @@ namespace Adjustment.App.UserControls
             this.TxtDistributor.Location = new System.Drawing.Point(3, 532);
             this.TxtDistributor.Name = "TxtDistributor";
             this.tableLayoutPanel1.SetRowSpan(this.TxtDistributor, 2);
-            this.TxtDistributor.Size = new System.Drawing.Size(222, 36);
+            this.TxtDistributor.Size = new System.Drawing.Size(221, 36);
             this.TxtDistributor.TabIndex = 3;
-            // 
-            // TxtGenre
-            // 
-            this.TxtGenre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtGenre.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtGenre.Location = new System.Drawing.Point(281, 532);
-            this.TxtGenre.Name = "TxtGenre";
-            this.tableLayoutPanel1.SetRowSpan(this.TxtGenre, 2);
-            this.TxtGenre.Size = new System.Drawing.Size(222, 36);
-            this.TxtGenre.TabIndex = 7;
-            // 
-            // TxtActor
-            // 
-            this.TxtActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtActor.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtActor.Location = new System.Drawing.Point(559, 532);
-            this.TxtActor.Name = "TxtActor";
-            this.tableLayoutPanel1.SetRowSpan(this.TxtActor, 2);
-            this.TxtActor.Size = new System.Drawing.Size(222, 36);
-            this.TxtActor.TabIndex = 8;
             // 
             // BtnDelDistributor
             // 
-            this.BtnDelDistributor.Location = new System.Drawing.Point(231, 553);
+            this.BtnDelDistributor.Location = new System.Drawing.Point(230, 553);
             this.BtnDelDistributor.Name = "BtnDelDistributor";
             this.BtnDelDistributor.Size = new System.Drawing.Size(44, 23);
             this.BtnDelDistributor.TabIndex = 9;
@@ -160,7 +163,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnAddGenre
             // 
-            this.BtnAddGenre.Location = new System.Drawing.Point(509, 523);
+            this.BtnAddGenre.Location = new System.Drawing.Point(508, 523);
             this.BtnAddGenre.Name = "BtnAddGenre";
             this.BtnAddGenre.Size = new System.Drawing.Size(44, 23);
             this.BtnAddGenre.TabIndex = 10;
@@ -169,7 +172,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnDelGenre
             // 
-            this.BtnDelGenre.Location = new System.Drawing.Point(509, 553);
+            this.BtnDelGenre.Location = new System.Drawing.Point(508, 553);
             this.BtnDelGenre.Name = "BtnDelGenre";
             this.BtnDelGenre.Size = new System.Drawing.Size(44, 23);
             this.BtnDelGenre.TabIndex = 11;
@@ -178,7 +181,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnAddActor
             // 
-            this.BtnAddActor.Location = new System.Drawing.Point(787, 523);
+            this.BtnAddActor.Location = new System.Drawing.Point(786, 523);
             this.BtnAddActor.Name = "BtnAddActor";
             this.BtnAddActor.Size = new System.Drawing.Size(47, 23);
             this.BtnAddActor.TabIndex = 12;
@@ -187,19 +190,19 @@ namespace Adjustment.App.UserControls
             // 
             // BtnDelActor
             // 
-            this.BtnDelActor.Location = new System.Drawing.Point(787, 553);
+            this.BtnDelActor.Location = new System.Drawing.Point(786, 553);
             this.BtnDelActor.Name = "BtnDelActor";
             this.BtnDelActor.Size = new System.Drawing.Size(47, 23);
             this.BtnDelActor.TabIndex = 13;
             this.BtnDelActor.Text = "－";
             this.BtnDelActor.UseVisualStyleBackColor = true;
             // 
-            // FilmDefineControl
+            // ClassificationDefineControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "FilmDefineControl";
+            this.Name = "ClassificationDefineControl";
             this.Size = new System.Drawing.Size(837, 580);
             this.Load += new System.EventHandler(this.FilmDefineControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
