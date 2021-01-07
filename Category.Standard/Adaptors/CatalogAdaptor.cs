@@ -16,7 +16,7 @@ namespace Category.Standard.Adaptors
             Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
             BaseConstants.LoadInfos(BaseConstants.EmptyDirPath, EmptyDirs);
             BaseConstants.LoadInfos(BaseConstants.BracketPath, Brackets);
-            FilmDefine = BaseConstants.LoadInfo<FilmDefine>(BaseConstants.FilmDefinePath);
+            ClassificationDefine = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
         }
 
         public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
@@ -24,17 +24,17 @@ namespace Category.Standard.Adaptors
         public Extension Extensions { get; }
         public IList<string> EmptyDirs { get; } = new List<string>();
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
-        public FilmDefine FilmDefine { get; }
+        public ClassificationDefine ClassificationDefine { get; }
 
         public IList<Film> FindFilms(string keyword)
         {
-            var result = FilmInfos.Where(x => x.FileName.Include(keyword));
+            var result = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
             return result.ToList();
         }
 
         public string FindDistributor(string keyword)
         {
-            var result = DistributorCats.Where(x => x.Category.Include(keyword));
+            var result = DistributorCats.Where(x => x.Category.IncludeText(keyword));
             return result.FirstOrDefault()?.Distributor;
         }
     }

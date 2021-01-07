@@ -3,20 +3,28 @@ using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
 {
-    public partial class FilmDefineControl : UserControl
+    public partial class ClassificationDefineControl : UserControl
     {
-        private readonly FilmDefine FilmDefine;
-        public FilmDefineControl(FilmDefine filmDefine)
+        private readonly ClassificationDefine ClassificationDefine;
+        public ClassificationDefineControl()
         {
             InitializeComponent();
-            FilmDefine = filmDefine;
+        }
+
+        public ClassificationDefineControl(ClassificationDefine filmDefine) : base()
+        {
+            InitializeComponent();
+            ClassificationDefine = filmDefine;
         }
 
         private void FilmDefineControl_Load(object sender, System.EventArgs e)
         {
-            LbDistributor.DataSource = FilmDefine.Distributors;
-            LbGenre.DataSource = FilmDefine.Genres;
-            LbActor.DataSource = FilmDefine.Actors;
+            if (ClassificationDefine == null)
+                return;
+
+            LbDistributor.DataSource = ClassificationDefine.Distributors;
+            LbGenre.DataSource = ClassificationDefine.Genres;
+            LbActor.DataSource = ClassificationDefine.Actors;
 
             LbDistributor.Click += (s, ev) => ShowSelectedItem(LbDistributor, TxtDistributor);
             BtnAddDistributor.Click += (s, ev) => AddItem(LbDistributor, TxtDistributor);

@@ -25,5 +25,21 @@ namespace Category.Standard.Configs
             var str = JsonConvert.SerializeObject(sources, Formatting.Indented);
             File.WriteAllText(path, str, Encoding.UTF8);
         }
+
+
+        public static void ExportItem<T>(T item, string path, bool isIncludeSource) where T : new()
+        {
+            var source = new T();
+            if (isIncludeSource)
+            {
+                source = BaseConstants.LoadInfo<T>(path);
+            }
+
+            if (source.Equals(item))
+                return;
+
+            var str = JsonConvert.SerializeObject(source, Formatting.Indented);
+            File.WriteAllText(path, str, Encoding.UTF8);
+        }
     }
 }

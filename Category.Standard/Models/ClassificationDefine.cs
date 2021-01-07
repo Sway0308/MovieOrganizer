@@ -2,7 +2,7 @@
 
 namespace Category.Standard.Models
 {
-    public class FilmDefine
+    public class ClassificationDefine
     {
         /// <summary>
         /// 發行商

@@ -15,7 +15,7 @@ namespace Gatchan.Base.Standard.Base
             return values.Any(x => x.SameText(s));
         }
 
-        public static bool Include(this string s, string value)
+        public static bool IncludeText(this string s, string value)
         {
             return s.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
