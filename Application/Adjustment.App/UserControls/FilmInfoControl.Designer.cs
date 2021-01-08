@@ -35,11 +35,11 @@ namespace Adjustment.App.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.LaPath = new System.Windows.Forms.Label();
             this.TxtName = new System.Windows.Forms.TextBox();
             this.TxtDistributor = new System.Windows.Forms.TextBox();
             this.TxtIdentification = new System.Windows.Forms.TextBox();
             this.LbBrackets = new System.Windows.Forms.ListBox();
+            this.TxtPath = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,12 +53,13 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.LaPath, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.TxtName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.TxtDistributor, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.TxtIdentification, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.LbBrackets, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.TxtPath, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -125,17 +126,6 @@ namespace Adjustment.App.UserControls
             this.label5.TabIndex = 4;
             this.label5.Text = "Brackets";
             // 
-            // LaPath
-            // 
-            this.LaPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LaPath.AutoSize = true;
-            this.LaPath.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.LaPath.Location = new System.Drawing.Point(103, 7);
-            this.LaPath.Name = "LaPath";
-            this.LaPath.Size = new System.Drawing.Size(404, 16);
-            this.LaPath.TabIndex = 5;
-            this.LaPath.Text = "label6";
-            // 
             // TxtName
             // 
             this.TxtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -166,13 +156,24 @@ namespace Adjustment.App.UserControls
             // LbBrackets
             // 
             this.LbBrackets.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LbBrackets.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.LbBrackets.FormattingEnabled = true;
             this.LbBrackets.HorizontalScrollbar = true;
-            this.LbBrackets.ItemHeight = 12;
+            this.LbBrackets.ItemHeight = 16;
             this.LbBrackets.Location = new System.Drawing.Point(103, 123);
             this.LbBrackets.Name = "LbBrackets";
             this.LbBrackets.Size = new System.Drawing.Size(404, 506);
             this.LbBrackets.TabIndex = 9;
+            // 
+            // TxtPath
+            // 
+            this.TxtPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtPath.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TxtPath.Location = new System.Drawing.Point(103, 3);
+            this.TxtPath.Name = "TxtPath";
+            this.TxtPath.ReadOnly = true;
+            this.TxtPath.Size = new System.Drawing.Size(404, 27);
+            this.TxtPath.TabIndex = 10;
             // 
             // FilmInfoControl
             // 
@@ -195,10 +196,10 @@ namespace Adjustment.App.UserControls
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label LaPath;
         private System.Windows.Forms.TextBox TxtName;
         private System.Windows.Forms.TextBox TxtDistributor;
         private System.Windows.Forms.TextBox TxtIdentification;
         private System.Windows.Forms.ListBox LbBrackets;
+        private System.Windows.Forms.TextBox TxtPath;
     }
 }

@@ -113,9 +113,10 @@ namespace Adjustment.App.UserControls
             // FilmExtensionListBox
             // 
             this.FilmExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilmExtensionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FilmExtensionListBox.FormattingEnabled = true;
             this.FilmExtensionListBox.HorizontalScrollbar = true;
-            this.FilmExtensionListBox.ItemHeight = 12;
+            this.FilmExtensionListBox.ItemHeight = 16;
             this.FilmExtensionListBox.Location = new System.Drawing.Point(3, 3);
             this.FilmExtensionListBox.Name = "FilmExtensionListBox";
             this.tableLayoutPanel1.SetRowSpan(this.FilmExtensionListBox, 6);
@@ -125,9 +126,10 @@ namespace Adjustment.App.UserControls
             // OtherExtensionListBox
             // 
             this.OtherExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OtherExtensionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.OtherExtensionListBox.FormattingEnabled = true;
             this.OtherExtensionListBox.HorizontalScrollbar = true;
-            this.OtherExtensionListBox.ItemHeight = 12;
+            this.OtherExtensionListBox.ItemHeight = 16;
             this.OtherExtensionListBox.Location = new System.Drawing.Point(403, 3);
             this.OtherExtensionListBox.Name = "OtherExtensionListBox";
             this.tableLayoutPanel1.SetRowSpan(this.OtherExtensionListBox, 6);

@@ -12,7 +12,7 @@ namespace Adjustment.App.UserControls
 
         public void ShowFilmInfo(Film filmInfo)
         {
-            LaPath.Text = filmInfo.FilePath;
+            TxtPath.Text = filmInfo.FilePath;
             TxtName.Text = filmInfo.FileName;
             TxtDistributor.Text = filmInfo.Distributor;
             TxtIdentification.Text = filmInfo.Identification;

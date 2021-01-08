@@ -35,9 +35,10 @@ namespace Adjustment.App.UserControls
             // EmptyDirListBox
             // 
             this.EmptyDirListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EmptyDirListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.EmptyDirListBox.FormattingEnabled = true;
             this.EmptyDirListBox.HorizontalScrollbar = true;
-            this.EmptyDirListBox.ItemHeight = 12;
+            this.EmptyDirListBox.ItemHeight = 16;
             this.EmptyDirListBox.Location = new System.Drawing.Point(0, 0);
             this.EmptyDirListBox.Name = "EmptyDirListBox";
             this.EmptyDirListBox.Size = new System.Drawing.Size(555, 501);

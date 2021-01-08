@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
@@ -53,7 +54,8 @@ namespace Adjustment.App.UserControls
 
             if (listBox.Items.IndexOf(item) >= 0)
                 return;
-            listBox.Items.Add(item);
+
+            (listBox.DataSource as IList<string>).Add(item);
         }
 
         private void DeleteItem(ListBox listBox, TextBox textBox)
@@ -64,7 +66,7 @@ namespace Adjustment.App.UserControls
 
             if (listBox.Items.IndexOf(item) < 0)
                 return;
-            listBox.Items.Remove(item);
+            (listBox.DataSource as IList<string>).Remove(item);
             textBox.Clear();
         }
     }
