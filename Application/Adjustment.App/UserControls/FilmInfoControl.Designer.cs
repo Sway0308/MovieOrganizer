@@ -45,6 +45,7 @@ namespace Adjustment.App.UserControls
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -76,7 +77,7 @@ namespace Adjustment.App.UserControls
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(62, 7);
+            this.label1.Location = new System.Drawing.Point(64, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 16);
             this.label1.TabIndex = 0;
@@ -87,7 +88,7 @@ namespace Adjustment.App.UserControls
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(52, 37);
+            this.label2.Location = new System.Drawing.Point(54, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 16);
             this.label2.TabIndex = 1;
@@ -98,7 +99,7 @@ namespace Adjustment.App.UserControls
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(22, 67);
+            this.label3.Location = new System.Drawing.Point(24, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 2;
@@ -109,7 +110,7 @@ namespace Adjustment.App.UserControls
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(6, 97);
+            this.label4.Location = new System.Drawing.Point(8, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 16);
             this.label4.TabIndex = 3;
@@ -120,7 +121,7 @@ namespace Adjustment.App.UserControls
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(35, 368);
+            this.label5.Location = new System.Drawing.Point(37, 372);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 16);
             this.label5.TabIndex = 4;
@@ -130,27 +131,27 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtName.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtName.Location = new System.Drawing.Point(103, 33);
+            this.TxtName.Location = new System.Drawing.Point(107, 37);
             this.TxtName.Name = "TxtName";
-            this.TxtName.Size = new System.Drawing.Size(404, 27);
+            this.TxtName.Size = new System.Drawing.Size(398, 27);
             this.TxtName.TabIndex = 6;
             // 
             // TxtDistributor
             // 
             this.TxtDistributor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtDistributor.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtDistributor.Location = new System.Drawing.Point(103, 63);
+            this.TxtDistributor.Location = new System.Drawing.Point(107, 69);
             this.TxtDistributor.Name = "TxtDistributor";
-            this.TxtDistributor.Size = new System.Drawing.Size(404, 27);
+            this.TxtDistributor.Size = new System.Drawing.Size(398, 27);
             this.TxtDistributor.TabIndex = 7;
             // 
             // TxtIdentification
             // 
             this.TxtIdentification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtIdentification.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtIdentification.Location = new System.Drawing.Point(103, 93);
+            this.TxtIdentification.Location = new System.Drawing.Point(107, 101);
             this.TxtIdentification.Name = "TxtIdentification";
-            this.TxtIdentification.Size = new System.Drawing.Size(404, 27);
+            this.TxtIdentification.Size = new System.Drawing.Size(398, 27);
             this.TxtIdentification.TabIndex = 8;
             // 
             // LbBrackets
@@ -160,19 +161,19 @@ namespace Adjustment.App.UserControls
             this.LbBrackets.FormattingEnabled = true;
             this.LbBrackets.HorizontalScrollbar = true;
             this.LbBrackets.ItemHeight = 16;
-            this.LbBrackets.Location = new System.Drawing.Point(103, 123);
+            this.LbBrackets.Location = new System.Drawing.Point(107, 133);
             this.LbBrackets.Name = "LbBrackets";
-            this.LbBrackets.Size = new System.Drawing.Size(404, 506);
+            this.LbBrackets.Size = new System.Drawing.Size(398, 494);
             this.LbBrackets.TabIndex = 9;
             // 
             // TxtPath
             // 
             this.TxtPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtPath.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtPath.Location = new System.Drawing.Point(103, 3);
+            this.TxtPath.Location = new System.Drawing.Point(107, 5);
             this.TxtPath.Name = "TxtPath";
             this.TxtPath.ReadOnly = true;
-            this.TxtPath.Size = new System.Drawing.Size(404, 27);
+            this.TxtPath.Size = new System.Drawing.Size(398, 27);
             this.TxtPath.TabIndex = 10;
             // 
             // FilmInfoControl

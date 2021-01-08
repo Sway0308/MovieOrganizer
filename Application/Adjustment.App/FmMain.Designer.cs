@@ -95,12 +95,12 @@ namespace Adjustment.App
             // 
             this.TlDefineSetting.ColumnCount = 2;
             this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TlDefineSetting.Location = new System.Drawing.Point(0, 0);
             this.TlDefineSetting.Name = "TlDefineSetting";
             this.TlDefineSetting.RowCount = 2;
-            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TlDefineSetting.Size = new System.Drawing.Size(1037, 703);
             this.TlDefineSetting.TabIndex = 1;
