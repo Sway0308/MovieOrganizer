@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
@@ -6,6 +7,8 @@ namespace Adjustment.App.UserControls
     public partial class ExtensionControl : UserControl
     {
         private readonly Extension Extensions;
+        private IList<string> FilmExtensions => Extensions.FilmExtensions;
+        private IList<string> OtherExtensions => Extensions.OtherExtensions;
 
         public ExtensionControl()
         {
@@ -18,48 +21,55 @@ namespace Adjustment.App.UserControls
             Extensions = extensions;
         }
 
-        private void OneLeftToRightButton_Click(object sender, System.EventArgs e)
-        {
-            var ext = FilmExtensionListBox.SelectedItem;
-            if (ext == null)
-                return;
-
-            OtherExtensionListBox.Items.Add(ext);
-            FilmExtensionListBox.Items.Remove(ext);
-        }
-
         private void AllLeftToRightButton_Click(object sender, System.EventArgs e)
         {
-            if (FilmExtensionListBox.Items.Count == 0)
-                return;
-
-            OtherExtensionListBox.Items.AddRange(FilmExtensionListBox.Items);
-            FilmExtensionListBox.Items.Clear();
+            AllSourceToDest(FilmExtensions, OtherExtensions);
         }
 
         private void AllRightToLeftButton_Click(object sender, System.EventArgs e)
         {
-            if (OtherExtensionListBox.Items.Count == 0)
+            AllSourceToDest(OtherExtensions, FilmExtensions);
+        }
+
+        private void AllSourceToDest(IList<string> sources, IList<string> dests)
+        {
+            if (sources.Count == 0)
                 return;
 
-            FilmExtensionListBox.Items.AddRange(OtherExtensionListBox.Items);
-            OtherExtensionListBox.Items.Clear();
+            foreach (var item in sources)
+            {
+                if (dests.IndexOf(item) >= 0)
+                    continue;
+                dests.Add(item);
+            }
+
+            sources.Clear();
+        }
+
+        private void OneLeftToRightButton_Click(object sender, System.EventArgs e)
+        {
+            OneSourceToDest(FilmExtensionListBox.SelectedItem as string, FilmExtensions, OtherExtensions);
         }
 
         private void OneRightToLeftButton_Click(object sender, System.EventArgs e)
         {
-            var ext = OtherExtensionListBox.SelectedItem;
-            if (ext == null)
+            OneSourceToDest(OtherExtensionListBox.SelectedItem as string, OtherExtensions, FilmExtensions);
+        }
+
+        private void OneSourceToDest(string item, IList<string> sources, IList<string> dests)
+        {
+            if (string.IsNullOrEmpty(item))
                 return;
 
-            FilmExtensionListBox.Items.Add(ext);
-            OtherExtensionListBox.Items.Remove(ext);
+            if (dests.IndexOf(item) < 0)
+                dests.Add(item);
+            sources.Remove(item);
         }
 
         private void ExtensionControl_Load(object sender, System.EventArgs e)
         {
-            FilmExtensionListBox.DataSource = Extensions.FilmExtensions;
-            OtherExtensionListBox.DataSource = Extensions.OtherExtensions;
+            FilmExtensionListBox.DataSource = FilmExtensions;
+            OtherExtensionListBox.DataSource = OtherExtensions;
         }
     }
 }
