@@ -9,7 +9,7 @@ namespace Category.Standard.Models
 
         public override string ToString()
         {
-            return Text + ", " + Type.ToString();
+            return Text + " - " + Type.ToString();
         }
     }
 }
