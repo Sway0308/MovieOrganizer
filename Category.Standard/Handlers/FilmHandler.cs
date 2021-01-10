@@ -66,7 +66,7 @@ namespace Category.Standard.Handlers
 
         private void ExtractBrackets(string fileName, IList<Bracket> brackets)
         {
-            if (!fileName.Contains("(") || !fileName.Contains(")"))
+            if (!fileName.StartsWith("(") || !fileName.Contains(")"))
                 return;
 
             var leftBracket = fileName.IndexOf("(");
