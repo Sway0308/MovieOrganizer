@@ -19,5 +19,10 @@ namespace Gatchan.Base.Standard.Base
         {
             return s.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
+
+        public static bool IncludeTextOr(this string s, params string[] values)
+        {
+            return values.Any(x => x.IncludeText(s));
+        }
     }
 }
