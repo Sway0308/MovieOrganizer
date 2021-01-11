@@ -31,7 +31,7 @@ namespace FindProblem.App
             }
 
             RuleListBox.Click += (s, ev) => {
-                if (RuleListBox.SelectedItem != null)
+                if (RuleListBox.SelectedItem == null)
                     return;
 
                 var result = RuleAdaptor.FindByRule(RuleListBox.SelectedIndex);
@@ -39,14 +39,14 @@ namespace FindProblem.App
                 DetailListBox.DataSource = Suggestions;
             };
             DetailListBox.Click += (s, ev) => {
-                if (!string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
+                if (string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
                     return;
 
                 var sugs = Suggestions.ElementAt(DetailListBox.SelectedIndex);
                 SuggestionListBox.DataSource = sugs.SuggestNames;
             };
             DetailListBox.DoubleClick += (s, ev) => {
-                if (!string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
+                if (string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
                     return;
 
                 Process prc = Process.GetCurrentProcess();
@@ -54,7 +54,7 @@ namespace FindProblem.App
                 prc.Start();
             };
             SuggestionListBox.Click += (s, ev) => {
-                if (SuggestionListBox.SelectedItem != null)
+                if (SuggestionListBox.SelectedItem == null)
                     return;
 
                 Clipboard.SetText(SuggestionListBox.SelectedItem.ToString() ?? string.Empty);
