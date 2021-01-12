@@ -12,7 +12,10 @@ namespace Category.Standard.Adaptors
     {
         public RuleAdaptor(string path)
         {
-            var rules = Assembly.Load("Category.Standard").GetTypes().Where(x => x is IRule);
+            var type = typeof(IRule);
+            var rules = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(x => type.IsAssignableFrom(x));
             RuleTypes = rules;
 
             CatalogAdaptor = new CatalogAdaptor(path);

@@ -24,10 +24,10 @@ namespace Category.Standard.Rules
                 var allMidBrackContent = GetAllMiddleBracketContent(film.FileName);
                 var ans = from mb in allMidBrackContent
                           from dist in DistributorCats
-                          where mb.StartsWith(dist.Category)
-                          select $"{dist.Distributor}({mb})";
+                          where mb.IncludeText(dist.Category)
+                          select $"({dist.Distributor})({mb})";
 
-                var sugs = new List<string>(ans);
+                var sugs = new List<string>(ans.Distinct());
                 result.Add(new FilmNameSuggestion { FilmInfo = film, SuggestNames = sugs });
             }
 

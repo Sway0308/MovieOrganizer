@@ -107,8 +107,13 @@ namespace Category.Standard.Handlers
                     continue;
                 var category = identify.Substring(0, index) + ")";
                 if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
-                    DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
+                    DistributorCats.Add(new DistributorCat { Distributor = NoBrackets(distributor), Category = NoBrackets(category) });
             }
+        }
+
+        private string NoBrackets(string input)
+        {
+            return input.Replace("(", string.Empty).Replace(")", string.Empty);
         }
 
         public void ExportJson()
