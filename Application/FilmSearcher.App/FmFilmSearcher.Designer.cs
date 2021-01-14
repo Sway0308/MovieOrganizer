@@ -79,7 +79,7 @@ namespace FilmSearcher.App
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmDistributorSearcher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "影片商搜尋器";
+            this.Text = "影片搜尋器";
             this.ResumeLayout(false);
             this.PerformLayout();
 
