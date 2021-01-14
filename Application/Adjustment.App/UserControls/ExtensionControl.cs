@@ -8,8 +8,8 @@ namespace Adjustment.App.UserControls
     public partial class ExtensionControl : UserControl
     {
         private readonly Extension Extensions;
-        private readonly ObservableCollection<string> FilmExtensions;
-        private readonly ObservableCollection<string> OtherExtensions;
+        private IList<string> FilmExtensions => Extensions.FilmExtensions;
+        private IList<string> OtherExtensions => Extensions.OtherExtensions;
 
         public ExtensionControl()
         {
@@ -21,8 +21,8 @@ namespace Adjustment.App.UserControls
             InitializeComponent();
             Extensions = extensions;
 
-            FilmExtensions = new ObservableCollection<string>(Extensions.FilmExtensions);
-            OtherExtensions = new ObservableCollection<string>(Extensions.OtherExtensions);
+            bindingSource1.DataSource = Extensions.FilmExtensions;
+            bindingSource2.DataSource = Extensions.OtherExtensions;
         }
 
         private void AllLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -72,8 +72,8 @@ namespace Adjustment.App.UserControls
 
         private void ExtensionControl_Load(object sender, System.EventArgs e)
         {
-            FilmExtensionListBox.DataSource = FilmExtensions;
-            OtherExtensionListBox.DataSource = OtherExtensions;
+            FilmExtensionListBox.DataSource = bindingSource1;
+            OtherExtensionListBox.DataSource = bindingSource2;
         }
     }
 }

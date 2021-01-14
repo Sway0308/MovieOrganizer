@@ -29,6 +29,7 @@ namespace Adjustment.App.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.OneLeftToRightButton = new System.Windows.Forms.Button();
             this.AllLeftToRightButton = new System.Windows.Forms.Button();
@@ -37,7 +38,11 @@ namespace Adjustment.App.UserControls
             this.FilmExtensionListBox = new System.Windows.Forms.ListBox();
             this.OtherExtensionListBox = new System.Windows.Forms.ListBox();
             this.ExportButton = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -112,6 +117,7 @@ namespace Adjustment.App.UserControls
             // 
             // FilmExtensionListBox
             // 
+            this.FilmExtensionListBox.DataSource = this.bindingSource1;
             this.FilmExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FilmExtensionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FilmExtensionListBox.FormattingEnabled = true;
@@ -125,6 +131,7 @@ namespace Adjustment.App.UserControls
             // 
             // OtherExtensionListBox
             // 
+            this.OtherExtensionListBox.DataSource = this.bindingSource2;
             this.OtherExtensionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OtherExtensionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.OtherExtensionListBox.FormattingEnabled = true;
@@ -155,6 +162,8 @@ namespace Adjustment.App.UserControls
             this.Size = new System.Drawing.Size(651, 528);
             this.Load += new System.EventHandler(this.ExtensionControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,5 +178,7 @@ namespace Adjustment.App.UserControls
         private System.Windows.Forms.ListBox FilmExtensionListBox;
         private System.Windows.Forms.ListBox OtherExtensionListBox;
         private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.BindingSource bindingSource2;
     }
 }
