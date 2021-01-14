@@ -40,7 +40,7 @@ namespace DistributorSearcher.App
             var distributor = Adaptor.FindDistributor(keyword);
             txtDistributor.Text = distributor;
             if (!string.IsNullOrEmpty(distributor))
-                Clipboard.SetText(distributor);
+                Clipboard.SetText($"({distributor})");
         }
     }
 }

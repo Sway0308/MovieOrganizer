@@ -1,5 +1,4 @@
 ﻿using Category.Standard.Interfaces;
-using Category.Standard.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +33,7 @@ namespace Category.Standard.Adaptors
             return desc?.Description ?? string.Empty;
         }
 
-        public IList<FilmNameSuggestion> FindByRule(int index)
+        public IList<IRuleModel> FindByRule(int index)
         {
             var ruleType = RuleTypes.ElementAt(index);
             var rule = (IRule)Activator.CreateInstance(ruleType, CatalogAdaptor.FilmInfos, CatalogAdaptor.DistributorCats);

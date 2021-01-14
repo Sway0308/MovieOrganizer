@@ -16,9 +16,9 @@ namespace Category.Standard.Rules
         {
         }
 
-        public IList<FilmNameSuggestion> Find()
+        public IList<IRuleModel> Find()
         {
-            var result = new List<FilmNameSuggestion>();
+            var result = new List<IRuleModel>();
             foreach (var film in Films.Where(x => x.Brackets.Count == 0))
             {
                 var sugs = new List<string>();
@@ -35,12 +35,11 @@ namespace Category.Standard.Rules
                     if (digits <= 1)
                         continue;
 
-                    sugs.Add(dist.Distributor + $"({dist.Category + "-" + idenNum})");
+                    sugs.Add($"({dist.Distributor})({dist.Category + "-" + idenNum})");
                 }
 
-                result.Add(new FilmNameSuggestion { FilmInfo = film, SuggestNames = sugs });
+                result.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
             }
-
             return result;
         }
 

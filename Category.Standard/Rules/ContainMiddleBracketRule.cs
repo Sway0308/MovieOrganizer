@@ -16,9 +16,9 @@ namespace Category.Standard.Rules
         {
         }
 
-        public IList<FilmNameSuggestion> Find()
+        public IList<IRuleModel> Find()
         {
-            var result = new List<FilmNameSuggestion>();
+            var result = new List<IRuleModel>();
             foreach (var film in Films.Where(x => x.FileName.IncludeText("[") && x.FileName.IncludeText("]")))
             {
                 var allMidBrackContent = GetAllMiddleBracketContent(film.FileName);
@@ -28,9 +28,8 @@ namespace Category.Standard.Rules
                           select $"({dist.Distributor})({mb})";
 
                 var sugs = new List<string>(ans.Distinct());
-                result.Add(new FilmNameSuggestion { FilmInfo = film, SuggestNames = sugs });
+                result.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
             }
-
             return result;
         }
 
