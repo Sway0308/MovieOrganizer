@@ -37,6 +37,12 @@ namespace FindProblem.App
 
                 Suggestions = RuleAdaptor.FindByRule(RuleListBox.SelectedIndex);
                 DetailListBox.DataSource = Suggestions.Select(x => x.Main).ToList();
+
+                if (!Suggestions.Any())
+                    return;
+
+                var ruleModel = Suggestions.First();
+                SuggestionListBox.DataSource = ruleModel.Answers;
             };
             DetailListBox.Click += (s, ev) => {
                 if (string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
