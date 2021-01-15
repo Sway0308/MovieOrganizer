@@ -1,6 +1,5 @@
 ﻿using Category.Standard.Models;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
@@ -20,9 +19,6 @@ namespace Adjustment.App.UserControls
         {
             InitializeComponent();
             Extensions = extensions;
-
-            bindingSource1.DataSource = Extensions.FilmExtensions;
-            bindingSource2.DataSource = Extensions.OtherExtensions;
         }
 
         private void AllLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -48,6 +44,7 @@ namespace Adjustment.App.UserControls
             }
 
             sources.Clear();
+            ReloadDataSource();
         }
 
         private void OneLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -68,12 +65,18 @@ namespace Adjustment.App.UserControls
             if (dests.IndexOf(item) < 0)
                 dests.Add(item);
             sources.Remove(item);
+            ReloadDataSource();
         }
 
         private void ExtensionControl_Load(object sender, System.EventArgs e)
         {
-            FilmExtensionListBox.DataSource = bindingSource1;
-            OtherExtensionListBox.DataSource = bindingSource2;
+            ReloadDataSource();
+        }
+
+        private void ReloadDataSource()
+        { 
+            FilmExtensionListBox.DataSource = new List<string>(FilmExtensions);
+            OtherExtensionListBox.DataSource = new List<string>(OtherExtensions);
         }
     }
 }
