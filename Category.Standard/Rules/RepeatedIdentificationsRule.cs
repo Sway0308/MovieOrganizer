@@ -19,7 +19,7 @@ namespace Category.Standard.Rules
             var result = new List<IRuleModel>();
             foreach (var film in Films)
             {
-                var repeats = Films.Where(x => film.Identification.SameText(x.Identification) && !film.FilePath.SameText(x.FilePath));
+                var repeats = Films.Where(x => !string.IsNullOrEmpty(x.Identification) && film.Identification.SameText(x.Identification) && !film.FilePath.SameText(x.FilePath));
                 if (repeats.Any())
                     result.Add(new RepeatedIdentifications { Identification = film.Identification, FilmInfos = repeats.ToList() });
             }
