@@ -50,44 +50,48 @@ namespace FindProblem.App
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(934, 564);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 719);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // RuleListBox
             // 
             this.RuleListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RuleListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.RuleListBox.FormattingEnabled = true;
-            this.RuleListBox.ItemHeight = 12;
+            this.RuleListBox.ItemHeight = 16;
             this.RuleListBox.Location = new System.Drawing.Point(3, 3);
             this.RuleListBox.Name = "RuleListBox";
-            this.RuleListBox.Size = new System.Drawing.Size(678, 144);
+            this.RuleListBox.Size = new System.Drawing.Size(894, 144);
             this.RuleListBox.TabIndex = 0;
             // 
             // DetailListBox
             // 
             this.DetailListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DetailListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.DetailListBox.FormattingEnabled = true;
-            this.DetailListBox.ItemHeight = 12;
+            this.DetailListBox.HorizontalScrollbar = true;
+            this.DetailListBox.ItemHeight = 16;
             this.DetailListBox.Location = new System.Drawing.Point(3, 153);
             this.DetailListBox.Name = "DetailListBox";
-            this.DetailListBox.Size = new System.Drawing.Size(678, 408);
+            this.DetailListBox.Size = new System.Drawing.Size(894, 563);
             this.DetailListBox.TabIndex = 1;
             // 
             // SuggestionListBox
             // 
             this.SuggestionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SuggestionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.SuggestionListBox.FormattingEnabled = true;
-            this.SuggestionListBox.ItemHeight = 12;
-            this.SuggestionListBox.Location = new System.Drawing.Point(687, 153);
+            this.SuggestionListBox.ItemHeight = 16;
+            this.SuggestionListBox.Location = new System.Drawing.Point(903, 153);
             this.SuggestionListBox.Name = "SuggestionListBox";
-            this.SuggestionListBox.Size = new System.Drawing.Size(244, 408);
+            this.SuggestionListBox.Size = new System.Drawing.Size(244, 563);
             this.SuggestionListBox.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 564);
+            this.ClientSize = new System.Drawing.Size(1150, 719);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "MainForm";
