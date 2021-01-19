@@ -41,9 +41,9 @@ namespace Category.Standard.Rules
                 yield break;
 
             var content = fileName.Substring(leftBracketIndex, rightBracketIndex - leftBracketIndex + 1);
-            var nextFileName = content.Replace($"[{content}]", string.Empty);
+            var nextFileName = content.Replace($"{content}", string.Empty);
             GetAllMiddleBracketContent(nextFileName);
-            yield return content;
+            yield return content.Replace("[", string.Empty).Replace("]", string.Empty);
         }
 
         public void Solve()
