@@ -27,9 +27,7 @@ namespace Adjustment.App.UserControls
             if (ClassificationDefine == null)
                 return;
 
-            LbDistributor.DataSource = Distributors;
-            LbGenre.DataSource = Genres;
-            LbActor.DataSource = Actors;
+            LoadListControl();
 
             LbDistributor.Click += (s, ev) => ShowSelectedItem(LbDistributor, TxtDistributor);
             BtnAddDistributor.Click += (s, ev) => AddItem(Distributors, TxtDistributor);
@@ -60,6 +58,7 @@ namespace Adjustment.App.UserControls
                 return;
 
             list.Add(item);
+            LoadListControl();
         }
 
         private void DeleteItem(IList<string> list, TextBox textBox)
@@ -72,6 +71,14 @@ namespace Adjustment.App.UserControls
                 return;
             list.Remove(item);
             textBox.Clear();
+            LoadListControl();
+        }
+
+        private void LoadListControl()
+        {
+            LbDistributor.DataSource = new List<string>(Distributors);
+            LbGenre.DataSource = new List<string>(Genres);
+            LbActor.DataSource = new List<string>(Actors);
         }
     }
 }
