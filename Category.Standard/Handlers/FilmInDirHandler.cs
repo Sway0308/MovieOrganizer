@@ -88,6 +88,8 @@ namespace Category.Standard.Handlers
         protected override void AfterRecusiveSearch(string path)
         {
             ClassifyDistributorAndCategory();
+            ClassifyNotRecognizedDistributorAndCategory();
+            ClassifySingularNotRecognizedDistributorAndCategory();
         }
 
         private void ClassifyDistributorAndCategory()
@@ -110,6 +112,35 @@ namespace Category.Standard.Handlers
 
                 if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
                     DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
+            }
+        }
+
+        private void ClassifyNotRecognizedDistributorAndCategory()
+        {
+            if (IsRecognizedPath)
+                return;
+
+            foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
+            {
+                var distributor = model.Brackets.ElementAt(0).Text;
+                var identify = model.Brackets.ElementAt(1).Text;
+                model.Distributor = distributor;
+                model.Identification = identify;
+            }
+        }
+
+        private void ClassifySingularNotRecognizedDistributorAndCategory()
+        {
+            if (IsRecognizedPath)
+                return;
+
+            foreach (var model in FilmInfos.Where(x => x.Brackets.Count == 1))
+            {
+                var bracket = model.Brackets.ElementAt(0).Text;
+                if (DistributorCats.Any(x => bracket.IncludeText(x.Distributor)))
+                    model.Distributor = bracket;
+                else if (DistributorCats.Any(x => bracket.IncludeText(x.Category)))
+                    model.Identification = bracket;
             }
         }
 
