@@ -37,7 +37,7 @@ namespace Category.Standard.Configs
             if (source.Equals(item))
                 return;
 
-            var str = JsonConvert.SerializeObject(source, Formatting.Indented);
+            var str = JsonConvert.SerializeObject(item, Formatting.Indented);
             File.WriteAllText(path, str, Encoding.UTF8);
         }
 

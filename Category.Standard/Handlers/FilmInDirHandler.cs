@@ -105,15 +105,12 @@ namespace Category.Standard.Handlers
                 var index = identify.IndexOf('-');
                 if (index < 0)
                     continue;
-                var category = identify.Substring(0, index) + ")";
-                if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
-                    DistributorCats.Add(new DistributorCat { Distributor = NoBrackets(distributor), Category = NoBrackets(category) });
-            }
-        }
+                var category = identify.Substring(1, index - 1);
+                distributor = distributor.RemoveCharToEmptyStr("(", ")");
 
-        private string NoBrackets(string input)
-        {
-            return input.RemoveCharToEmptyStr("(", ")");
+                if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
+                    DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
+            }
         }
 
         public void ExportJson()

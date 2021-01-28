@@ -51,7 +51,9 @@ namespace Adjustment.App.UserControls
         private void ShowSelectedItem(ListBox listBox, TextBox textBox)
         {
             textBox.Text = listBox.SelectedItem?.ToString();
-            Clipboard.SetText(textBox.Text ?? string.Empty);
+            if (string.IsNullOrEmpty(textBox.Text))
+                return;
+            Clipboard.SetText(textBox.Text);
         }
 
         private void AddItem(IList<string> list, TextBox textBox)
