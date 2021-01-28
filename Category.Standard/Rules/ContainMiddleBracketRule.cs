@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Abstracts;
+using Category.Standard.Configs;
 using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
@@ -43,7 +44,7 @@ namespace Category.Standard.Rules
             var content = fileName.Substring(leftBracketIndex, rightBracketIndex - leftBracketIndex + 1);
             var nextFileName = content.Replace($"{content}", string.Empty);
             GetAllMiddleBracketContent(nextFileName);
-            yield return content.Replace("[", string.Empty).Replace("]", string.Empty);
+            yield return content.RemoveCharToEmptyStr("[", "]");
         }
 
         public void Solve()

@@ -9,7 +9,7 @@ namespace Category.Standard.Adaptors
 {
     public class FilmAdaptor : IServiceAdaptor
     {
-        private readonly FilmHandler Handler = new FilmHandler(false, true);
+        private readonly FilmInDirHandler Handler = new FilmInDirHandler(false, true);
 
         public void Execute(string inputParam)
         {

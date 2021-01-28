@@ -42,34 +42,43 @@ namespace Adjustment.App.UserControls
             this.BtnDelGenre = new System.Windows.Forms.Button();
             this.BtnAddActor = new System.Windows.Forms.Button();
             this.BtnDelActor = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanel1.Controls.Add(this.TxtActor, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.TxtGenre, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.LbDistributor, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.LbGenre, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.LbActor, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.BtnAddDistributor, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.TxtDistributor, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnDelDistributor, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnAddGenre, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnDelGenre, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BtnAddActor, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.BtnDelActor, 5, 2);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tableLayoutPanel1.Controls.Add(this.LbDistributor, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.LbGenre, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.LbActor, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.BtnDelDistributor, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnDelGenre, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnDelActor, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.BtnAddActor, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnAddGenre, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BtnAddDistributor, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.TxtDistributor, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.TxtGenre, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.TxtActor, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ExportButton, 5, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -81,7 +90,7 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtActor.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtActor.Location = new System.Drawing.Point(557, 532);
+            this.TxtActor.Location = new System.Drawing.Point(556, 532);
             this.TxtActor.Name = "TxtActor";
             this.tableLayoutPanel1.SetRowSpan(this.TxtActor, 2);
             this.TxtActor.Size = new System.Drawing.Size(221, 36);
@@ -91,7 +100,7 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtGenre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtGenre.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtGenre.Location = new System.Drawing.Point(280, 532);
+            this.TxtGenre.Location = new System.Drawing.Point(279, 532);
             this.TxtGenre.Name = "TxtGenre";
             this.tableLayoutPanel1.SetRowSpan(this.TxtGenre, 2);
             this.TxtGenre.Size = new System.Drawing.Size(221, 36);
@@ -105,9 +114,9 @@ namespace Adjustment.App.UserControls
             this.LbDistributor.FormattingEnabled = true;
             this.LbDistributor.HorizontalScrollbar = true;
             this.LbDistributor.ItemHeight = 16;
-            this.LbDistributor.Location = new System.Drawing.Point(3, 3);
+            this.LbDistributor.Location = new System.Drawing.Point(3, 33);
             this.LbDistributor.Name = "LbDistributor";
-            this.LbDistributor.Size = new System.Drawing.Size(271, 514);
+            this.LbDistributor.Size = new System.Drawing.Size(270, 484);
             this.LbDistributor.TabIndex = 0;
             // 
             // LbGenre
@@ -118,9 +127,9 @@ namespace Adjustment.App.UserControls
             this.LbGenre.FormattingEnabled = true;
             this.LbGenre.HorizontalScrollbar = true;
             this.LbGenre.ItemHeight = 16;
-            this.LbGenre.Location = new System.Drawing.Point(280, 3);
+            this.LbGenre.Location = new System.Drawing.Point(279, 33);
             this.LbGenre.Name = "LbGenre";
-            this.LbGenre.Size = new System.Drawing.Size(271, 514);
+            this.LbGenre.Size = new System.Drawing.Size(271, 484);
             this.LbGenre.TabIndex = 1;
             // 
             // LbActor
@@ -131,14 +140,14 @@ namespace Adjustment.App.UserControls
             this.LbActor.FormattingEnabled = true;
             this.LbActor.HorizontalScrollbar = true;
             this.LbActor.ItemHeight = 16;
-            this.LbActor.Location = new System.Drawing.Point(557, 3);
+            this.LbActor.Location = new System.Drawing.Point(556, 33);
             this.LbActor.Name = "LbActor";
-            this.LbActor.Size = new System.Drawing.Size(277, 514);
+            this.LbActor.Size = new System.Drawing.Size(278, 484);
             this.LbActor.TabIndex = 2;
             // 
             // BtnAddDistributor
             // 
-            this.BtnAddDistributor.Location = new System.Drawing.Point(230, 523);
+            this.BtnAddDistributor.Location = new System.Drawing.Point(229, 523);
             this.BtnAddDistributor.Name = "BtnAddDistributor";
             this.BtnAddDistributor.Size = new System.Drawing.Size(44, 23);
             this.BtnAddDistributor.TabIndex = 6;
@@ -152,12 +161,12 @@ namespace Adjustment.App.UserControls
             this.TxtDistributor.Location = new System.Drawing.Point(3, 532);
             this.TxtDistributor.Name = "TxtDistributor";
             this.tableLayoutPanel1.SetRowSpan(this.TxtDistributor, 2);
-            this.TxtDistributor.Size = new System.Drawing.Size(221, 36);
+            this.TxtDistributor.Size = new System.Drawing.Size(220, 36);
             this.TxtDistributor.TabIndex = 3;
             // 
             // BtnDelDistributor
             // 
-            this.BtnDelDistributor.Location = new System.Drawing.Point(230, 553);
+            this.BtnDelDistributor.Location = new System.Drawing.Point(229, 553);
             this.BtnDelDistributor.Name = "BtnDelDistributor";
             this.BtnDelDistributor.Size = new System.Drawing.Size(44, 23);
             this.BtnDelDistributor.TabIndex = 9;
@@ -166,7 +175,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnAddGenre
             // 
-            this.BtnAddGenre.Location = new System.Drawing.Point(507, 523);
+            this.BtnAddGenre.Location = new System.Drawing.Point(506, 523);
             this.BtnAddGenre.Name = "BtnAddGenre";
             this.BtnAddGenre.Size = new System.Drawing.Size(44, 23);
             this.BtnAddGenre.TabIndex = 10;
@@ -175,7 +184,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnDelGenre
             // 
-            this.BtnDelGenre.Location = new System.Drawing.Point(507, 553);
+            this.BtnDelGenre.Location = new System.Drawing.Point(506, 553);
             this.BtnDelGenre.Name = "BtnDelGenre";
             this.BtnDelGenre.Size = new System.Drawing.Size(44, 23);
             this.BtnDelGenre.TabIndex = 11;
@@ -184,7 +193,7 @@ namespace Adjustment.App.UserControls
             // 
             // BtnAddActor
             // 
-            this.BtnAddActor.Location = new System.Drawing.Point(784, 523);
+            this.BtnAddActor.Location = new System.Drawing.Point(783, 523);
             this.BtnAddActor.Name = "BtnAddActor";
             this.BtnAddActor.Size = new System.Drawing.Size(47, 23);
             this.BtnAddActor.TabIndex = 12;
@@ -193,12 +202,51 @@ namespace Adjustment.App.UserControls
             // 
             // BtnDelActor
             // 
-            this.BtnDelActor.Location = new System.Drawing.Point(784, 553);
+            this.BtnDelActor.Location = new System.Drawing.Point(783, 553);
             this.BtnDelActor.Name = "BtnDelActor";
             this.BtnDelActor.Size = new System.Drawing.Size(47, 23);
             this.BtnDelActor.TabIndex = 13;
             this.BtnDelActor.Text = "－";
             this.BtnDelActor.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(220, 12);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Distributor";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(279, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(221, 12);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Genre";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(556, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(221, 12);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Actor";
+            // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(783, 3);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(51, 23);
+            this.ExportButton.TabIndex = 17;
+            this.ExportButton.Text = "Export";
+            this.ExportButton.UseVisualStyleBackColor = true;
             // 
             // ClassificationDefineControl
             // 
@@ -229,5 +277,9 @@ namespace Adjustment.App.UserControls
         private System.Windows.Forms.Button BtnDelGenre;
         private System.Windows.Forms.Button BtnAddActor;
         private System.Windows.Forms.Button BtnDelActor;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button ExportButton;
     }
 }

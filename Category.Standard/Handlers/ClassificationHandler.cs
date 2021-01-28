@@ -12,12 +12,12 @@ namespace Category.Standard.Handlers
         {
             var currentClassification = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
 
-            var distributors = distributorCats.Select(x => x.Distributor.Replace("(", string.Empty).Replace(")", string.Empty)).Distinct();
+            var distributors = distributorCats.Select(x => x.Distributor.RemoveCharToEmptyStr("(", ")")).Distinct();
             var exceptDistributors = distributors.Except(currentClassification.Distributors);
             if (exceptDistributors.Any())
                 exceptDistributors.ForEach(x => currentClassification.Distributors.Add(x));
 
-            BusinessFunc.ExportItem(currentClassification, BaseConstants.ClassificationDefinePath, false);
+            BusinessFunc.ExportItemToFile(currentClassification, BaseConstants.ClassificationDefinePath, false);
         }
     }
 }

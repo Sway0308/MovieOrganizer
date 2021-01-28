@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace Adjustment.App.UserControls
     public partial class ClassificationDefineControl : UserControl
     {
         private readonly ClassificationDefine ClassificationDefine;
+        private readonly Action SaveClassificationDefineAction;
         private IList<string> Distributors => ClassificationDefine.Distributors;
         private IList<string> Genres => ClassificationDefine.Genres;
         private IList<string> Actors => ClassificationDefine.Actors;
@@ -16,10 +18,12 @@ namespace Adjustment.App.UserControls
             InitializeComponent();
         }
 
-        public ClassificationDefineControl(ClassificationDefine filmDefine) : base()
+        public ClassificationDefineControl(ClassificationDefine filmDefine, Action saveClassificationDefine) : base()
         {
             InitializeComponent();
             ClassificationDefine = filmDefine;
+
+            SaveClassificationDefineAction = saveClassificationDefine;
         }
 
         private void FilmDefineControl_Load(object sender, System.EventArgs e)
@@ -40,6 +44,8 @@ namespace Adjustment.App.UserControls
             LbActor.Click += (s, ev) => ShowSelectedItem(LbActor, TxtActor);
             BtnAddActor.Click += (s, ev) => AddItem(Actors, TxtActor);
             BtnDelActor.Click += (s, ev) => DeleteItem(Actors, TxtActor);
+
+            ExportButton.Click += (s, ev) => SaveClassificationDefineAction.Invoke();
         }
 
         private void ShowSelectedItem(ListBox listBox, TextBox textBox)

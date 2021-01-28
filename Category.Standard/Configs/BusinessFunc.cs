@@ -8,7 +8,7 @@ namespace Category.Standard.Configs
 {
     public static class BusinessFunc
     {
-        public static void ExportList<T>(IEnumerable<T> items, string path, bool isIncludeSource)
+        public static void ExportListToFile<T>(IEnumerable<T> items, string path, bool isIncludeSource)
         {
             var sources = new List<T>();
             if (isIncludeSource)
@@ -26,8 +26,7 @@ namespace Category.Standard.Configs
             File.WriteAllText(path, str, Encoding.UTF8);
         }
 
-
-        public static void ExportItem<T>(T item, string path, bool isIncludeSource) where T : new()
+        public static void ExportItemToFile<T>(T item, string path, bool isIncludeSource) where T : new()
         {
             var source = new T();
             if (isIncludeSource)
@@ -40,6 +39,19 @@ namespace Category.Standard.Configs
 
             var str = JsonConvert.SerializeObject(source, Formatting.Indented);
             File.WriteAllText(path, str, Encoding.UTF8);
+        }
+
+        public static string RemoveCharToEmptyStr(this string s, params string[] vs)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+
+            foreach (var item in vs)
+            {
+                if (!string.IsNullOrEmpty(item))
+                    s = s.Replace(item, string.Empty);
+            }
+            return s;
         }
     }
 }

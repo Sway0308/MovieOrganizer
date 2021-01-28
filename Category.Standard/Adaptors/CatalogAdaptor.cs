@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Configs;
+using Category.Standard.Handlers;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
 using System.Collections.Generic;
@@ -8,23 +9,32 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor
     {
+        private readonly JsonListFileHandler<Film> FilmFileHandler;
+        private readonly JsonListFileHandler<DistributorCat> DistributorCatFileHandler;
+        private readonly JsonListFileHandler<string> EmptyDirFileHandler;
+        private readonly JsonListFileHandler<Bracket> BracketFileHandler;
+        private readonly JsonFileHandler<Extension> ExtensionFileHandler;
+        private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineFileHandler;
+
         public CatalogAdaptor(string path) : base()
         {
             BaseConstants.SetExportPath(path);
-            BaseConstants.LoadInfos(BaseConstants.FilmPath, FilmInfos);
-            BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, DistributorCats);
-            Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
-            BaseConstants.LoadInfos(BaseConstants.EmptyDirPath, EmptyDirs);
-            BaseConstants.LoadInfos(BaseConstants.BracketPath, Brackets);
-            ClassificationDefine = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+
+            FilmFileHandler = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
+            DistributorCatFileHandler = new JsonListFileHandler<DistributorCat>(BaseConstants.DistributorCatPath);
+            EmptyDirFileHandler = new JsonListFileHandler<string>(BaseConstants.EmptyDirPath);
+            BracketFileHandler = new JsonListFileHandler<Bracket>(BaseConstants.BracketPath);
+
+            ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
+            ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
         }
 
-        public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
-        public IList<Film> FilmInfos { get; } = new List<Film>();
-        public Extension Extensions { get; }
-        public IList<string> EmptyDirs { get; } = new List<string>();
-        public IList<Bracket> Brackets { get; } = new List<Bracket>();
-        public ClassificationDefine ClassificationDefine { get; }
+        public IList<Film> FilmInfos => FilmFileHandler.Items;
+        public IList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
+        public IList<string> EmptyDirs => EmptyDirFileHandler.Items;
+        public IList<Bracket> Brackets => BracketFileHandler.Items;
+        public Extension Extensions => ExtensionFileHandler.Item;
+        public ClassificationDefine ClassificationDefine => ClassificationDefineFileHandler.Item;
 
         public IList<Film> FindFilms(string keyword)
         {
@@ -36,6 +46,16 @@ namespace Category.Standard.Adaptors
         {
             var result = DistributorCats.Where(x => x.Category.IncludeText(keyword));
             return result.FirstOrDefault()?.Distributor;
+        }
+
+        public void SaveExtention()
+        {
+            ExtensionFileHandler.SaveItemToJson();
+        }
+
+        public void SaveClassificationDefine()
+        {
+            ClassificationDefineFileHandler.SaveItemToJson();
         }
     }
 }
