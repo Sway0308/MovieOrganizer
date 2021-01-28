@@ -94,8 +94,8 @@ namespace Adjustment.App
             // TlDefineSetting
             // 
             this.TlDefineSetting.ColumnCount = 2;
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TlDefineSetting.Location = new System.Drawing.Point(0, 0);
             this.TlDefineSetting.Name = "TlDefineSetting";
