@@ -183,6 +183,7 @@ namespace Adjustment.App.UserControls
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FilmInfoControl";
             this.Size = new System.Drawing.Size(510, 632);
+            this.Load += new System.EventHandler(this.FilmInfoControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

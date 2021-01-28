@@ -29,6 +29,7 @@ namespace Adjustment.App
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageFilmSearcher = new System.Windows.Forms.TabPage();
             this.tabPageEmptyDirs = new System.Windows.Forms.TabPage();
@@ -41,10 +42,10 @@ namespace Adjustment.App
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPageDefineSetting);
             this.tabControl1.Controls.Add(this.tabPageFilmSearcher);
             this.tabControl1.Controls.Add(this.tabPageEmptyDirs);
             this.tabControl1.Controls.Add(this.tabPageExtension);
-            this.tabControl1.Controls.Add(this.tabPageDefineSetting);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -112,6 +113,7 @@ namespace Adjustment.App
             this.ClientSize = new System.Drawing.Size(1045, 729);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gatchan";

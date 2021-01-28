@@ -18,5 +18,22 @@ namespace Adjustment.App.UserControls
             TxtIdentification.Text = filmInfo.Identification;
             LbBrackets.DataSource = filmInfo.Brackets;
         }
+
+        private void FilmInfoControl_Load(object sender, System.EventArgs e)
+        {
+            TxtPath.MouseEnter += (s, ev) => TextBoxEnter(TxtPath);
+            TxtName.MouseEnter += (s, ev) => TextBoxEnter(TxtName);
+            TxtDistributor.MouseEnter += (s, ev) => TextBoxEnter(TxtDistributor);
+            TxtIdentification.MouseEnter += (s, ev) => TextBoxEnter(TxtIdentification);
+        }
+
+        private void TextBoxEnter(TextBox textBox)
+        {
+            var value = textBox.Text ?? string.Empty;
+            if (string.IsNullOrEmpty(value))
+                return;
+
+            Clipboard.SetText(value);
+        }
     }
 }
