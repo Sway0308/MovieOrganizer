@@ -10,7 +10,6 @@ namespace Adjustment.App
     public partial class FmMain : Form
     {
         private readonly CatalogAdaptor Adaptor;
-        private readonly FilmInfoControl FilmInfoControl = new FilmInfoControl { Dock = DockStyle.Fill };
 
         public FmMain()
         {
@@ -29,13 +28,10 @@ namespace Adjustment.App
             var filmDefine = new ClassificationDefineControl(Adaptor.ClassificationDefine, Adaptor.SaveClassificationDefine) { Dock = DockStyle.Fill };
             TlDefineSetting.Controls.Add(filmDefine, 0, 0);
             TlDefineSetting.SetColumnSpan(filmDefine, 2);
-            TlDefineSetting.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos, NotifySelectedFilmInfo) { Dock = DockStyle.Fill }, 0, 1);
-            TlDefineSetting.Controls.Add(FilmInfoControl, 1, 1);
-        }
 
-        private void NotifySelectedFilmInfo(Film filmInfo)
-        {
-            FilmInfoControl.ShowFilmInfo(filmInfo);
+            var filmInfoControl = new FilmInfoControl { Dock = DockStyle.Fill };
+            TlDefineSetting.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos, filmInfoControl.ShowFilmInfo) { Dock = DockStyle.Fill }, 0, 1);
+            TlDefineSetting.Controls.Add(filmInfoControl, 1, 1);
         }
     }
 }
