@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace Adjustment.App.UserControls
     public partial class ExtensionControl : UserControl
     {
         private readonly Extension Extensions;
+        private readonly Action ExportAction;
         private IList<string> FilmExtensions => Extensions.FilmExtensions;
         private IList<string> OtherExtensions => Extensions.OtherExtensions;
 
@@ -15,10 +17,12 @@ namespace Adjustment.App.UserControls
             InitializeComponent();
         }
 
-        public ExtensionControl(Extension extensions) : base()
+        public ExtensionControl(Extension extensions, Action exportAction) : base()
         {
             InitializeComponent();
             Extensions = extensions;
+
+            ExportAction = exportAction;
         }
 
         private void AllLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -77,6 +81,11 @@ namespace Adjustment.App.UserControls
         { 
             FilmExtensionListBox.DataSource = new List<string>(FilmExtensions);
             OtherExtensionListBox.DataSource = new List<string>(OtherExtensions);
+        }
+
+        private void ExportButton_Click(object sender, System.EventArgs e)
+        {
+            ExportAction.Invoke();
         }
     }
 }

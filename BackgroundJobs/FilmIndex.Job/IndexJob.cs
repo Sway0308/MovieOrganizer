@@ -23,7 +23,7 @@ namespace FilmIndex.Job
                 var isRecongnized = SamplePaths.Any(x => x.SameText(path));
                 var exportAndIncludeSource = i != 0;
 
-                var filmHandler = new FilmHandler(exportAndIncludeSource, isRecongnized);
+                var filmHandler = new FilmInDirHandler(exportAndIncludeSource, isRecongnized);
                 filmHandler.RecusiveSearch(path);
                 filmHandler.ExportJson();
             }

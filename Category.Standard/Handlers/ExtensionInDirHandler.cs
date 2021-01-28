@@ -9,14 +9,14 @@ using System.Linq;
 
 namespace Category.Standard.Handlers
 {
-    public class ExtensionHandler : DirRecursiveHandler
+    public class ExtensionInDirHandler : DirRecursiveHandler
     {
-        private string FilePath => BaseConstants.ExtensionPath;
-        private readonly Extension Extensions;
+        private readonly JsonFileHandler<Extension> ExtensionFileHandler;
+        private Extension Extensions => ExtensionFileHandler.Item;
 
-        public ExtensionHandler()
+        public ExtensionInDirHandler()
         {
-            Extensions = BaseConstants.LoadInfo<Extension>(FilePath);
+            ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
         }
 
         protected override void ProcessFiles(string path, IEnumerable<string> files)
@@ -41,8 +41,7 @@ namespace Category.Standard.Handlers
                 Extensions.OtherExtensions.Add(item);
             }
 
-            Directory.CreateDirectory(BaseConstants.AppDataPath);
-            File.WriteAllText(FilePath, JsonConvert.SerializeObject(Extensions, Formatting.Indented));
+            ExtensionFileHandler.SaveItemToJson();
         }
     }
 }

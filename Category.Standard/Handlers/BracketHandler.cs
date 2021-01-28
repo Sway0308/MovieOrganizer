@@ -38,7 +38,7 @@ namespace Category.Standard.Handlers
         private void ExportJson(IList<Film> filmInfos)
         {
             var list = filmInfos.SelectMany(x => x.Brackets).OrderBy(x => x.Text).ThenByDescending(x => x.Type);
-            BusinessFunc.ExportList(list, BaseConstants.BracketPath, false);
+            BusinessFunc.ExportListToFile(list, BaseConstants.BracketPath, false);
         }
     }
 }

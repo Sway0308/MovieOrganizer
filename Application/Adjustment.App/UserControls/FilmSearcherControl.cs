@@ -24,7 +24,15 @@ namespace Adjustment.App.UserControls
             FilmInfos = filmInfos;
         }
 
-        public bool IsNotifyRequired { get; set; }
+        public FilmSearcherControl(IList<Film> filmInfos, Action<Film> action) : base()
+        {
+            InitializeComponent();
+            FilmInfos = filmInfos;
+
+            NotifyAction = action;
+        }
+
+        private readonly Action<Film> NotifyAction;
 
         private void TxtKeyword_TextChanged(object sender, EventArgs e)
         {
@@ -62,14 +70,14 @@ namespace Adjustment.App.UserControls
         {
             TxtKeyword.Focus();
             ListBoxFilm.Click += (s, ev) => {
-                if (!IsNotifyRequired || ListBoxFilm.SelectedItem == null)
+                if (NotifyAction == null || ListBoxFilm.SelectedItem == null)
                     return;
 
                 var film = FilmInfos.FirstOrDefault(x => x.FilePath.SameText(ListBoxFilm.SelectedItem.ToString()));
                 if (film == null)
                     return;
 
-                (ParentForm as FmMain).NotifySelectedFilmInfo(film);
+                NotifyAction.Invoke(film);
             };
         }
     }

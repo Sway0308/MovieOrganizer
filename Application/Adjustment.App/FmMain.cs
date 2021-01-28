@@ -24,16 +24,16 @@ namespace Adjustment.App
         {
             tabPageFilmSearcher.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos) { Dock = DockStyle.Fill });
             tabPageEmptyDirs.Controls.Add(new EmptyDirsControl(Adaptor.EmptyDirs) { Dock = DockStyle.Fill });
-            tabPageExtension.Controls.Add(new ExtensionControl(Adaptor.Extensions) { Dock = DockStyle.Fill });
+            tabPageExtension.Controls.Add(new ExtensionControl(Adaptor.Extensions, Adaptor.SaveExtention) { Dock = DockStyle.Fill });
 
-            var filmDefine = new ClassificationDefineControl(Adaptor.ClassificationDefine) { Dock = DockStyle.Fill };
+            var filmDefine = new ClassificationDefineControl(Adaptor.ClassificationDefine, Adaptor.SaveClassificationDefine) { Dock = DockStyle.Fill };
             TlDefineSetting.Controls.Add(filmDefine, 0, 0);
             TlDefineSetting.SetColumnSpan(filmDefine, 2);
-            TlDefineSetting.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos) { Dock = DockStyle.Fill, IsNotifyRequired = true }, 0, 1);
+            TlDefineSetting.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos, NotifySelectedFilmInfo) { Dock = DockStyle.Fill }, 0, 1);
             TlDefineSetting.Controls.Add(FilmInfoControl, 1, 1);
         }
 
-        public void NotifySelectedFilmInfo(Film filmInfo)
+        private void NotifySelectedFilmInfo(Film filmInfo)
         {
             FilmInfoControl.ShowFilmInfo(filmInfo);
         }

@@ -145,6 +145,7 @@ namespace Adjustment.App.UserControls
             this.ExportButton.TabIndex = 6;
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // ExtensionControl
             // 

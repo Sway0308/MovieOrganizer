@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Abstracts;
+using Category.Standard.Configs;
 using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Category.Standard.Rules
                 if (bracket.Type != Configs.CategoryType.Identification)
                     continue;
 
-                var iden = bracket.Text.Replace("(", string.Empty).Replace(")", string.Empty);
+                var iden = bracket.Text.RemoveCharToEmptyStr("(", ")");
                 var sugs = new List<string>();
                 var dists = DistributorCats.Where(x => iden.StartsWith(x.Category));
                 foreach (var dist in dists)

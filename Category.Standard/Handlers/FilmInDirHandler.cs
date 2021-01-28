@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Category.Standard.Handlers
 {
-    public partial class FilmHandler : DirRecursiveHandler
+    public partial class FilmInDirHandler : DirRecursiveHandler
     {
         /// <summary>
         /// 匯出時是否保留來源資料
@@ -24,7 +24,7 @@ namespace Category.Standard.Handlers
         /// </summary>
         private readonly Extension Extensions;
 
-        public FilmHandler(bool exportAndIncludeSource, bool isRecognizedPath)
+        public FilmInDirHandler(bool exportAndIncludeSource, bool isRecognizedPath)
         {
             ExportAndIncludeSource = exportAndIncludeSource;
             IsRecognizedPath = isRecognizedPath;
@@ -113,14 +113,14 @@ namespace Category.Standard.Handlers
 
         private string NoBrackets(string input)
         {
-            return input.Replace("(", string.Empty).Replace(")", string.Empty);
+            return input.RemoveCharToEmptyStr("(", ")");
         }
 
         public void ExportJson()
         {
-            BusinessFunc.ExportList(DistributorCats, BaseConstants.DistributorCatPath, ExportAndIncludeSource);
-            BusinessFunc.ExportList(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
-            BusinessFunc.ExportList(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
     }
 }

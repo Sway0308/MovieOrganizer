@@ -5,7 +5,7 @@ namespace Category.Standard.Adaptors
 {
     public class ExtensionAdaptor : IServiceAdaptor
     {
-        private readonly ExtensionHandler Handler = new ExtensionHandler();
+        private readonly ExtensionInDirHandler Handler = new ExtensionInDirHandler();
         public void Execute(string inputParam)
         {
             Handler.RecusiveSearch(inputParam);
