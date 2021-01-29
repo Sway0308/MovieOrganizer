@@ -36,10 +36,10 @@ namespace Adjustment.App.UserControls
 
         private void TxtKeyword_TextChanged(object sender, EventArgs e)
         {
-            SearchDistributor();
+            SearchFilms();
         }
 
-        private void SearchDistributor()
+        private void SearchFilms()
         {
             var keyword = TxtKeyword.Text;
             if (string.IsNullOrEmpty(keyword))
@@ -51,6 +51,7 @@ namespace Adjustment.App.UserControls
             var films = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
+            NotifyAction.Invoke(films.ElementAt(0));
         }
 
         private void ListBoxFilm_DoubleClick(object sender, EventArgs e)

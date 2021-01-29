@@ -6,16 +6,16 @@ using System.Linq;
 
 namespace Category.Standard.Handlers
 {
-    public class ClassificationHandler
+    public class ClassifyDistributorHandler
     {
         public void ClassifyAndExportDefines(IList<DistributorCat> distributorCats)
         {
             var currentClassification = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
-
-            var distributors = distributorCats.Select(x => x.Distributor.RemoveCharToEmptyStr("(", ")")).Distinct();
-            var exceptDistributors = distributors.Except(currentClassification.Distributors);
-            if (exceptDistributors.Any())
-                exceptDistributors.ForEach(x => currentClassification.Distributors.Add(x));
+            foreach (var item in distributorCats)
+            {
+                if (!currentClassification.Distributors.Any(x => x.IncludeText(item.Distributor)))
+                    currentClassification.Distributors.Add(item.Distributor);
+            }
 
             BusinessFunc.ExportItemToFile(currentClassification, BaseConstants.ClassificationDefinePath);
         }
