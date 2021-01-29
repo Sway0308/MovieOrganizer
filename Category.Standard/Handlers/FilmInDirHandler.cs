@@ -87,23 +87,22 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            ClassifyDistributorAndCategory();
-            ClassifyNotRecognizedDistributorAndCategory();
-            ClassifySingularNotRecognizedDistributorAndCategory();
+            ClassifyDistributorAndCategoryFromRecognizedPath();
+            ClassifyDistributorAndCategoryFromNotRecognizedPath();
+            ClassifySingularDistributorOrCategoryFromNotRecognizedPath();
         }
 
-        private void ClassifyDistributorAndCategory()
+        private void ClassifyDistributorAndCategoryFromRecognizedPath()
         {
             if (!IsRecognizedPath)
                 return;
 
             foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
             {
-                var distributor = model.Brackets.ElementAt(0).Text;
-                var identify = model.Brackets.ElementAt(1).Text;
-                model.Distributor = distributor;
-                model.Identification = identify;
+                var (distributorBracket, identifyBracket) = ClassifyTwoBracketsModelIntoDistributorAndCategory(model);
 
+                var distributor = distributorBracket.Text;
+                var identify = identifyBracket.Text;
                 var index = identify.IndexOf('-');
                 if (index < 0)
                     continue;
@@ -115,32 +114,47 @@ namespace Category.Standard.Handlers
             }
         }
 
-        private void ClassifyNotRecognizedDistributorAndCategory()
+        private void ClassifyDistributorAndCategoryFromNotRecognizedPath()
         {
             if (IsRecognizedPath)
                 return;
 
             foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
             {
-                var distributor = model.Brackets.ElementAt(0).Text;
-                var identify = model.Brackets.ElementAt(1).Text;
-                model.Distributor = distributor;
-                model.Identification = identify;
+                ClassifyTwoBracketsModelIntoDistributorAndCategory(model);
             }
         }
 
-        private void ClassifySingularNotRecognizedDistributorAndCategory()
+        private (Bracket distributor, Bracket identify) ClassifyTwoBracketsModelIntoDistributorAndCategory(Film model)
+        {
+            var distributor = model.Brackets[0];
+            distributor.Type = CategoryType.Distributor;
+            model.Distributor = distributor.Text;
+
+            var identify = model.Brackets[1];
+            identify.Type = CategoryType.Identification;
+            model.Identification = identify.Text;
+            return (distributor, identify);
+        }
+
+        private void ClassifySingularDistributorOrCategoryFromNotRecognizedPath()
         {
             if (IsRecognizedPath)
                 return;
 
             foreach (var model in FilmInfos.Where(x => x.Brackets.Count == 1))
             {
-                var bracket = model.Brackets.ElementAt(0).Text;
-                if (DistributorCats.Any(x => bracket.IncludeText(x.Distributor)))
-                    model.Distributor = bracket;
-                else if (DistributorCats.Any(x => bracket.IncludeText(x.Category)))
-                    model.Identification = bracket;
+                var bracket = model.Brackets[0];
+                if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Distributor)))
+                {
+                    bracket.Type = CategoryType.Distributor;
+                    model.Distributor = bracket.Text;
+                }
+                else if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Category)))
+                {
+                    bracket.Type = CategoryType.Identification;
+                    model.Identification = bracket.Text;
+                }
             }
         }
 

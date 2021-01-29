@@ -17,7 +17,7 @@ namespace Category.Standard.Handlers
             if (exceptDistributors.Any())
                 exceptDistributors.ForEach(x => currentClassification.Distributors.Add(x));
 
-            BusinessFunc.ExportItemToFile(currentClassification, BaseConstants.ClassificationDefinePath, false);
+            BusinessFunc.ExportItemToFile(currentClassification, BaseConstants.ClassificationDefinePath);
         }
     }
 }
