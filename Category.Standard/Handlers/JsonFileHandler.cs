@@ -19,7 +19,7 @@ namespace Category.Standard.Handlers
 
         public void SaveItemToJson(bool isIncludeSource = false)
         {
-            BusinessFunc.ExportItemToFile(Item, _FilePath, isIncludeSource);
+            BusinessFunc.ExportItemToFile(Item, _FilePath);
         }
     }
 }

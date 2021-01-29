@@ -26,17 +26,8 @@ namespace Category.Standard.Configs
             File.WriteAllText(path, str, Encoding.UTF8);
         }
 
-        public static void ExportItemToFile<T>(T item, string path, bool isIncludeSource) where T : new()
+        public static void ExportItemToFile<T>(T item, string path) where T : new()
         {
-            var source = new T();
-            if (isIncludeSource)
-            {
-                source = BaseConstants.LoadInfo<T>(path);
-            }
-
-            if (source.Equals(item))
-                return;
-
             var str = JsonConvert.SerializeObject(item, Formatting.Indented);
             File.WriteAllText(path, str, Encoding.UTF8);
         }
