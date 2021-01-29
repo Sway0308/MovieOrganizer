@@ -86,6 +86,7 @@ namespace Adjustment.App.UserControls
         private void ExportButton_Click(object sender, System.EventArgs e)
         {
             ExportAction.Invoke();
+            MessageBox.Show("Done");
         }
     }
 }

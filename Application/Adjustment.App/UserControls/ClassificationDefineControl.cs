@@ -45,7 +45,10 @@ namespace Adjustment.App.UserControls
             BtnAddActor.Click += (s, ev) => AddItem(Actors, TxtActor);
             BtnDelActor.Click += (s, ev) => DeleteItem(Actors, TxtActor);
 
-            ExportButton.Click += (s, ev) => SaveClassificationDefineAction.Invoke();
+            ExportButton.Click += (s, ev) => { 
+                SaveClassificationDefineAction.Invoke();
+                MessageBox.Show("Done");
+            };
         }
 
         private void ShowSelectedItem(ListBox listBox, TextBox textBox)
