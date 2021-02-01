@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Category.Standard.Models
 {
+    /// <summary>
+    /// 影片設定
+    /// </summary>
     public class Film
     {
         public Film(string filePath)

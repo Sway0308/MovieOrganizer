@@ -2,6 +2,9 @@
 
 namespace Category.Standard.Models
 {
+    /// <summary>
+    /// 片源分類
+    /// </summary>
     public class ClassificationDefine
     {
         /// <summary>

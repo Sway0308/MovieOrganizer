@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Category.Standard.Models
 {
+    /// <summary>
+    /// 副檔名分類
+    /// </summary>
     public class Extension
     {
         [JsonIgnore]

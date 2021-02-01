@@ -2,6 +2,9 @@
 
 namespace Category.Standard.Models
 {
+    /// <summary>
+    /// 括弧內文字定義物件
+    /// </summary>
     public class Bracket
     {
         public string Text { get; set; }

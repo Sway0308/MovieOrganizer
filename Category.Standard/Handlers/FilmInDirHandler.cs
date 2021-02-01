@@ -28,7 +28,9 @@ namespace Category.Standard.Handlers
         {
             ExportAndIncludeSource = exportAndIncludeSource;
             IsRecognizedPath = isRecognizedPath;
+            
             Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
+            BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, DistributorCats);
         }
 
         public IList<string> EmptyFileDirs { get; } = new List<string>();
@@ -160,7 +162,7 @@ namespace Category.Standard.Handlers
 
         public void ExportJson()
         {
-            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, false);
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
