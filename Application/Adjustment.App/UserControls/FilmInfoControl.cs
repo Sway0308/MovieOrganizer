@@ -16,6 +16,9 @@ namespace Adjustment.App.UserControls
             TxtName.Text = filmInfo.FileName;
             TxtDistributor.Text = filmInfo.Distributor;
             TxtIdentification.Text = filmInfo.Identification;
+
+            LbGenres.DataSource = filmInfo.Genres;
+            LbActors.DataSource = filmInfo.Actors;
             LbBrackets.DataSource = filmInfo.Brackets;
         }
 

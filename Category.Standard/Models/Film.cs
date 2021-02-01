@@ -20,6 +20,8 @@ namespace Category.Standard.Models
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
+        public IList<string> Genres { get; } = new List<string>();
+        public IList<string> Actors { get; } = new List<string>();
 
         public void AddBrackets(IEnumerable<Bracket> brackets)
         {

@@ -24,6 +24,8 @@ namespace Category.Standard.Handlers
         /// </summary>
         private readonly Extension Extensions;
 
+        private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+
         public FilmInDirHandler(bool exportAndIncludeSource, bool isRecognizedPath)
         {
             ExportAndIncludeSource = exportAndIncludeSource;
@@ -36,6 +38,7 @@ namespace Category.Standard.Handlers
         public IList<string> EmptyFileDirs { get; } = new List<string>();
         public IList<Film> FilmInfos { get; } = new List<Film>();
         public IList<DistributorCat> DistributorCats { get; } = new List<DistributorCat>();
+        private ClassificationDefine ClassificationDefine => ClassificationDefineHandler.Item;
 
         protected override void BeforeRecusiveSearch(string path)
         {
@@ -89,74 +92,79 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            ClassifyDistributorAndCategoryFromRecognizedPath();
-            ClassifyDistributorAndCategoryFromNotRecognizedPath();
-            ClassifySingularDistributorOrCategoryFromNotRecognizedPath();
+            foreach (var model in FilmInfos)
+            {
+                ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
+                ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+
+                ClassifyGenres(model);
+                ClassifyActors(model);
+            }
         }
 
-        private void ClassifyDistributorAndCategoryFromRecognizedPath()
+        private void ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(Film model)
         {
+            if (model.Brackets.Count < 2)
+                return;
+
+            var distributorBracket = model.Brackets[0];
+            distributorBracket.Type = CategoryType.Distributor;
+            model.Distributor = distributorBracket.Text;
+
+            var identifyBracket = model.Brackets[1];
+            identifyBracket.Type = CategoryType.Identification;
+            model.Identification = identifyBracket.Text;
+
             if (!IsRecognizedPath)
                 return;
 
-            foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
-            {
-                var (distributorBracket, identifyBracket) = ClassifyTwoBracketsModelIntoDistributorAndCategory(model);
+            var distributor = distributorBracket.Text;
+            var identify = identifyBracket.Text;
+            var index = identify.IndexOf('-');
+            if (index < 0)
+                return;
 
-                var distributor = distributorBracket.Text;
-                var identify = identifyBracket.Text;
-                var index = identify.IndexOf('-');
-                if (index < 0)
-                    continue;
-                var category = identify.Substring(1, index - 1);
-                distributor = distributor.RemoveCharToEmptyStr("(", ")");
+            var category = identify.Substring(1, index - 1);
+            distributor = distributor.RemoveCharToEmptyStr("(", ")");
 
-                if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
-                    DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
-            }
+            if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
+                DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
         }
 
-        private void ClassifyDistributorAndCategoryFromNotRecognizedPath()
+        private void ClassifySingularDistributorOrCategoryFromNotRecognizedPath(Film model)
         {
             if (IsRecognizedPath)
                 return;
 
-            foreach (var model in FilmInfos.Where(x => x.Brackets.Count >= 2))
+            if (model.Brackets.Count != 1)
+                return;
+
+            var bracket = model.Brackets[0];
+            if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Distributor)))
             {
-                ClassifyTwoBracketsModelIntoDistributorAndCategory(model);
+                bracket.Type = CategoryType.Distributor;
+                model.Distributor = bracket.Text;
+            }
+            else if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Category)))
+            {
+                bracket.Type = CategoryType.Identification;
+                model.Identification = bracket.Text;
             }
         }
 
-        private (Bracket distributor, Bracket identify) ClassifyTwoBracketsModelIntoDistributorAndCategory(Film model)
+        private void ClassifyGenres(Film model)
         {
-            var distributor = model.Brackets[0];
-            distributor.Type = CategoryType.Distributor;
-            model.Distributor = distributor.Text;
-
-            var identify = model.Brackets[1];
-            identify.Type = CategoryType.Identification;
-            model.Identification = identify.Text;
-            return (distributor, identify);
+            foreach (var genre in ClassificationDefine.Genres.Where(x => model.FileName.IncludeText(x)))
+            {
+                model.Genres.Add(genre);
+            }
         }
 
-        private void ClassifySingularDistributorOrCategoryFromNotRecognizedPath()
+        private void ClassifyActors(Film model)
         {
-            if (IsRecognizedPath)
-                return;
-
-            foreach (var model in FilmInfos.Where(x => x.Brackets.Count == 1))
+            foreach (var genre in ClassificationDefine.Actors.Where(x => model.FileName.IncludeText(x)))
             {
-                var bracket = model.Brackets[0];
-                if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Distributor)))
-                {
-                    bracket.Type = CategoryType.Distributor;
-                    model.Distributor = bracket.Text;
-                }
-                else if (DistributorCats.Any(x => bracket.Text.IncludeText(x.Category)))
-                {
-                    bracket.Type = CategoryType.Identification;
-                    model.Identification = bracket.Text;
-                }
+                model.Actors.Add(genre);
             }
         }
 
