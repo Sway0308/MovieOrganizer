@@ -40,6 +40,10 @@ namespace Adjustment.App.UserControls
             this.TxtIdentification = new System.Windows.Forms.TextBox();
             this.LbBrackets = new System.Windows.Forms.ListBox();
             this.TxtPath = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.LbGenres = new System.Windows.Forms.ListBox();
+            this.LbActors = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +53,8 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
@@ -57,18 +63,23 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.Controls.Add(this.TxtName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.TxtDistributor, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.TxtIdentification, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.LbBrackets, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.LbBrackets, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.TxtPath, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.LbGenres, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.LbActors, 1, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 632);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -121,11 +132,11 @@ namespace Adjustment.App.UserControls
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(37, 372);
+            this.label5.Location = new System.Drawing.Point(47, 204);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 16);
+            this.label5.Size = new System.Drawing.Size(52, 16);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Brackets";
+            this.label5.Text = "Genres";
             // 
             // TxtName
             // 
@@ -161,9 +172,9 @@ namespace Adjustment.App.UserControls
             this.LbBrackets.FormattingEnabled = true;
             this.LbBrackets.HorizontalScrollbar = true;
             this.LbBrackets.ItemHeight = 16;
-            this.LbBrackets.Location = new System.Drawing.Point(107, 133);
+            this.LbBrackets.Location = new System.Drawing.Point(107, 467);
             this.LbBrackets.Name = "LbBrackets";
-            this.LbBrackets.Size = new System.Drawing.Size(398, 494);
+            this.LbBrackets.Size = new System.Drawing.Size(398, 160);
             this.LbBrackets.TabIndex = 9;
             // 
             // TxtPath
@@ -175,6 +186,50 @@ namespace Adjustment.App.UserControls
             this.TxtPath.ReadOnly = true;
             this.TxtPath.Size = new System.Drawing.Size(398, 27);
             this.TxtPath.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(37, 539);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 16);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Brackets";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(50, 371);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 16);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Actors";
+            // 
+            // LbGenres
+            // 
+            this.LbGenres.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LbGenres.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.LbGenres.FormattingEnabled = true;
+            this.LbGenres.ItemHeight = 16;
+            this.LbGenres.Location = new System.Drawing.Point(107, 133);
+            this.LbGenres.Name = "LbGenres";
+            this.LbGenres.Size = new System.Drawing.Size(398, 159);
+            this.LbGenres.TabIndex = 13;
+            // 
+            // LbActors
+            // 
+            this.LbActors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LbActors.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.LbActors.FormattingEnabled = true;
+            this.LbActors.ItemHeight = 16;
+            this.LbActors.Location = new System.Drawing.Point(107, 300);
+            this.LbActors.Name = "LbActors";
+            this.LbActors.Size = new System.Drawing.Size(398, 159);
+            this.LbActors.TabIndex = 14;
             // 
             // FilmInfoControl
             // 
@@ -203,5 +258,9 @@ namespace Adjustment.App.UserControls
         private System.Windows.Forms.TextBox TxtIdentification;
         private System.Windows.Forms.ListBox LbBrackets;
         private System.Windows.Forms.TextBox TxtPath;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox LbGenres;
+        private System.Windows.Forms.ListBox LbActors;
     }
 }
