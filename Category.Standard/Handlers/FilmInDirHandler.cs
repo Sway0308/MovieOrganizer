@@ -118,14 +118,13 @@ namespace Category.Standard.Handlers
             if (!IsRecognizedPath)
                 return;
 
-            var distributor = distributorBracket.Text;
             var identify = identifyBracket.Text;
             var index = identify.IndexOf('-');
             if (index < 0)
                 return;
 
             var category = identify.Substring(1, index - 1);
-            distributor = distributor.RemoveCharToEmptyStr("(", ")");
+            var distributor = distributorBracket.Text.RemoveCharToEmptyStr("(", ")");
 
             if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
                 DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
