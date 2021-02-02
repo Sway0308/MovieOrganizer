@@ -30,9 +30,6 @@ namespace FilmIndex.Job
 
             var categoryAdaptor = new CatalogAdaptor(AppDataPath);
 
-            var bracketHandler = new BracketHandler();
-            bracketHandler.ClassifyAndExportBrackets(categoryAdaptor.FilmInfos, categoryAdaptor.DistributorCats);
-
             var classificationHandler = new ClassifyDistributorHandler();
             classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);
         }

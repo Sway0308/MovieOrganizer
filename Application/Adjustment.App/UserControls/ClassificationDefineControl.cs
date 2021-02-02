@@ -88,8 +88,13 @@ namespace Adjustment.App.UserControls
         private void LoadListControl()
         {
             LbDistributor.DataSource = new List<string>(Distributors);
+            LbDistributor.SelectedIndex = Distributors.Count - 1;
+
             LbGenre.DataSource = new List<string>(Genres);
+            LbGenre.SelectedIndex = Genres.Count - 1;
+
             LbActor.DataSource = new List<string>(Actors);
+            LbActor.SelectedIndex = Actors.Count - 1;
         }
     }
 }
