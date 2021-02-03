@@ -9,6 +9,8 @@ namespace Category.Standard.Adaptors
 {
     public class RuleAdaptor
     {
+        private readonly CatalogAdaptor _CatalogAdaptor;
+
         public RuleAdaptor(string path)
         {
             var type = typeof(IRule);
@@ -17,10 +19,8 @@ namespace Category.Standard.Adaptors
                 .Where(x => type.IsAssignableFrom(x));
             RuleTypes = rules;
 
-            CatalogAdaptor = new CatalogAdaptor(path);
+            _CatalogAdaptor = new CatalogAdaptor(path);
         }
-
-        public CatalogAdaptor CatalogAdaptor { get; }
 
         public IEnumerable<Type> RuleTypes { get; }
 
@@ -36,7 +36,7 @@ namespace Category.Standard.Adaptors
         public IList<IRuleModel> FindByRule(int index)
         {
             var ruleType = RuleTypes.ElementAt(index);
-            var rule = (IRule)Activator.CreateInstance(ruleType, CatalogAdaptor.FilmInfos, CatalogAdaptor.DistributorCats);
+            var rule = (IRule)Activator.CreateInstance(ruleType, _CatalogAdaptor.FilmInfos, _CatalogAdaptor.DistributorCats);
             return rule.Find();
         }
     }

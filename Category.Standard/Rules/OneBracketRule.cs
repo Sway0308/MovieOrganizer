@@ -20,7 +20,7 @@ namespace Category.Standard.Rules
             var result = new List<IRuleModel>();
             foreach (var film in Films.Where(x => x.Brackets.Count == 1))
             {
-                var bracket = film.Brackets.First();
+                var bracket = film.Brackets[0];
                 if (bracket.Type != Configs.CategoryType.Identification)
                     continue;
 
@@ -29,7 +29,7 @@ namespace Category.Standard.Rules
                 var dists = DistributorCats.Where(x => iden.StartsWith(x.Category));
                 foreach (var dist in dists)
                 {
-                    sugs.Add(dist.Distributor + $"({dist.Category + "-" + bracket.Text})");
+                    sugs.Add($"({dist.Distributor}){bracket.Text}");
                 }
 
                 result.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });

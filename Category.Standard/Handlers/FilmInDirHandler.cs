@@ -2,9 +2,11 @@
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
 using Gatchan.Base.Standard.Base;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Category.Standard.Handlers
 {
@@ -92,14 +94,72 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            foreach (var model in FilmInfos)
-            {
-                ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
-                ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+            //foreach (var model in FilmInfos)
+            //{
+            //    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
+            //    ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+            //
+            //    ClassifyGenres(model);
+            //    ClassifyActors(model);
+            //}
 
-                ClassifyGenres(model);
-                ClassifyActors(model);
-            }
+            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase1(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase2(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase3(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyGenres(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase4(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyActors(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
         }
 
         private void ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(Film model)
