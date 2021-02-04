@@ -89,11 +89,16 @@ namespace Category.Standard.Handlers
         {
             if (Extensions.FilmExtensions.Count == 0)
                 return files;
-            return files.Where(x => Extensions.FilmExtensions.Contains(Path.GetExtension(x)));
+            var result = from x in files.AsParallel()
+                         where Extensions.FilmExtensions.Contains(Path.GetExtension(x))
+                         select x;
+            return result;
         }
 
         protected override void AfterRecusiveSearch(string path)
         {
+            #region Regular way
+
             //foreach (var model in FilmInfos)
             //{
             //    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
@@ -103,7 +108,13 @@ namespace Category.Standard.Handlers
             //    ClassifyActors(model);
             //}
 
+            #endregion
+
+            #region Pipeline way
+
             foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
+
+            #endregion
         }
 
         private IEnumerable<Film> BlockCollectionPhase1(IEnumerable<Film> filmInfos)
@@ -213,7 +224,11 @@ namespace Category.Standard.Handlers
 
         private void ClassifyGenres(Film model)
         {
-            foreach (var genre in ClassificationDefine.Genres.Where(x => model.FileName.IncludeText(x)))
+            var genres = from x in ClassificationDefine.Genres.AsParallel()
+                         where model.FileName.IncludeText(x)
+                         select x;
+
+            foreach (var genre in genres)
             {
                 model.Genres.Add(genre);
             }
@@ -221,7 +236,11 @@ namespace Category.Standard.Handlers
 
         private void ClassifyActors(Film model)
         {
-            foreach (var genre in ClassificationDefine.Actors.Where(x => model.FileName.IncludeText(x)))
+            var actors = from x in ClassificationDefine.Actors.AsParallel()
+                         where model.FileName.IncludeText(x)
+                         select x;
+
+            foreach (var genre in actors)
             {
                 model.Actors.Add(genre);
             }
