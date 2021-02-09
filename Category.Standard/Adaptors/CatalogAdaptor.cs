@@ -35,13 +35,18 @@ namespace Category.Standard.Adaptors
 
         public IList<Film> FindFilms(string keyword)
         {
-            var result = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
+            var result = from x in FilmInfos.AsParallel()
+                         where x.FileName.IncludeText(keyword)
+                         select x;
+
             return result.ToList();
         }
 
         public string FindDistributor(string keyword)
         {
-            var result = DistributorCats.Where(x => x.Category.IncludeText(keyword));
+            var result = from x in DistributorCats.AsParallel()
+                         where x.Category.IncludeText(keyword)
+                         select x;
             return result.FirstOrDefault()?.Distributor;
         }
 
