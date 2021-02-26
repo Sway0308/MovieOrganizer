@@ -9,6 +9,10 @@ namespace Category.Standard.Models
     /// </summary>
     public class Film
     {
+        public Film()
+        { 
+        }
+
         public Film(string filePath)
         {
             FilePath = filePath;
