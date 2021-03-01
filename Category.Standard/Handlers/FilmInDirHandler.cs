@@ -248,7 +248,7 @@ namespace Category.Standard.Handlers
 
         public void ExportJson()
         {
-            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, false);
+            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
