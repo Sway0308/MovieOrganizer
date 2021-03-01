@@ -12,31 +12,32 @@ namespace Category.Standard.Handlers
     {
         public void Analyze()
         {
+            BaseConstants.SetExportPath(@"\\as-204te\Sway\FilmDb");
+
             var filmCollector = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
             var films = filmCollector.Items;
 
-            var classDefineCollector = new JsonListFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
-            var classDefines = classDefineCollector.Items;
+            var classDefineCollector = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+            var classDefines = classDefineCollector.Item;
 
             ClassifyFilms(films, classDefines);
         }
 
-        private void ClassifyFilms(IList<Film> films, IList<ClassificationDefine> classificationDefines)
+        private void ClassifyFilms(IList<Film> films, ClassificationDefine classificationDefines)
         {
-            var keywords = classificationDefines.SelectMany(x => x.Actors).Union(classificationDefines.SelectMany(x => x.Genres)).ToArray();
+            var keywords = classificationDefines.Actors.Union(classificationDefines.Genres).ToArray();
 
             var result = new List<MoviePhrase>();
-            foreach (var film in films)
+            foreach (var film in films.Where(x => x.Distributor.Length != 0 && x.Identification.Length != 0))
             {
                 var model = new MoviePhrase { FilePath = film.FilePath, FileName = film.FileName };
                 var wording = model.FileName.Replace(film.Distributor, string.Empty).Replace(film.Identification, string.Empty);
 
-
                 var recogPhrases = new List<string>();
                 var unrecogPhrases = new List<string> { wording };
                 SplitRecognizedPhrase(keywords, recogPhrases, unrecogPhrases);
-                model.Phrase.AddRange(recogPhrases);
-                model.Phrase.AddRange(unrecogPhrases);
+                model.RecogPhrase.AddRange(recogPhrases);
+                model.UnrecogPhrase.AddRange(unrecogPhrases);
                 result.Add(model);
             }
 
@@ -48,10 +49,10 @@ namespace Category.Standard.Handlers
 
         private void SplitRecognizedPhrase(string[] keywords, List<string> recogPhrases, List<string> unrecogPhrases)
         {
-            if (!unrecogPhrases.Any(x => keywords.Any(y => x.Contains(y))))
+            var wording = unrecogPhrases.FirstOrDefault(x => keywords.Any(y => x.Contains(y)));
+            if (wording == null)
                 return;
-
-            var wording = unrecogPhrases.First(x => keywords.Any(y => y.SameText(x)));
+            
             unrecogPhrases.Remove(wording);
             DoSplitRecognizedPhrase(wording, keywords, recogPhrases, unrecogPhrases);
 
@@ -62,7 +63,7 @@ namespace Category.Standard.Handlers
         {
             var allPhrases = src.Split(keywords, StringSplitOptions.RemoveEmptyEntries);
 
-            recogPhrases.AddRange(allPhrases.Where(x => keywords.Any(y => x.Contains(y))));
+            recogPhrases.AddRange(keywords.Where(x => src.Contains(x)));
             unrecogPhrases.AddRange(allPhrases.Except(recogPhrases));
         }
     }

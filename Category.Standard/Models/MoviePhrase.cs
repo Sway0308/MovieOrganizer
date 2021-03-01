@@ -8,6 +8,7 @@ namespace Category.Standard.Models
     {
         public string FilePath { get; set; }
         public string FileName { get; set; }
-        public List<string> Phrase { get; } = new List<string>();
+        public List<string> RecogPhrase { get; } = new List<string>();
+        public List<string> UnrecogPhrase { get; } = new List<string>();
     }
 }
