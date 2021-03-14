@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gatchan.Base.Standard.Base;
 using Category.Standard.Adaptors;
+using Category.Standard.Models;
 
 namespace FilmIndex.Job
 {
@@ -17,6 +18,8 @@ namespace FilmIndex.Job
         public void Execute()
         {
             BaseConstants.SetExportPath(AppDataPath);
+
+            ReDefine();
             for (int i = 0; i < FilmPaths.Count; i++)
             {
                 var path = FilmPaths[i];
@@ -32,6 +35,24 @@ namespace FilmIndex.Job
 
             var classificationHandler = new ClassifyDistributorHandler();
             classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);
+        }
+        
+        private void ReDefine()
+        {
+            var src = new List<DistributorCat>();
+            BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, src);
+
+            var dest = new List<DistributorCat>();
+            foreach (var item in src)
+            {
+                if (!dest.Any(x => x.Equals(item)))
+                    dest.Add(item);
+            }
+
+            if (!src.Any(x => dest.Any(y => x.Equals(y))))
+            {
+                BusinessFunc.ExportListToFile(dest, BaseConstants.DistributorCatPath, false);
+            }
         }
     }
 }
