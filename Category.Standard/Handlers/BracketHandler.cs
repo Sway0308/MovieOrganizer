@@ -37,8 +37,16 @@ namespace Category.Standard.Handlers
 
         private void ExportJson(IList<Film> filmInfos)
         {
-            var list = filmInfos.SelectMany(x => x.Brackets).OrderBy(x => x.Text).ThenByDescending(x => x.Type);
-            BusinessFunc.ExportListToFile(list, BaseConstants.BracketPath, false);
+            var list = filmInfos.SelectMany(x => x.Brackets).OrderBy(x => x.Type).ThenByDescending(x => x.Text);
+
+            var result = new Dictionary<string, Bracket>();
+            foreach (var item in list)
+            {
+                if (!result.ContainsKey(item.Text))
+                    result.Add(item.Text, item);
+            }
+
+            BusinessFunc.ExportListToFile(result.Values, BaseConstants.BracketPath, false);
         }
     }
 }

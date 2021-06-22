@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gatchan.Base.Standard.Base;
 using Category.Standard.Adaptors;
+using Category.Standard.Models;
 
 namespace FilmIndex.Job
 {
@@ -35,6 +36,10 @@ namespace FilmIndex.Job
 
             var classificationHandler = new ClassifyDistributorHandler();
             classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);
+
+            var currentClassification = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+            var phraseHandler = new PhraseHandler();
+            phraseHandler.ClassifyAndExportDefines(categoryAdaptor.FilmInfos, currentClassification);
         }
     }
 }

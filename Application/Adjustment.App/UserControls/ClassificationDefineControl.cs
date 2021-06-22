@@ -65,10 +65,14 @@ namespace Adjustment.App.UserControls
             if (string.IsNullOrEmpty(item))
                 return;
 
-            if (list.IndexOf(item) >= 0)
-                return;
+            var allPhrases = item.Split(' ');
+            foreach (var phrase in allPhrases)
+            {
+                if (list.IndexOf(phrase) >= 0)
+                    continue;
 
-            list.Add(item);
+                list.Add(phrase);
+            }
             LoadListControl();
         }
 
@@ -88,8 +92,11 @@ namespace Adjustment.App.UserControls
         private void LoadListControl()
         {
             LbDistributor.DataSource = new List<string>(Distributors);
+            LbDistributor.SelectedIndex = LbDistributor.Items.Count - 1;
             LbGenre.DataSource = new List<string>(Genres);
+            LbGenre.SelectedIndex = LbGenre.Items.Count - 1;
             LbActor.DataSource = new List<string>(Actors);
+            LbActor.SelectedIndex = LbActor.Items.Count - 1;
         }
     }
 }

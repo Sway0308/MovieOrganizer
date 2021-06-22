@@ -31,11 +31,11 @@ namespace Adjustment.App
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageDefineSetting = new System.Windows.Forms.TabPage();
+            this.TlDefineSetting = new System.Windows.Forms.TableLayoutPanel();
             this.tabPageFilmSearcher = new System.Windows.Forms.TabPage();
             this.tabPageEmptyDirs = new System.Windows.Forms.TabPage();
             this.tabPageExtension = new System.Windows.Forms.TabPage();
-            this.tabPageDefineSetting = new System.Windows.Forms.TabPage();
-            this.TlDefineSetting = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPageDefineSetting.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +52,30 @@ namespace Adjustment.App
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1045, 729);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tabPageDefineSetting
+            // 
+            this.tabPageDefineSetting.Controls.Add(this.TlDefineSetting);
+            this.tabPageDefineSetting.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDefineSetting.Name = "tabPageDefineSetting";
+            this.tabPageDefineSetting.Size = new System.Drawing.Size(1037, 703);
+            this.tabPageDefineSetting.TabIndex = 3;
+            this.tabPageDefineSetting.Text = "Category Define";
+            this.tabPageDefineSetting.UseVisualStyleBackColor = true;
+            // 
+            // TlDefineSetting
+            // 
+            this.TlDefineSetting.ColumnCount = 2;
+            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TlDefineSetting.Location = new System.Drawing.Point(0, 0);
+            this.TlDefineSetting.Name = "TlDefineSetting";
+            this.TlDefineSetting.RowCount = 2;
+            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TlDefineSetting.Size = new System.Drawing.Size(1037, 703);
+            this.TlDefineSetting.TabIndex = 1;
             // 
             // tabPageFilmSearcher
             // 
@@ -81,30 +105,6 @@ namespace Adjustment.App
             this.tabPageExtension.TabIndex = 1;
             this.tabPageExtension.Text = "Extensions";
             this.tabPageExtension.UseVisualStyleBackColor = true;
-            // 
-            // tabPageDefineSetting
-            // 
-            this.tabPageDefineSetting.Controls.Add(this.TlDefineSetting);
-            this.tabPageDefineSetting.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDefineSetting.Name = "tabPageDefineSetting";
-            this.tabPageDefineSetting.Size = new System.Drawing.Size(1037, 703);
-            this.tabPageDefineSetting.TabIndex = 3;
-            this.tabPageDefineSetting.Text = "Category Define";
-            this.tabPageDefineSetting.UseVisualStyleBackColor = true;
-            // 
-            // TlDefineSetting
-            // 
-            this.TlDefineSetting.ColumnCount = 2;
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TlDefineSetting.Location = new System.Drawing.Point(0, 0);
-            this.TlDefineSetting.Name = "TlDefineSetting";
-            this.TlDefineSetting.RowCount = 2;
-            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlDefineSetting.Size = new System.Drawing.Size(1037, 703);
-            this.TlDefineSetting.TabIndex = 1;
             // 
             // FmMain
             // 

@@ -32,11 +32,11 @@ namespace Adjustment.App.UserControls
 
         private void TextBoxEnter(TextBox textBox)
         {
-            var value = textBox.Text ?? string.Empty;
-            if (string.IsNullOrEmpty(value))
-                return;
-
-            Clipboard.SetText(value);
+            //var value = textBox.Text ?? string.Empty;
+            //if (string.IsNullOrEmpty(value))
+            //    return;
+            //
+            //Clipboard.SetText(value);
         }
     }
 }

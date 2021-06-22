@@ -15,6 +15,7 @@ namespace Category.Standard.Configs
         public static string DistributorCatPath => Path.Combine(AppDataPath, "distributor_category.json");
         public static string EmptyDirPath => Path.Combine(AppDataPath, "empty_dir.json");
         public static string ClassificationDefinePath => Path.Combine(AppDataPath, "classification_define.json");
+        public static string PhrasePath => Path.Combine(AppDataPath, "phrases.json");
 
         public static void SetExportPath(string appDataPath)
         {
@@ -47,5 +48,12 @@ namespace Category.Standard.Configs
         Undefined,
         Distributor,
         Identification
+    }
+
+    public enum PhraseType
+    { 
+        Undefined,
+        Actress,
+        Subject
     }
 }

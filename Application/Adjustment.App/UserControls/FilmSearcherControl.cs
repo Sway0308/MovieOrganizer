@@ -51,7 +51,8 @@ namespace Adjustment.App.UserControls
             var films = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
-            NotifyAction.Invoke(films.ElementAt(0));
+            var film = ListBoxFilm.Items.Count == 0 ? new Film(string.Empty) : films.ElementAt(0);
+            NotifyAction.Invoke(film);
         }
 
         private void ListBoxFilm_DoubleClick(object sender, EventArgs e)
