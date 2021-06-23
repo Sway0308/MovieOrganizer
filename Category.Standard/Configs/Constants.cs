@@ -11,10 +11,10 @@ namespace Category.Standard.Configs
         public static string AppDataPath { get; private set; } = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\";
         public static string ExtensionPath => Path.Combine(AppDataPath, "extension.json");
         public static string FilmPath => Path.Combine(AppDataPath, "film.json");
-        public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string DistributorCatPath => Path.Combine(AppDataPath, "distributor_category.json");
         public static string EmptyDirPath => Path.Combine(AppDataPath, "empty_dir.json");
         public static string ClassificationDefinePath => Path.Combine(AppDataPath, "classification_define.json");
+        public static string MoviePhrasePath => Path.Combine(AppDataPath, "movie_phrase.json");
         public static string PhrasePath => Path.Combine(AppDataPath, "phrases.json");
 
         public static void SetExportPath(string appDataPath)

@@ -12,7 +12,6 @@ namespace Category.Standard.Adaptors
         private readonly JsonListFileHandler<Film> FilmFileHandler;
         private readonly JsonListFileHandler<DistributorCat> DistributorCatFileHandler;
         private readonly JsonListFileHandler<string> EmptyDirFileHandler;
-        private readonly JsonListFileHandler<Bracket> BracketFileHandler;
         private readonly JsonFileHandler<Extension> ExtensionFileHandler;
         private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineFileHandler;
 
@@ -23,8 +22,7 @@ namespace Category.Standard.Adaptors
             FilmFileHandler = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
             DistributorCatFileHandler = new JsonListFileHandler<DistributorCat>(BaseConstants.DistributorCatPath);
             EmptyDirFileHandler = new JsonListFileHandler<string>(BaseConstants.EmptyDirPath);
-            BracketFileHandler = new JsonListFileHandler<Bracket>(BaseConstants.BracketPath);
-
+            
             ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
             ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
         }
@@ -32,19 +30,23 @@ namespace Category.Standard.Adaptors
         public IList<Film> FilmInfos => FilmFileHandler.Items;
         public IList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
         public IList<string> EmptyDirs => EmptyDirFileHandler.Items;
-        public IList<Bracket> Brackets => BracketFileHandler.Items;
         public Extension Extensions => ExtensionFileHandler.Item;
         public ClassificationDefine ClassificationDefine => ClassificationDefineFileHandler.Item;
 
         public IList<Film> FindFilms(string keyword)
         {
-            var result = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
+            var result = from x in FilmInfos.AsParallel()
+                         where x.FileName.IncludeText(keyword)
+                         select x;
+
             return result.ToList();
         }
 
         public string FindDistributor(string keyword)
         {
-            var result = DistributorCats.Where(x => x.Category.IncludeText(keyword));
+            var result = from x in DistributorCats.AsParallel()
+                         where x.Category.IncludeText(keyword)
+                         select x;
             return result.FirstOrDefault()?.Distributor;
         }
 

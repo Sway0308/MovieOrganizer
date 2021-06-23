@@ -9,14 +9,18 @@ namespace Category.Standard.Models
     /// </summary>
     public class Film
     {
+        public Film()
+        { 
+        }
+
         public Film(string filePath)
         {
             FilePath = filePath;
             FileName = Path.GetFileNameWithoutExtension(filePath);
         }
 
-        public string FilePath { get; }
-        public string FileName { get; private set; }
+        public string FilePath { get; set; }
+        public string FileName { get; set; }
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
         public IList<Bracket> Brackets { get; } = new List<Bracket>();

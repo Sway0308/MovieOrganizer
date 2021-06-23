@@ -15,7 +15,7 @@ namespace Category.Standard.Handlers
             BaseConstants.LoadInfos(_FilePath, Items);
         }
 
-        public IList<T> Items { get; } = new List<T>();
+        public List<T> Items { get; } = new List<T>();
 
         public void SaveItemsToJson(bool isIncludeSource = false)
         {

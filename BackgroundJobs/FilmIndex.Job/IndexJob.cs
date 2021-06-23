@@ -18,6 +18,8 @@ namespace FilmIndex.Job
         public void Execute()
         {
             BaseConstants.SetExportPath(AppDataPath);
+
+            ReDefine();
             for (int i = 0; i < FilmPaths.Count; i++)
             {
                 var path = FilmPaths[i];
@@ -31,15 +33,30 @@ namespace FilmIndex.Job
 
             var categoryAdaptor = new CatalogAdaptor(AppDataPath);
 
-            var bracketHandler = new BracketHandler();
-            bracketHandler.ClassifyAndExportBrackets(categoryAdaptor.FilmInfos, categoryAdaptor.DistributorCats);
-
             var classificationHandler = new ClassifyDistributorHandler();
             classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);
 
             var currentClassification = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
             var phraseHandler = new PhraseHandler();
             phraseHandler.ClassifyAndExportDefines(categoryAdaptor.FilmInfos, currentClassification);
+        }
+        
+        private void ReDefine()
+        {
+            var src = new List<DistributorCat>();
+            BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, src);
+
+            var dest = new List<DistributorCat>();
+            foreach (var item in src)
+            {
+                if (!dest.Any(x => x.Equals(item)))
+                    dest.Add(item);
+            }
+
+            if (!src.Any(x => dest.Any(y => x.Equals(y))))
+            {
+                BusinessFunc.ExportListToFile(dest, BaseConstants.DistributorCatPath, false);
+            }
         }
     }
 }

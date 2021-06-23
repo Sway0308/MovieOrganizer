@@ -2,9 +2,11 @@
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
 using Gatchan.Base.Standard.Base;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Category.Standard.Handlers
 {
@@ -87,19 +89,88 @@ namespace Category.Standard.Handlers
         {
             if (Extensions.FilmExtensions.Count == 0)
                 return files;
-            return files.Where(x => Extensions.FilmExtensions.Contains(Path.GetExtension(x)));
+            var result = from x in files.AsParallel()
+                         where Extensions.FilmExtensions.Contains(Path.GetExtension(x))
+                         select x;
+            return result;
         }
 
         protected override void AfterRecusiveSearch(string path)
         {
-            foreach (var model in FilmInfos)
-            {
-                ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
-                ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+            #region Regular way
 
-                ClassifyGenres(model);
-                ClassifyActors(model);
-            }
+            //foreach (var model in FilmInfos)
+            //{
+            //    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
+            //    ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+            //
+            //    ClassifyGenres(model);
+            //    ClassifyActors(model);
+            //}
+
+            #endregion
+
+            #region Pipeline way
+
+            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
+
+            #endregion
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase1(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase2(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase3(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyGenres(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
+        }
+
+        private IEnumerable<Film> BlockCollectionPhase4(IEnumerable<Film> filmInfos)
+        {
+            var result = new BlockingCollection<Film>();
+            Task.Run(() => {
+                foreach (var model in filmInfos)
+                {
+                    ClassifyActors(model);
+                    result.Add(model);
+                }
+                result.CompleteAdding();
+            });
+            return result.GetConsumingEnumerable();
         }
 
         private void ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(Film model)
@@ -118,14 +189,13 @@ namespace Category.Standard.Handlers
             if (!IsRecognizedPath)
                 return;
 
-            var distributor = distributorBracket.Text;
             var identify = identifyBracket.Text;
             var index = identify.IndexOf('-');
             if (index < 0)
                 return;
 
             var category = identify.Substring(1, index - 1);
-            distributor = distributor.RemoveCharToEmptyStr("(", ")");
+            var distributor = distributorBracket.Text.RemoveCharToEmptyStr("(", ")");
 
             if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
                 DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
@@ -154,7 +224,11 @@ namespace Category.Standard.Handlers
 
         private void ClassifyGenres(Film model)
         {
-            foreach (var genre in ClassificationDefine.Genres.Where(x => model.FileName.IncludeText(x)))
+            var genres = from x in ClassificationDefine.Genres.AsParallel()
+                         where model.FileName.IncludeText(x)
+                         select x;
+
+            foreach (var genre in genres)
             {
                 model.Genres.Add(genre);
             }
@@ -162,7 +236,11 @@ namespace Category.Standard.Handlers
 
         private void ClassifyActors(Film model)
         {
-            foreach (var genre in ClassificationDefine.Actors.Where(x => model.FileName.IncludeText(x)))
+            var actors = from x in ClassificationDefine.Actors.AsParallel()
+                         where model.FileName.IncludeText(x)
+                         select x;
+
+            foreach (var genre in actors)
             {
                 model.Actors.Add(genre);
             }
@@ -170,7 +248,7 @@ namespace Category.Standard.Handlers
 
         public void ExportJson()
         {
-            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, false);
+            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
