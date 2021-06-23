@@ -21,7 +21,6 @@ namespace Adjustment.App
 
         private void FmMain_Load(object sender, EventArgs e)
         {
-            tabPageFilmSearcher.Controls.Add(new FilmSearcherControl(Adaptor.FilmInfos) { Dock = DockStyle.Fill });
             tabPageEmptyDirs.Controls.Add(new EmptyDirsControl(Adaptor.EmptyDirs) { Dock = DockStyle.Fill });
             tabPageExtension.Controls.Add(new ExtensionControl(Adaptor.Extensions, Adaptor.SaveExtention) { Dock = DockStyle.Fill });
 

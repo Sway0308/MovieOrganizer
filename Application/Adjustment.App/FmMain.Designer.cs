@@ -33,7 +33,6 @@ namespace Adjustment.App
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDefineSetting = new System.Windows.Forms.TabPage();
             this.TlDefineSetting = new System.Windows.Forms.TableLayoutPanel();
-            this.tabPageFilmSearcher = new System.Windows.Forms.TabPage();
             this.tabPageEmptyDirs = new System.Windows.Forms.TabPage();
             this.tabPageExtension = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
@@ -43,7 +42,6 @@ namespace Adjustment.App
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageDefineSetting);
-            this.tabControl1.Controls.Add(this.tabPageFilmSearcher);
             this.tabControl1.Controls.Add(this.tabPageEmptyDirs);
             this.tabControl1.Controls.Add(this.tabPageExtension);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -76,15 +74,6 @@ namespace Adjustment.App
             this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TlDefineSetting.Size = new System.Drawing.Size(1037, 703);
             this.TlDefineSetting.TabIndex = 1;
-            // 
-            // tabPageFilmSearcher
-            // 
-            this.tabPageFilmSearcher.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFilmSearcher.Name = "tabPageFilmSearcher";
-            this.tabPageFilmSearcher.Size = new System.Drawing.Size(1037, 703);
-            this.tabPageFilmSearcher.TabIndex = 2;
-            this.tabPageFilmSearcher.Text = "Film Search";
-            this.tabPageFilmSearcher.UseVisualStyleBackColor = true;
             // 
             // tabPageEmptyDirs
             // 
@@ -129,7 +118,6 @@ namespace Adjustment.App
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageEmptyDirs;
         private System.Windows.Forms.TabPage tabPageExtension;
-        private System.Windows.Forms.TabPage tabPageFilmSearcher;
         private System.Windows.Forms.TabPage tabPageDefineSetting;
         private System.Windows.Forms.TableLayoutPanel TlDefineSetting;
     }
