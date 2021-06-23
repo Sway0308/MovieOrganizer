@@ -28,19 +28,42 @@ namespace DistributorSearcher.App
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchDistributor();
+                txtCategory.SelectAll();
             }
         }
 
         private void SearchDistributor()
         {
-            var keyword = txtCategory.Text;
-            if (string.IsNullOrEmpty(keyword))
+            var searchText = txtCategory.Text;
+            if (string.IsNullOrEmpty(searchText))
                 return;
 
-            var distributor = Adaptor.FindDistributor(keyword);
+            var keyword = searchText;
+            var dashIndex = searchText.IndexOf("-");
+            if (dashIndex >= 0)
+            {
+                keyword = searchText.Substring(0, dashIndex);
+            }
+
+            var distributor = DoSearchDistributor(keyword);
             txtDistributor.Text = distributor;
             if (!string.IsNullOrEmpty(distributor))
-                Clipboard.SetText($"({distributor})");
+            {
+                if (dashIndex < 0)
+                    Clipboard.SetText($"({distributor})");
+                else
+                {
+                    var identity = searchText.Substring(0, searchText.IndexOf(" "));
+                    var name = searchText.Substring(searchText.IndexOf(" ") + 1, searchText.Length - identity.Length - 1);
+
+                    Clipboard.SetText($"({distributor})({identity}){name}");
+                }
+            }
+        }
+
+        private string DoSearchDistributor(string keyword)
+        { 
+            return Adaptor.FindDistributor(keyword);
         }
     }
 }
