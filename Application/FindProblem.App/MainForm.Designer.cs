@@ -40,8 +40,8 @@ namespace FindProblem.App
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.RuleListBox, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.DetailListBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.SuggestionListBox, 1, 1);
@@ -62,7 +62,7 @@ namespace FindProblem.App
             this.RuleListBox.ItemHeight = 16;
             this.RuleListBox.Location = new System.Drawing.Point(3, 3);
             this.RuleListBox.Name = "RuleListBox";
-            this.RuleListBox.Size = new System.Drawing.Size(799, 144);
+            this.RuleListBox.Size = new System.Drawing.Size(569, 144);
             this.RuleListBox.TabIndex = 0;
             // 
             // DetailListBox
@@ -74,7 +74,7 @@ namespace FindProblem.App
             this.DetailListBox.ItemHeight = 16;
             this.DetailListBox.Location = new System.Drawing.Point(3, 153);
             this.DetailListBox.Name = "DetailListBox";
-            this.DetailListBox.Size = new System.Drawing.Size(799, 563);
+            this.DetailListBox.Size = new System.Drawing.Size(569, 563);
             this.DetailListBox.TabIndex = 1;
             // 
             // SuggestionListBox
@@ -83,9 +83,9 @@ namespace FindProblem.App
             this.SuggestionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.SuggestionListBox.FormattingEnabled = true;
             this.SuggestionListBox.ItemHeight = 16;
-            this.SuggestionListBox.Location = new System.Drawing.Point(808, 153);
+            this.SuggestionListBox.Location = new System.Drawing.Point(578, 153);
             this.SuggestionListBox.Name = "SuggestionListBox";
-            this.SuggestionListBox.Size = new System.Drawing.Size(339, 563);
+            this.SuggestionListBox.Size = new System.Drawing.Size(569, 563);
             this.SuggestionListBox.TabIndex = 2;
             // 
             // MainForm

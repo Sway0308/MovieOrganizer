@@ -25,10 +25,22 @@ namespace Category.Standard.Rules
                     continue;
 
                 var repeats = Films.Where(x => !string.IsNullOrEmpty(x.Identification) && film.Identification.SameText(x.Identification));
-                if (repeats.Count() > 1)
+                if (repeats.Count() <= 1)
+                    continue;
+
+                var answers = new List<Film>();
+                foreach (var item in repeats)
                 {
-                    result.Add(new RepeatedIdentifications { Identification = film.Identification, FilmInfos = repeats.ToList() });
+                    if (repeats.Any(x => x != item && x.DirectoryPath.SameText(item.DirectoryPath)))
+                        continue;
+
+                    answers.Add(item);
                 }
+
+                if (answers.Count == 0)
+                    continue;
+
+                result.Add(new RepeatedIdentifications { Identification = film.Identification, FilmInfos = answers });
             }
             return result;
         }
