@@ -6,16 +6,18 @@ using System.Linq;
 using Gatchan.Base.Standard.Base;
 using Category.Standard.Adaptors;
 using Category.Standard.Models;
+using Quartz;
+using System.Threading.Tasks;
 
 namespace FilmIndex.Job
 {
-    public class IndexJob : IJobExecuter
+    public class IndexJob : IJobExecuter, IJob
     {
         public string AppDataPath { get; set; }
         public IList<string> FilmPaths { get; set; }
         public IList<string> SamplePaths { get; set; }
 
-        public void Execute()
+        public void ExecuteJob()
         {
             BaseConstants.SetExportPath(AppDataPath);
 
@@ -40,7 +42,12 @@ namespace FilmIndex.Job
             var phraseHandler = new PhraseHandler();
             phraseHandler.ClassifyAndExportDefines(categoryAdaptor.FilmInfos, currentClassification);
         }
-        
+
+        public Task Execute(IJobExecutionContext context)
+        {
+            return Task.Run(() => ExecuteJob());
+        }
+
         private void ReDefine()
         {
             var src = new List<DistributorCat>();

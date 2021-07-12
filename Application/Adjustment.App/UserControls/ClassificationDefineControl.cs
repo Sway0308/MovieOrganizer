@@ -65,15 +65,22 @@ namespace Adjustment.App.UserControls
             if (string.IsNullOrEmpty(item))
                 return;
 
+            var isNew = false;
             var allPhrases = item.Split(' ');
             foreach (var phrase in allPhrases)
             {
                 if (list.IndexOf(phrase) >= 0)
                     continue;
 
+                isNew = true;
                 list.Add(phrase);
             }
-            LoadListControl();
+
+            if (isNew)
+            {
+                SaveClassificationDefineAction.Invoke();
+                LoadListControl();
+            }
         }
 
         private void DeleteItem(IList<string> list, TextBox textBox)

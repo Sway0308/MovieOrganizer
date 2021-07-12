@@ -2,6 +2,6 @@
 {
     public interface IJobExecuter
     {
-        void Execute();
+        void ExecuteJob();
     }
 }
