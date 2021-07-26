@@ -1,30 +1,37 @@
-﻿using System;
+﻿using Adjustment.App.Interfaces;
+using Category.Standard.Adaptors;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
 {
-    public partial class EmptyDirsControl : UserControl
+    public partial class EmptyDirsControl : UserControl, IInitControls
     {
-        private readonly IList<string> EmptyDirs;
+        private IList<string> EmptyDirs;
         public EmptyDirsControl()
         {
             InitializeComponent();
         }
 
-        public EmptyDirsControl(IList<string> emptyDirs) : base()
+        public void InitControls(CatalogAdaptor Adaptor)
         {
-            InitializeComponent();
-            EmptyDirs = emptyDirs;
+            Init();
+            EmptyDirs = Adaptor.EmptyDirs;
+        }
+
+        private void Init()
+        {
+            EmptyDirListBox.DataSource = null;
+            if (EmptyDirs?.Count == 0)
+                return;
+            EmptyDirListBox.DataSource = EmptyDirs;
         }
 
         private void EmptyDirsControl_Load(object sender, EventArgs e)
         {
-            if (EmptyDirs?.Count == 0)
-                return;
-
-            EmptyDirListBox.DataSource = EmptyDirs;
+            Init();
         }
 
         private void EmptyDirListBox_DoubleClick(object sender, EventArgs e)

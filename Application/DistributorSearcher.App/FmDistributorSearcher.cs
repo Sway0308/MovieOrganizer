@@ -15,7 +15,7 @@ namespace DistributorSearcher.App
             txtCategory.Focus();
 
             var exportPath = ConfigurationManager.AppSettings["ExportPath"];
-            Adaptor = new CatalogAdaptor(exportPath);
+            Adaptor = new CatalogAdaptor(exportPath, true);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -64,6 +64,22 @@ namespace DistributorSearcher.App
         private string DoSearchDistributor(string keyword)
         { 
             return Adaptor.FindDistributor(keyword);
+        }
+
+        private void txtDistributor_DoubleClick(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Refresh?", "Refresh Catalog", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                return;
+
+            ReCatalogAdaptor();
+        }
+
+        private void ReCatalogAdaptor()
+        {
+            Adaptor.Init();
+            txtCategory.Text = string.Empty;
+            txtDistributor.Text = string.Empty;
+            txtCategory.Focus();
         }
     }
 }

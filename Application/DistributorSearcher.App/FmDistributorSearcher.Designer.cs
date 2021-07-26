@@ -53,6 +53,7 @@ namespace DistributorSearcher.App
             this.txtDistributor.ReadOnly = true;
             this.txtDistributor.Size = new System.Drawing.Size(265, 55);
             this.txtDistributor.TabIndex = 4;
+            this.txtDistributor.DoubleClick += new System.EventHandler(this.txtDistributor_DoubleClick);
             // 
             // txtCategory
             // 

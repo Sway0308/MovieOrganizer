@@ -1,4 +1,6 @@
-﻿using Category.Standard.Models;
+﻿using Adjustment.App.Interfaces;
+using Category.Standard.Adaptors;
+using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
 using System;
 using System.Collections.Generic;
@@ -9,30 +11,21 @@ using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
 {
-    public partial class FilmSearcherControl : UserControl
+    public partial class FilmSearcherControl : UserControl, IInitControls
     {
-        private readonly IList<Film> FilmInfos;
+        private IList<Film> FilmInfos;
+        private readonly Action<Film> NotifyAction;
 
         public FilmSearcherControl()
         {
             InitializeComponent();
         }
 
-        public FilmSearcherControl(IList<Film> filmInfos) : base()
+        public FilmSearcherControl(Action<Film> action) : base()
         {
             InitializeComponent();
-            FilmInfos = filmInfos;
-        }
-
-        public FilmSearcherControl(IList<Film> filmInfos, Action<Film> action) : base()
-        {
-            InitializeComponent();
-            FilmInfos = filmInfos;
-
             NotifyAction = action;
         }
-
-        private readonly Action<Film> NotifyAction;
 
         private void TxtKeyword_TextChanged(object sender, EventArgs e)
         {
@@ -45,10 +38,11 @@ namespace Adjustment.App.UserControls
             if (string.IsNullOrEmpty(keyword))
             {
                 ListBoxFilm.DataSource = null;
+                NotifyAction.Invoke(null);
                 return;
             }
 
-            var films = FilmInfos.Where(x => x.FileName.IncludeText(keyword));
+            var films = FilmInfos.Where(x => x.FilePath.IncludeText(keyword));
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
             var film = ListBoxFilm.Items.Count == 0 ? new Film(string.Empty) : films.ElementAt(0);
@@ -81,6 +75,13 @@ namespace Adjustment.App.UserControls
 
                 NotifyAction.Invoke(film);
             };
+        }
+
+        public void InitControls(CatalogAdaptor Adaptor)
+        {
+            TxtKeyword.Text = string.Empty;
+            SearchFilms();
+            FilmInfos = Adaptor.FilmInfos;
         }
     }
 }

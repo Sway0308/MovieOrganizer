@@ -15,7 +15,7 @@ namespace Category.Standard.Models
 
         public Film(string filePath)
         {
-            DirectoryPath = Directory.GetParent(filePath).FullName;
+            DirectoryPath = string.IsNullOrEmpty(filePath) ? string.Empty : Directory.GetParent(filePath).FullName;
             FilePath = filePath;
             FileName = Path.GetFileNameWithoutExtension(filePath);
         }

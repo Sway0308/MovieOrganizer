@@ -12,14 +12,14 @@ namespace Adjustment.App.UserControls
 
         public void ShowFilmInfo(Film filmInfo)
         {
-            TxtPath.Text = filmInfo.FilePath;
-            TxtName.Text = filmInfo.FileName;
-            TxtDistributor.Text = filmInfo.Distributor;
-            TxtIdentification.Text = filmInfo.Identification;
+            TxtPath.Text = filmInfo?.DirectoryPath;
+            TxtName.Text = filmInfo?.FileName;
+            TxtDistributor.Text = filmInfo?.Distributor;
+            TxtIdentification.Text = filmInfo?.Identification;
 
-            LbGenres.DataSource = filmInfo.Genres;
-            LbActors.DataSource = filmInfo.Actors;
-            LbBrackets.DataSource = filmInfo.Brackets;
+            LbGenres.DataSource = filmInfo?.Genres;
+            LbActors.DataSource = filmInfo?.Actors;
+            LbBrackets.DataSource = filmInfo?.Brackets;
         }
 
         private void FilmInfoControl_Load(object sender, System.EventArgs e)

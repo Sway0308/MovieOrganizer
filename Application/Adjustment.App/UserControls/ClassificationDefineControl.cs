@@ -1,14 +1,16 @@
-﻿using Category.Standard.Models;
+﻿using Adjustment.App.Interfaces;
+using Category.Standard.Adaptors;
+using Category.Standard.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
 {
-    public partial class ClassificationDefineControl : UserControl
+    public partial class ClassificationDefineControl : UserControl, IInitControls
     {
-        private readonly ClassificationDefine ClassificationDefine;
-        private readonly Action SaveClassificationDefineAction;
+        private ClassificationDefine ClassificationDefine;
+        private Action SaveClassificationDefineAction;
         private IList<string> Distributors => ClassificationDefine.Distributors;
         private IList<string> Genres => ClassificationDefine.Genres;
         private IList<string> Actors => ClassificationDefine.Actors;
@@ -18,30 +20,17 @@ namespace Adjustment.App.UserControls
             InitializeComponent();
         }
 
-        public ClassificationDefineControl(ClassificationDefine filmDefine, Action saveClassificationDefine) : base()
-        {
-            InitializeComponent();
-            ClassificationDefine = filmDefine;
-
-            SaveClassificationDefineAction = saveClassificationDefine;
-        }
-
         private void FilmDefineControl_Load(object sender, System.EventArgs e)
         {
-            if (ClassificationDefine == null)
-                return;
-
-            LoadListControl();
-
-            LbDistributor.Click += (s, ev) => ShowSelectedItem(LbDistributor, TxtDistributor);
+            LbDistributor.DoubleClick += (s, ev) => ShowSelectedItem(LbDistributor, TxtDistributor);
             BtnAddDistributor.Click += (s, ev) => AddItem(Distributors, TxtDistributor);
             BtnDelDistributor.Click += (s, ev) => DeleteItem(Distributors, TxtDistributor);
 
-            LbGenre.Click += (s, ev) => ShowSelectedItem(LbGenre, TxtGenre);
+            LbGenre.DoubleClick += (s, ev) => ShowSelectedItem(LbGenre, TxtGenre);
             BtnAddGenre.Click += (s, ev) => AddItem(Genres, TxtGenre);
             BtnDelGenre.Click += (s, ev) => DeleteItem(Genres, TxtGenre);
 
-            LbActor.Click += (s, ev) => ShowSelectedItem(LbActor, TxtActor);
+            LbActor.DoubleClick += (s, ev) => ShowSelectedItem(LbActor, TxtActor);
             BtnAddActor.Click += (s, ev) => AddItem(Actors, TxtActor);
             BtnDelActor.Click += (s, ev) => DeleteItem(Actors, TxtActor);
 
@@ -97,6 +86,13 @@ namespace Adjustment.App.UserControls
             LbGenre.SelectedIndex = LbGenre.Items.Count - 1;
             LbActor.DataSource = new List<string>(Actors);
             LbActor.SelectedIndex = LbActor.Items.Count - 1;
+        }
+
+        public void InitControls(CatalogAdaptor Adaptor)
+        {
+            ClassificationDefine = Adaptor.ClassificationDefine;
+            SaveClassificationDefineAction = Adaptor.SaveClassificationDefine;
+            LoadListControl();
         }
     }
 }

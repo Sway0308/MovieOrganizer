@@ -1,28 +1,22 @@
-﻿using Category.Standard.Models;
+﻿using Adjustment.App.Interfaces;
+using Category.Standard.Adaptors;
+using Category.Standard.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Adjustment.App.UserControls
 {
-    public partial class ExtensionControl : UserControl
+    public partial class ExtensionControl : UserControl, IInitControls
     {
-        private readonly Extension Extensions;
-        private readonly Action ExportAction;
+        private Extension Extensions;
+        private Action ExportAction;
         private IList<string> FilmExtensions => Extensions.FilmExtensions;
         private IList<string> OtherExtensions => Extensions.OtherExtensions;
 
         public ExtensionControl()
         {
             InitializeComponent();
-        }
-
-        public ExtensionControl(Extension extensions, Action exportAction) : base()
-        {
-            InitializeComponent();
-            Extensions = extensions;
-
-            ExportAction = exportAction;
         }
 
         private void AllLeftToRightButton_Click(object sender, System.EventArgs e)
@@ -87,6 +81,13 @@ namespace Adjustment.App.UserControls
         {
             ExportAction.Invoke();
             MessageBox.Show("Done");
+        }
+
+        public void InitControls(CatalogAdaptor Adaptor)
+        {
+            Extensions = Adaptor.Extensions;
+            ExportAction = Adaptor.SaveExtention;
+            ReloadDataSource();
         }
     }
 }

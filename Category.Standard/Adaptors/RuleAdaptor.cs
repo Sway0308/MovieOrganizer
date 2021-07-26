@@ -19,7 +19,7 @@ namespace Category.Standard.Adaptors
                 .Where(x => type.IsAssignableFrom(x));
             RuleTypes = rules;
 
-            _CatalogAdaptor = new CatalogAdaptor(path);
+            _CatalogAdaptor = new CatalogAdaptor(path, true);
         }
 
         public IEnumerable<Type> RuleTypes { get; }

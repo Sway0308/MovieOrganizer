@@ -9,22 +9,17 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor
     {
-        private readonly JsonListFileHandler<Film> FilmFileHandler;
-        private readonly JsonListFileHandler<DistributorCat> DistributorCatFileHandler;
-        private readonly JsonListFileHandler<string> EmptyDirFileHandler;
-        private readonly JsonFileHandler<Extension> ExtensionFileHandler;
-        private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineFileHandler;
+        private JsonListFileHandler<Film> FilmFileHandler;
+        private JsonListFileHandler<DistributorCat> DistributorCatFileHandler;
+        private JsonListFileHandler<string> EmptyDirFileHandler;
+        private JsonFileHandler<Extension> ExtensionFileHandler;
+        private JsonFileHandler<ClassificationDefine> ClassificationDefineFileHandler;
 
-        public CatalogAdaptor(string path) : base()
+        public CatalogAdaptor(string path, bool initOnCtor) : base()
         {
             BaseConstants.SetExportPath(path);
-
-            FilmFileHandler = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
-            DistributorCatFileHandler = new JsonListFileHandler<DistributorCat>(BaseConstants.DistributorCatPath);
-            EmptyDirFileHandler = new JsonListFileHandler<string>(BaseConstants.EmptyDirPath);
-            
-            ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
-            ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+            if (initOnCtor)
+                Init();
         }
 
         public IList<Film> FilmInfos => FilmFileHandler.Items;
@@ -58,6 +53,17 @@ namespace Category.Standard.Adaptors
         public void SaveClassificationDefine()
         {
             ClassificationDefineFileHandler.SaveItemToJson();
+        }
+
+        public void Init()
+        {
+            FilmFileHandler = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
+            DistributorCatFileHandler = new JsonListFileHandler<DistributorCat>(BaseConstants.DistributorCatPath);
+            EmptyDirFileHandler = new JsonListFileHandler<string>(BaseConstants.EmptyDirPath);
+
+            ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
+            ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+
         }
     }
 }
