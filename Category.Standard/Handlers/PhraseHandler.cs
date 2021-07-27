@@ -9,6 +9,8 @@ namespace Category.Standard.Handlers
 {
     public class PhraseHandler
     {
+        private readonly char[] SplitChars = { ' ', '。' };
+
         public void ClassifyAndExportDefines(IList<Film> filmInfos, ClassificationDefine classificationDefine)
         {
             var list = new List<Phrases>();
@@ -19,7 +21,8 @@ namespace Category.Standard.Handlers
                     name = name.Replace(item.Distributor, string.Empty);
                 if (!string.IsNullOrEmpty(item.Identification))
                     name = name.Replace(item.Identification, string.Empty);
-                var allPhrases = name.Split(' ');
+
+                var allPhrases = name.Split(SplitChars).Select(x => x.Trim());
                 foreach (var phrase in allPhrases)
                 {
                     if (list.Any(x => x.Phrase.Equals(phrase, StringComparison.CurrentCultureIgnoreCase)))
@@ -35,7 +38,7 @@ namespace Category.Standard.Handlers
                 }
             }
 
-            var result = list.OrderBy(x => x.PhraseType).ThenBy(x => x.Phrase);
+            var result = list.OrderBy(x => x.PhraseType).ThenBy(x => x.Phrase.Length).ThenBy(x => x.Phrase);
             BusinessFunc.ExportListToFile(result, BaseConstants.PhrasePath, false);
         }
     }

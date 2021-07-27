@@ -62,6 +62,7 @@ namespace Adjustment.App.UserControls
 
                 list.Add(phrase);
             }
+            SaveClassificationDefineAction.Invoke();
             LoadListControl();
         }
 
@@ -75,6 +76,7 @@ namespace Adjustment.App.UserControls
                 return;
             list.Remove(item);
             textBox.Clear();
+            SaveClassificationDefineAction.Invoke();
             LoadListControl();
         }
 
@@ -93,6 +95,9 @@ namespace Adjustment.App.UserControls
             ClassificationDefine = Adaptor.ClassificationDefine;
             SaveClassificationDefineAction = Adaptor.SaveClassificationDefine;
             LoadListControl();
+            TxtDistributor.Text = string.Empty;
+            TxtGenre.Text = string.Empty;
+            TxtActor.Text = string.Empty;
         }
     }
 }
