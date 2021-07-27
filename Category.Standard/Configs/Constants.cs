@@ -1,5 +1,6 @@
 ﻿using Gatchan.Base.Standard.Base;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,7 @@ namespace Category.Standard.Configs
         }
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum CategoryType
     {
         Undefined,
@@ -51,6 +53,7 @@ namespace Category.Standard.Configs
         Identification
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum PhraseType
     { 
         Undefined,
