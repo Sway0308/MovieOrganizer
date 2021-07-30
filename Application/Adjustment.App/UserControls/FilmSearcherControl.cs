@@ -65,7 +65,7 @@ namespace Adjustment.App.UserControls
         private void FilmSearcherControl_Load(object sender, EventArgs e)
         {
             TxtKeyword.Focus();
-            ListBoxFilm.Click += (s, ev) => {
+            ListBoxFilm.SelectedIndexChanged += (s, ev) => {
                 if (NotifyAction == null || ListBoxFilm.SelectedItem == null)
                     return;
 
