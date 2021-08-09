@@ -38,7 +38,9 @@ namespace FilmIndex.Host
             sw.Stop();
             Console.WriteLine($"End Indexing...");
             Console.WriteLine($"elapse time: {sw.ElapsedMilliseconds}");
+#if DEBUG
             Console.ReadKey();
+#endif
         }
     }
 }
