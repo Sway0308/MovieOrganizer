@@ -1,5 +1,5 @@
 ﻿using Adjustment.App.Interfaces;
-using Category.Standard.Adaptors;
+using Category.Standard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,16 +9,17 @@ namespace Adjustment.App.UserControls
 {
     public partial class EmptyDirsControl : UserControl, IInitControls
     {
-        private IList<string> EmptyDirs;
+        private ICatalog Catalog;
+        private IList<string> EmptyDirs => Catalog.EmptyDirs;
         public EmptyDirsControl()
         {
             InitializeComponent();
         }
 
-        public void InitControls(CatalogAdaptor Adaptor)
+        public void InitControls(ICatalog catalog)
         {
+            Catalog = catalog;
             Init();
-            EmptyDirs = Adaptor.EmptyDirs;
         }
 
         private void Init()

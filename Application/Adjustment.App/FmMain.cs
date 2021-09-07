@@ -1,6 +1,7 @@
 ﻿using Adjustment.App.Interfaces;
 using Adjustment.App.UserControls;
 using Category.Standard.Adaptors;
+using Category.Standard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,14 +11,14 @@ namespace Adjustment.App
 {
     public partial class FmMain : Form
     {
-        private CatalogAdaptor Adaptor { get; set; }
+        private readonly ICatalog Catalog;
         private readonly List<UserControl> UserControls = new List<UserControl>();
 
         public FmMain()
         {
             InitializeComponent();
             var exportPath = ConfigurationManager.AppSettings["ExportPath"];
-            Adaptor = new CatalogAdaptor(exportPath, false);
+            Catalog = new CatalogAdaptor(exportPath);
         }
 
         private void FmMain_Load(object sender, EventArgs e)
@@ -47,12 +48,12 @@ namespace Adjustment.App
 
         private void InitUserControls(IInitControls usercontrol)
         {
-            usercontrol.InitControls(Adaptor);
+            usercontrol.InitControls(Catalog);
         }
 
         private void ReCatalogAdaptor()
         {
-            Adaptor.Init();
+            Catalog.Init();
             foreach (var item in UserControls)
             {
                 if (item is IInitControls)

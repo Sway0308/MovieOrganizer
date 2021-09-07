@@ -1,7 +1,5 @@
 ﻿using Adjustment.App.Interfaces;
-using Category.Standard.Adaptors;
-using Category.Standard.Models;
-using System;
+using Category.Standard.Interfaces;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -9,11 +7,10 @@ namespace Adjustment.App.UserControls
 {
     public partial class ClassificationDefineControl : UserControl, IInitControls
     {
-        private ClassificationDefine ClassificationDefine;
-        private Action SaveClassificationDefineAction;
-        private IList<string> Distributors => ClassificationDefine.Distributors;
-        private IList<string> Genres => ClassificationDefine.Genres;
-        private IList<string> Actors => ClassificationDefine.Actors;
+        private ICatalog Catalog;
+        private IList<string> Distributors => Catalog.ClassificationDefine.Distributors;
+        private IList<string> Genres => Catalog.ClassificationDefine.Genres;
+        private IList<string> Actors => Catalog.ClassificationDefine.Actors;
 
         public ClassificationDefineControl()
         {
@@ -34,8 +31,8 @@ namespace Adjustment.App.UserControls
             BtnAddActor.Click += (s, ev) => AddItem(Actors, TxtActor);
             BtnDelActor.Click += (s, ev) => DeleteItem(Actors, TxtActor);
 
-            ExportButton.Click += (s, ev) => { 
-                SaveClassificationDefineAction.Invoke();
+            ExportButton.Click += (s, ev) => {
+                Catalog.SaveClassificationDefine();
                 MessageBox.Show("Done");
             };
         }
@@ -62,7 +59,7 @@ namespace Adjustment.App.UserControls
 
                 list.Add(phrase);
             }
-            SaveClassificationDefineAction.Invoke();
+            Catalog.SaveClassificationDefine();
             LoadListControl();
         }
 
@@ -76,7 +73,7 @@ namespace Adjustment.App.UserControls
                 return;
             list.Remove(item);
             textBox.Clear();
-            SaveClassificationDefineAction.Invoke();
+            Catalog.SaveClassificationDefine();
             LoadListControl();
         }
 
@@ -90,10 +87,9 @@ namespace Adjustment.App.UserControls
             LbActor.SelectedIndex = LbActor.Items.Count - 1;
         }
 
-        public void InitControls(CatalogAdaptor Adaptor)
+        public void InitControls(ICatalog catalog)
         {
-            ClassificationDefine = Adaptor.ClassificationDefine;
-            SaveClassificationDefineAction = Adaptor.SaveClassificationDefine;
+            Catalog = catalog;
             LoadListControl();
             TxtDistributor.Text = string.Empty;
             TxtGenre.Text = string.Empty;

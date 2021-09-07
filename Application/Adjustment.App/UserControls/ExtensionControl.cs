@@ -1,7 +1,6 @@
 ﻿using Adjustment.App.Interfaces;
-using Category.Standard.Adaptors;
+using Category.Standard.Interfaces;
 using Category.Standard.Models;
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -9,8 +8,8 @@ namespace Adjustment.App.UserControls
 {
     public partial class ExtensionControl : UserControl, IInitControls
     {
-        private Extension Extensions;
-        private Action ExportAction;
+        private ICatalog Catalog;
+        private Extension Extensions => Catalog.Extensions;
         private IList<string> FilmExtensions => Extensions.FilmExtensions;
         private IList<string> OtherExtensions => Extensions.OtherExtensions;
 
@@ -79,14 +78,13 @@ namespace Adjustment.App.UserControls
 
         private void ExportButton_Click(object sender, System.EventArgs e)
         {
-            ExportAction.Invoke();
+            Catalog.SaveExtention();
             MessageBox.Show("Done");
         }
 
-        public void InitControls(CatalogAdaptor Adaptor)
+        public void InitControls(ICatalog catalog)
         {
-            Extensions = Adaptor.Extensions;
-            ExportAction = Adaptor.SaveExtention;
+            Catalog = catalog;
             ReloadDataSource();
         }
     }
