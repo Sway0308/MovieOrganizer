@@ -1,25 +1,36 @@
-﻿using Category.Standard.Configs;
+﻿using Category.Standard.Cache;
+using Category.Standard.Configs;
 using Category.Standard.Handlers;
+using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Category.Standard.Adaptors
 {
-    public class CatalogAdaptor
+    public class CatalogAdaptor : ICatalog
     {
-        private JsonListFileHandler<Film> FilmFileHandler;
-        private JsonListFileHandler<DistributorCat> DistributorCatFileHandler;
-        private JsonListFileHandler<string> EmptyDirFileHandler;
-        private JsonFileHandler<Extension> ExtensionFileHandler;
-        private JsonFileHandler<ClassificationDefine> ClassificationDefineFileHandler;
+        private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, x => {
+            return new FilmFileHandler(BaseConstants.FilmPath);
+        });
+        private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, x => {
+            return new DistributorCatFileHandler(BaseConstants.DistributorCatPath);
+        });
+        private EmptyDirFileHandler EmptyDirFileHandler => CacheManager.GetOrCreate(CacheKey.EmptyDirFileHandler, x => {
+            return new EmptyDirFileHandler(BaseConstants.EmptyDirPath);
+        });
+        private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, x => {
+            return new ExtensionFileHandler(BaseConstants.ExtensionPath);
+        });
+        private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, x => {
+            return new ClassificationDefineFileHandler(BaseConstants.ClassificationDefinePath);
+        });
 
-        public CatalogAdaptor(string path, bool initOnCtor) : base()
+        public CatalogAdaptor(string path) : base()
         {
             BaseConstants.SetExportPath(path);
-            if (initOnCtor)
-                Init();
         }
 
         public IList<Film> FilmInfos => FilmFileHandler.Items;
@@ -57,13 +68,11 @@ namespace Category.Standard.Adaptors
 
         public void Init()
         {
-            FilmFileHandler = new JsonListFileHandler<Film>(BaseConstants.FilmPath);
-            DistributorCatFileHandler = new JsonListFileHandler<DistributorCat>(BaseConstants.DistributorCatPath);
-            EmptyDirFileHandler = new JsonListFileHandler<string>(BaseConstants.EmptyDirPath);
-
-            ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
-            ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
-
+            foreach (var value in Enum.GetNames(typeof(CacheKey)))
+            {
+                if (Enum.TryParse<CacheKey>(value, out var result))
+                    CacheManager.DeleteCache(result);
+            }
         }
     }
 }

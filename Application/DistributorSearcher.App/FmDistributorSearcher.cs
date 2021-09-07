@@ -1,4 +1,5 @@
 ﻿using Category.Standard.Adaptors;
+using Category.Standard.Interfaces;
 using System;
 using System.Configuration;
 using System.Windows.Forms;
@@ -7,7 +8,7 @@ namespace DistributorSearcher.App
 {
     public partial class FmDistributorSearcher : Form
     {
-        private readonly CatalogAdaptor Adaptor;
+        private readonly ICatalog Catalog;
 
         public FmDistributorSearcher()
         {
@@ -15,7 +16,7 @@ namespace DistributorSearcher.App
             txtCategory.Focus();
 
             var exportPath = ConfigurationManager.AppSettings["ExportPath"];
-            Adaptor = new CatalogAdaptor(exportPath, true);
+            Catalog = new CatalogAdaptor(exportPath);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -63,7 +64,7 @@ namespace DistributorSearcher.App
 
         private string DoSearchDistributor(string keyword)
         { 
-            return Adaptor.FindDistributor(keyword);
+            return Catalog.FindDistributor(keyword);
         }
 
         private void txtDistributor_DoubleClick(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace DistributorSearcher.App
 
         private void ReCatalogAdaptor()
         {
-            Adaptor.Init();
+            Catalog.Init();
             txtCategory.Text = string.Empty;
             txtDistributor.Text = string.Empty;
             txtCategory.Focus();

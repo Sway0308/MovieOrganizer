@@ -31,7 +31,7 @@ namespace FilmIndex.Job
                 filmHandler.ExportJson();
             }
 
-            var categoryAdaptor = new CatalogAdaptor(AppDataPath, true);
+            var categoryAdaptor = new CatalogAdaptor(AppDataPath);
 
             var classificationHandler = new ClassifyDistributorHandler();
             classificationHandler.ClassifyAndExportDefines(categoryAdaptor.DistributorCats);

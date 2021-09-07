@@ -17,5 +17,10 @@ namespace Category.Standard.Models
                 return false;
             return dis.Distributor.SameText(Distributor) && dis.Category.SameText(Category);
         }
+
+        public override int GetHashCode()
+        {
+            return Distributor.GetHashCode() * Category.GetHashCode();
+        }
     }
 }

@@ -60,4 +60,12 @@ namespace Category.Standard.Configs
         Actress,
         Subject
     }
+    public enum CacheKey
+    {
+        FilmFileHandler,
+        DistributorCatFileHandler,
+        EmptyDirFileHandler,
+        ExtensionFileHandler,
+        ClassificationDefineFileHandler,
+    }
 }

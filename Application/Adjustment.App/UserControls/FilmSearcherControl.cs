@@ -1,9 +1,8 @@
 ﻿using Adjustment.App.Interfaces;
-using Category.Standard.Adaptors;
+using Category.Standard.Interfaces;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace Adjustment.App.UserControls
 {
     public partial class FilmSearcherControl : UserControl, IInitControls
     {
-        private IList<Film> FilmInfos;
+        private ICatalog Catalog;
         private readonly Action<Film> NotifyAction;
 
         public FilmSearcherControl()
@@ -42,7 +41,7 @@ namespace Adjustment.App.UserControls
                 return;
             }
 
-            var films = FilmInfos.Where(x => x.FilePath.IncludeText(keyword));
+            var films = Catalog.FindFilms(keyword);
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
             var film = ListBoxFilm.Items.Count == 0 ? new Film(string.Empty) : films.ElementAt(0);
@@ -69,7 +68,7 @@ namespace Adjustment.App.UserControls
                 if (NotifyAction == null || ListBoxFilm.SelectedItem == null)
                     return;
 
-                var film = FilmInfos.FirstOrDefault(x => x.FilePath.SameText(ListBoxFilm.SelectedItem.ToString()));
+                var film = Catalog.FilmInfos.FirstOrDefault(x => x.FilePath.SameText(ListBoxFilm.SelectedItem.ToString()));
                 if (film == null)
                     return;
 
@@ -77,11 +76,11 @@ namespace Adjustment.App.UserControls
             };
         }
 
-        public void InitControls(CatalogAdaptor Adaptor)
+        public void InitControls(ICatalog catalog)
         {
+            Catalog = catalog;
             TxtKeyword.Text = string.Empty;
             SearchFilms();
-            FilmInfos = Adaptor.FilmInfos;
         }
     }
 }
