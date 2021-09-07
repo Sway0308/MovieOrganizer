@@ -1,4 +1,5 @@
-﻿using Category.Standard.Configs;
+﻿using Category.Standard.Cache;
+using Category.Standard.Configs;
 using Category.Standard.Handlers;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Base;
@@ -22,11 +23,21 @@ namespace Category.Standard.Adaptors
                 Init();
         }
 
-        public IList<Film> FilmInfos => FilmFileHandler.Items;
-        public IList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
-        public IList<string> EmptyDirs => EmptyDirFileHandler.Items;
-        public Extension Extensions => ExtensionFileHandler.Item;
-        public ClassificationDefine ClassificationDefine => ClassificationDefineFileHandler.Item;
+        public IList<Film> FilmInfos => CacheManager.GetOrCreate<IList<Film>>("FilmInfos", x => { 
+            return (new FilmFileHandler(BaseConstants.FilmPath)).Items;
+        });
+        public IList<DistributorCat> DistributorCats => CacheManager.GetOrCreate<IList<DistributorCat>>("DistributorCats", x => {
+            return (new DistributorCatFileHandler(BaseConstants.DistributorCatPath)).Items;
+        });
+        public IList<string> EmptyDirs => CacheManager.GetOrCreate<IList<string>>("EmptyDirs", x => {
+            return (new EmptyDirFileHandler(BaseConstants.EmptyDirPath)).Items;
+        });
+        public Extension Extensions => CacheManager.GetOrCreate("Extensions", x => {
+            return (new ExtensionFileHandler(BaseConstants.ExtensionPath)).Item;
+        });
+        public ClassificationDefine ClassificationDefine => CacheManager.GetOrCreate("ClassificationDefine", x => {
+            return (new ClassificationDefineFileHandler(BaseConstants.ClassificationDefinePath)).Item;
+        });
 
         public IList<Film> FindFilms(string keyword)
         {
@@ -63,7 +74,6 @@ namespace Category.Standard.Adaptors
 
             ExtensionFileHandler = new JsonFileHandler<Extension>(BaseConstants.ExtensionPath);
             ClassificationDefineFileHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
-
         }
     }
 }
