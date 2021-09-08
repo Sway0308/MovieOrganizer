@@ -90,7 +90,8 @@ namespace Category.Standard.Handlers
             if (Extensions.FilmExtensions.Count == 0)
                 return files;
             var result = from x in files.AsParallel()
-                         where Extensions.FilmExtensions.Contains(Path.GetExtension(x))
+                         from y in Extensions.FilmExtensions
+                         where y.SameText(Path.GetExtension(x))
                          select x;
             return result;
         }
