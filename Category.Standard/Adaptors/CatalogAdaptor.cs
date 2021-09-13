@@ -12,19 +12,20 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor : ICatalog
     {
-        private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, x => {
+        private const int ExpirationTime = 60;
+        private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, ExpirationTime, () => {
             return new FilmFileHandler(BaseConstants.FilmPath);
         });
-        private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, x => {
+        private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, ExpirationTime, () => {
             return new DistributorCatFileHandler(BaseConstants.DistributorCatPath);
         });
-        private EmptyDirFileHandler EmptyDirFileHandler => CacheManager.GetOrCreate(CacheKey.EmptyDirFileHandler, x => {
+        private EmptyDirFileHandler EmptyDirFileHandler => CacheManager.GetOrCreate(CacheKey.EmptyDirFileHandler, ExpirationTime, () => {
             return new EmptyDirFileHandler(BaseConstants.EmptyDirPath);
         });
-        private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, x => {
+        private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, ExpirationTime, () => {
             return new ExtensionFileHandler(BaseConstants.ExtensionPath);
         });
-        private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, x => {
+        private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, ExpirationTime, () => {
             return new ClassificationDefineFileHandler(BaseConstants.ClassificationDefinePath);
         });
 
