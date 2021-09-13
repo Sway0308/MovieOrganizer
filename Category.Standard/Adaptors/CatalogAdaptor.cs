@@ -12,20 +12,20 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor : ICatalog
     {
-        private const int ExpirationTime = 60;
-        private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, ExpirationTime, () => {
+        private const int ExpirationSeconds = 60;
+        private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, ExpirationSeconds, () => {
             return new FilmFileHandler(BaseConstants.FilmPath);
         });
-        private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, ExpirationTime, () => {
+        private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, ExpirationSeconds, () => {
             return new DistributorCatFileHandler(BaseConstants.DistributorCatPath);
         });
-        private EmptyDirFileHandler EmptyDirFileHandler => CacheManager.GetOrCreate(CacheKey.EmptyDirFileHandler, ExpirationTime, () => {
+        private EmptyDirFileHandler EmptyDirFileHandler => CacheManager.GetOrCreate(CacheKey.EmptyDirFileHandler, ExpirationSeconds, () => {
             return new EmptyDirFileHandler(BaseConstants.EmptyDirPath);
         });
-        private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, ExpirationTime, () => {
+        private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, ExpirationSeconds, () => {
             return new ExtensionFileHandler(BaseConstants.ExtensionPath);
         });
-        private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, ExpirationTime, () => {
+        private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, ExpirationSeconds, () => {
             return new ClassificationDefineFileHandler(BaseConstants.ClassificationDefinePath);
         });
 
