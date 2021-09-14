@@ -11,13 +11,14 @@ namespace Category.Standard.Rules
     [Description("One Bracket")]
     public class OneBracketRule : AbstractRule, IRule
     {
+        private readonly IList<IRuleModel> _OneBracketFilms = new List<IRuleModel>();
+
         public OneBracketRule(IList<Film> films, IList<DistributorCat> distributorCats) : base(films, distributorCats)
         {
         }
 
         public IList<IRuleModel> Find()
         {
-            var result = new List<IRuleModel>();
             foreach (var film in Films.Where(x => x.Brackets.Count == 1))
             {
                 var bracket = film.Brackets[0];
@@ -27,14 +28,15 @@ namespace Category.Standard.Rules
                 var iden = bracket.Text.RemoveCharToEmptyStr("(", ")");
                 var sugs = new List<string>();
                 var dists = DistributorCats.Where(x => iden.StartsWith(x.Category));
+                var subject = film.FileName.Replace(bracket.Text, string.Empty).TrimStart(' ');
                 foreach (var dist in dists)
                 {
-                    sugs.Add($"({dist.Distributor}){bracket.Text}");
+                    sugs.Add($"({dist.Distributor}){bracket.Text}{subject}");
                 }
 
-                result.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
+                _OneBracketFilms.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
             }
-            return result;
+            return _OneBracketFilms;
         }
 
         public void Solve()
