@@ -12,7 +12,7 @@ namespace Category.Standard.Rules
     [Description("No Bracket But With Identification")]
     public class NoBracketButWithIdentificationRule : AbstractRule, IRule
     {
-        public NoBracketButWithIdentificationRule(IList<Film> films, IList<DistributorCat> distributorCats) : base(films, distributorCats)
+        public NoBracketButWithIdentificationRule(ICatalog catalog) : base(catalog)
         {
         }
 
@@ -52,11 +52,6 @@ namespace Category.Standard.Rules
                 index += 1;
                 GetIdentificationNumber(filmName, index, ref idenNum);
             }
-        }
-
-        public void Solve()
-        {
-            throw new NotImplementedException();
         }
     }
 }

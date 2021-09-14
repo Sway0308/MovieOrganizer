@@ -13,7 +13,7 @@ namespace Category.Standard.Rules
     [Description("Contain Middle Bracket")]
     public class ContainMiddleBracketRule : AbstractRule, IRule
     {
-        public ContainMiddleBracketRule(IList<Film> films, IList<DistributorCat> distributorCats) : base(films, distributorCats)
+        public ContainMiddleBracketRule(ICatalog catalog) : base(catalog)
         {
         }
 
@@ -45,11 +45,6 @@ namespace Category.Standard.Rules
             var nextFileName = content.Replace($"{content}", string.Empty);
             GetAllMiddleBracketContent(nextFileName);
             yield return content.RemoveCharToEmptyStr("[", "]");
-        }
-
-        public void Solve()
-        {
-            throw new NotImplementedException();
         }
     }
 }

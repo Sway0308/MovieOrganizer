@@ -15,8 +15,8 @@ namespace Category.Standard.Adaptors
         {
             var type = typeof(IRule);
             var rules = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .Where(x => type.IsAssignableFrom(x));
+                            .SelectMany(x => x.GetTypes())
+                            .Where(x => type.IsAssignableFrom(x));
             RuleTypes = rules;
 
             _Catalog = new CatalogAdaptor(path);
@@ -36,7 +36,10 @@ namespace Category.Standard.Adaptors
         public IList<IRuleModel> FindByRule(int index)
         {
             var ruleType = RuleTypes.ElementAt(index);
-            var rule = (IRule)Activator.CreateInstance(ruleType, _Catalog.FilmInfos, _Catalog.DistributorCats);
+            if (ruleType.IsInterface)
+                return new List<IRuleModel>();
+
+            var rule = (IRule)Activator.CreateInstance(ruleType, _Catalog);
             return rule.Find();
         }
     }

@@ -4,8 +4,12 @@ namespace Category.Standard.Interfaces
 {
     public interface IRuleModel
     {
-        string Main { get; }
         IList<string> Answers { get; }
+        bool Solved { get; }
+
+        string Main { get; }
+
+        void Solve(string answer);
 
         string GetCopyableMainText();
         string GetCopyableAnswerText(string answer);

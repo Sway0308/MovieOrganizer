@@ -48,16 +48,34 @@ namespace Category.Standard.Configs
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CategoryType
     {
+        /// <summary>
+        /// 未定義
+        /// </summary>
         Undefined,
+        /// <summary>
+        /// 發行商
+        /// </summary>
         Distributor,
+        /// <summary>
+        /// 類別
+        /// </summary>
         Identification
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PhraseType
-    { 
+    {
+        /// <summary>
+        /// 未定義
+        /// </summary>
         Undefined,
+        /// <summary>
+        /// 女演員
+        /// </summary>
         Actress,
+        /// <summary>
+        /// 標題
+        /// </summary>
         Subject
     }
     public enum CacheKey

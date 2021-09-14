@@ -1,18 +1,17 @@
 ﻿using Category.Standard.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Category.Standard.Models
 {
-    public class FilmNameSuggestion : IRuleModel
+    public class FilmDirectorySuggestion : IRuleModel
     {
         public Film Film { get; set; }
         public IList<string> Suggestions { get; set; }
-
         public IList<string> Answers => Suggestions;
-
-        public string Main => Film.FilePath;
-
+        public string Main => Film.DirectoryName;
         public bool Solved { get; private set; }
 
         public string GetCopyableAnswerText(string answer)
@@ -22,12 +21,12 @@ namespace Category.Standard.Models
 
         public string GetCopyableMainText()
         {
-            return Film.FileName;
+            return Film.DirectoryPath;
         }
 
         public string OpenableAnswerText(string answer)
         {
-            return null;
+            return answer;
         }
 
         public string OpenableMainText()
@@ -39,16 +38,17 @@ namespace Category.Standard.Models
         {
             if (Solved) return;
             if (string.IsNullOrEmpty(answer)) return;
+            if (!Directory.Exists(Film.DirectoryPath)) return;
 
-            var newName = Path.Combine(Film.DirectoryPath, answer + Film.Extension);
-            File.Move(Film.FilePath, newName);
+            var newName = Path.Combine(Directory.GetParent(Film.DirectoryPath).FullName, answer);
+            Directory.Move(Film.DirectoryPath, newName);
 
             Solved = true;
         }
 
         public override string ToString()
         {
-            return Film.FilePath;  
+            return Main;
         }
     }
 }

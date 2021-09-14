@@ -24,6 +24,8 @@ namespace Category.Standard.Models
 
         public string Main => Identification;
 
+        public bool Solved { get; private set; }
+
         public string GetCopyableAnswerText(string answer)
         {
             return Path.GetFileName(answer);
@@ -42,6 +44,16 @@ namespace Category.Standard.Models
         public string OpenableMainText()
         {
             return null;
+        }
+
+        public void Solve(string answer)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return Identification;
         }
     }
 }

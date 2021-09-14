@@ -98,19 +98,6 @@ namespace Category.Standard.Handlers
 
         protected override void AfterRecusiveSearch(string path)
         {
-            #region Regular way
-
-            //foreach (var model in FilmInfos)
-            //{
-            //    ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(model);
-            //    ClassifySingularDistributorOrCategoryFromNotRecognizedPath(model);
-            //
-            //    ClassifyGenres(model);
-            //    ClassifyActors(model);
-            //}
-
-            #endregion
-
             #region Pipeline way
 
             foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
