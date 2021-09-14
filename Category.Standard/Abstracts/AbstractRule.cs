@@ -1,17 +1,18 @@
-﻿using Category.Standard.Models;
+﻿using Category.Standard.Interfaces;
+using Category.Standard.Models;
 using System.Collections.Generic;
 
 namespace Category.Standard.Abstracts
 {
     public abstract class AbstractRule
     {
-        protected AbstractRule(IList<Film> films, IList<DistributorCat> distributorCats)
+        protected readonly ICatalog _Catalog;
+        protected AbstractRule(ICatalog catalog)
         {
-            Films = new List<Film>(films);
-            DistributorCats = new List<DistributorCat>(distributorCats);
+            _Catalog = catalog;
         }
 
-        protected IReadOnlyList<Film> Films { get; }
-        protected IReadOnlyList<DistributorCat> DistributorCats { get; }
+        protected IList<Film> Films => _Catalog.FilmInfos;
+        protected IList<DistributorCat> DistributorCats => _Catalog.DistributorCats;
     }
 }

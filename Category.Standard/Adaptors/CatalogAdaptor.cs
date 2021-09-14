@@ -43,7 +43,7 @@ namespace Category.Standard.Adaptors
         public IList<Film> FindFilms(string keyword)
         {
             var result = from x in FilmInfos.AsParallel()
-                         where x.FileName.IncludeText(keyword)
+                         where x.FileName.IncludeText(keyword) || x.DirectoryPath.IncludeText(keyword)
                          select x;
 
             return result.ToList();

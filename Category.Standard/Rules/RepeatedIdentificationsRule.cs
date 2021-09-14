@@ -12,7 +12,7 @@ namespace Category.Standard.Rules
     [Description("Repeated Identifications")]
     public class RepeatedIdentificationsRule : AbstractRule, IRule
     {
-        public RepeatedIdentificationsRule(IList<Film> films, IList<DistributorCat> distributorCats) : base(films, distributorCats)
+        public RepeatedIdentificationsRule(ICatalog catalog) : base(catalog)
         {
         }
 
@@ -43,11 +43,6 @@ namespace Category.Standard.Rules
                 result.Add(new RepeatedIdentifications { Identification = film.Identification, FilmInfos = answers });
             }
             return result;
-        }
-
-        public void Solve()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Category.Standard.Rules
     {
         private readonly IList<IRuleModel> _OneBracketFilms = new List<IRuleModel>();
 
-        public OneBracketRule(IList<Film> films, IList<DistributorCat> distributorCats) : base(films, distributorCats)
+        public OneBracketRule(ICatalog catalog) : base(catalog)
         {
         }
 
@@ -37,11 +37,6 @@ namespace Category.Standard.Rules
                 _OneBracketFilms.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
             }
             return _OneBracketFilms;
-        }
-
-        public void Solve()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

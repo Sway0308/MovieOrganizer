@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ namespace FindProblem.App
         }
 
         private IList<IRuleModel> Suggestions { get; set; }
+        private IEnumerable<IRuleModel> DisplaySuggestions => Suggestions.Where(x => !x.Solved).Select(x => x);
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -36,60 +38,69 @@ namespace FindProblem.App
                     return;
 
                 Suggestions = RuleAdaptor.FindByRule(RuleListBox.SelectedIndex);
-                DetailListBox.DataSource = Suggestions.Select(x => x.Main).ToList();
-
-                if (!Suggestions.Any())
-                    return;
-
-                var ruleModel = Suggestions.First();
-                SuggestionListBox.DataSource = ruleModel.Answers;
+                ShowDetails();
+                ShowSuggestions(DisplaySuggestions.FirstOrDefault());
             };
+
             DetailListBox.Click += (s, ev) => {
                 if (string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
                     return;
 
-                var ruleModel = Suggestions[DetailListBox.SelectedIndex];
-                SuggestionListBox.DataSource = ruleModel.Answers;
+                var ruleModel = GetSelectedRule();
+                ShowSuggestions(ruleModel);
 
                 Clipboard.SetText(ruleModel.GetCopyableMainText() ?? string.Empty);
             };
+
             DetailListBox.DoubleClick += (s, ev) => {
                 if (string.IsNullOrEmpty(DetailListBox.SelectedItem?.ToString()))
                     return;
 
-                var ruleModel = Suggestions[DetailListBox.SelectedIndex];
-                var openableText = ruleModel.OpenableMainText();
-                if (string.IsNullOrEmpty(openableText))
-                    return;
-
-                Process prc = Process.GetCurrentProcess();
-                prc.StartInfo.FileName = openableText;
-                prc.Start();
+                var ruleModel = GetSelectedRule();
+                OpenDirectory(ruleModel.OpenableMainText());
             };
-            SuggestionListBox.Click += (s, ev) => {
-                if (SuggestionListBox.SelectedItem == null)
-                    return;
 
-                var ruleModel = Suggestions[DetailListBox.SelectedIndex];
-                var answer = ruleModel.Answers.ElementAt(SuggestionListBox.SelectedIndex);
-
-                Clipboard.SetText(ruleModel.GetCopyableAnswerText(answer) ?? string.Empty);
-            };
             SuggestionListBox.DoubleClick += (s, ev) =>
             {
                 if (SuggestionListBox.SelectedItem == null)
                     return;
 
-                var ruleModel = Suggestions[DetailListBox.SelectedIndex];
-                var answer = ruleModel.Answers.ElementAt(SuggestionListBox.SelectedIndex);
-                var openableText = ruleModel.OpenableAnswerText(answer);
-                if (string.IsNullOrEmpty(openableText))
+                if (MessageBox.Show("Are you sure rename this file?", "Rename?", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                     return;
 
-                Process prc = Process.GetCurrentProcess();
-                prc.StartInfo.FileName = openableText;
-                prc.Start();
+                var ruleModel = GetSelectedRule();
+                ruleModel.Solve(ruleModel.Answers[SuggestionListBox.SelectedIndex]);
+                ShowDetails();
+                ShowSuggestions(DisplaySuggestions.FirstOrDefault());
             };
+        }
+
+        private void ShowDetails()
+        {
+            DetailListBox.DataSource = DisplaySuggestions.ToList();
+        }
+
+        private void ShowSuggestions(IRuleModel rule)
+        {
+            if (rule == null)
+                return;
+
+            SuggestionListBox.DataSource = rule.Answers;
+        }
+
+        private IRuleModel GetSelectedRule() => DisplaySuggestions.ElementAt(DetailListBox.SelectedIndex);
+
+        private void OpenDirectory(string dirPath)
+        {
+            if (string.IsNullOrEmpty(dirPath) || !Directory.Exists(dirPath))
+            {
+                MessageBox.Show("No such file");
+                return;
+            }
+
+            Process prc = Process.GetCurrentProcess();
+            prc.StartInfo.FileName = dirPath;
+            prc.Start();
         }
     }
 }

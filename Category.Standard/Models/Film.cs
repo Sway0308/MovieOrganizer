@@ -15,14 +15,14 @@ namespace Category.Standard.Models
 
         public Film(string filePath)
         {
-            DirectoryPath = string.IsNullOrEmpty(filePath) ? string.Empty : Directory.GetParent(filePath).FullName;
             FilePath = filePath;
-            FileName = Path.GetFileNameWithoutExtension(filePath);
         }
 
-        public string DirectoryPath { get; set; }
         public string FilePath { get; set; }
-        public string FileName { get; set; }
+        public string DirectoryName => Directory.GetParent(FilePath).Name;
+        public string DirectoryPath => Directory.GetParent(FilePath).FullName;
+        public string FileName => Path.GetFileNameWithoutExtension(FilePath);
+        public string Extension => Path.GetExtension(FilePath);
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;
         public IList<Bracket> Brackets { get; } = new List<Bracket>();
