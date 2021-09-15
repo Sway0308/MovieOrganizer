@@ -39,6 +39,7 @@ namespace Category.Standard.Models
         {
             if (Solved) return;
             if (string.IsNullOrEmpty(answer)) return;
+            if (!File.Exists(Film.FilePath)) return;
 
             var newName = Path.Combine(Film.DirectoryPath, answer + Film.Extension);
             File.Move(Film.FilePath, newName);
@@ -48,7 +49,7 @@ namespace Category.Standard.Models
 
         public override string ToString()
         {
-            return Film.FilePath;  
+            return Film.FileName;  
         }
     }
 }
