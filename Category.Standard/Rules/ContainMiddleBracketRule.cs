@@ -22,29 +22,10 @@ namespace Category.Standard.Rules
             var result = new List<IRuleModel>();
             foreach (var film in Films.Where(x => x.FileName.IncludeText("[") && x.FileName.IncludeText("]")))
             {
-                var allMidBrackContent = GetAllMiddleBracketContent(film.FileName);
-                var ans = from mb in allMidBrackContent
-                          from dist in DistributorCats
-                          where mb.IncludeText(dist.Category)
-                          select $"({dist.Distributor})({mb})";
-
-                var sugs = new List<string>(ans.Distinct());
+                var sugs = new List<string> { film.FileName.Replace("[", "(").Replace("]", ")") };
                 result.Add(new FilmNameSuggestion { Film = film, Suggestions = sugs });
             }
             return result;
-        }
-
-        private IEnumerable<string> GetAllMiddleBracketContent(string fileName)
-        {
-            var leftBracketIndex = fileName.IndexOf("[");
-            var rightBracketIndex = fileName.IndexOf("]");
-            if (leftBracketIndex < 0 || rightBracketIndex < 0)
-                yield break;
-
-            var content = fileName.Substring(leftBracketIndex, rightBracketIndex - leftBracketIndex + 1);
-            var nextFileName = content.Replace($"{content}", string.Empty);
-            GetAllMiddleBracketContent(nextFileName);
-            yield return content.RemoveCharToEmptyStr("[", "]");
         }
     }
 }
