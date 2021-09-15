@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FindProblem.App
@@ -37,9 +38,17 @@ namespace FindProblem.App
                 if (RuleListBox.SelectedItem == null)
                     return;
 
-                Suggestions = RuleAdaptor.FindByRule(RuleListBox.SelectedIndex);
-                ShowDetails();
-                ShowSuggestions(DisplaySuggestions.FirstOrDefault());
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    Suggestions = RuleAdaptor.FindByRule(RuleListBox.SelectedIndex);
+                    ShowDetails();
+                    ShowSuggestions(DisplaySuggestions.FirstOrDefault());
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
             };
 
             DetailListBox.Click += (s, ev) => {
