@@ -14,7 +14,7 @@ namespace Category.Standard.Handlers
             foreach (var item in distributorCats)
             {
                 if (!currentClassification.Distributors.Any(x => x.IncludeText(item.Distributor)))
-                    currentClassification.Distributors.Add(item.Distributor);
+                    currentClassification.AddItem(EClassificationDefine.Distributors, item.Distributor);
             }
 
             BusinessFunc.ExportItemToFile(currentClassification, BaseConstants.ClassificationDefinePath);

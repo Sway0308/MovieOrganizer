@@ -10,7 +10,7 @@ namespace Adjustment.App.UserControls
     public partial class EmptyDirsControl : UserControl, IInitControls
     {
         private ICatalog Catalog;
-        private IList<string> EmptyDirs => Catalog.EmptyDirs;
+        private IReadOnlyList<string> EmptyDirs => Catalog.EmptyDirs;
         public EmptyDirsControl()
         {
             InitializeComponent();

@@ -24,5 +24,10 @@ namespace Gatchan.Base.Standard.Base
         {
             return values.Any(x => x.IncludeText(s));
         }
+
+        public static bool IsEmpty(this string s)
+        {
+            return string.IsNullOrEmpty(s);
+        }
     }
 }

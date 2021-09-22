@@ -27,7 +27,7 @@ namespace Category.Standard.Rules
                 var sugName = suggestion.suggestName.SameText(film.DirectoryName) ? string.Empty : suggestion.suggestName;
 
                 var sugs = new List<string> { sugName };
-                result.Add(new FilmDirectorySuggestion { Film = film, Suggestions = sugs });
+                result.Add(new FilmDirectorySuggestion { Film = film, Answers = sugs });
             }
 
             var diss = DistributorCats.Select(x => "(" + x.Category);
@@ -42,7 +42,7 @@ namespace Category.Standard.Rules
                     var sugName = suggestion.suggestName.SameText(film.DirectoryName) ? string.Empty : suggestion.suggestName;
 
                     var sugs = new List<string> { sugName };
-                    result.Add(new FilmDirectorySuggestion { Film = film, Suggestions = sugs });
+                    result.Add(new FilmDirectorySuggestion { Film = film, Answers = sugs });
                 }
 
                 if (DistributorCats.Any(x => film.DirectoryName.StartsWith(x.Category + "-") && film.DirectoryName.Contains(" ")))
@@ -51,7 +51,7 @@ namespace Category.Standard.Rules
                     var sugName = suggestion.suggestName.SameText(film.DirectoryName) ? string.Empty : suggestion.suggestName;
 
                     var sugs = new List<string> { sugName };
-                    result.Add(new FilmDirectorySuggestion { Film = film, Suggestions = sugs });
+                    result.Add(new FilmDirectorySuggestion { Film = film, Answers = sugs });
                 }
             }
 

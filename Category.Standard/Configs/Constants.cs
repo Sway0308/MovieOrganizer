@@ -78,6 +78,8 @@ namespace Category.Standard.Configs
         /// </summary>
         Subject
     }
+
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum CacheKey
     {
         FilmFileHandler,
@@ -85,5 +87,13 @@ namespace Category.Standard.Configs
         EmptyDirFileHandler,
         ExtensionFileHandler,
         ClassificationDefineFileHandler,
+    }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum EClassificationDefine
+    {
+        Distributors,
+        Actors,
+        Genres,
     }
 }

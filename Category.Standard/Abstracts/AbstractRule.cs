@@ -12,7 +12,7 @@ namespace Category.Standard.Abstracts
             _Catalog = catalog;
         }
 
-        protected IList<Film> Films => _Catalog.FilmInfos;
-        protected IList<DistributorCat> DistributorCats => _Catalog.DistributorCats;
+        protected IReadOnlyList<Film> Films => _Catalog.FilmInfos;
+        protected IReadOnlyList<DistributorCat> DistributorCats => _Catalog.DistributorCats;
     }
 }

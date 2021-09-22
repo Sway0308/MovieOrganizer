@@ -69,6 +69,14 @@ namespace FindProblem.App
                 OpenDirectory(ruleModel.OpenableMainText());
             };
 
+            SuggestionListBox.Click += (s, ev) =>
+            {
+                if (string.IsNullOrEmpty(SuggestionListBox.SelectedItem?.ToString()))
+                    return;
+
+                Clipboard.SetText(SuggestionListBox.SelectedItem.ToString());
+            };
+
             SuggestionListBox.DoubleClick += (s, ev) =>
             {
                 if (SuggestionListBox.SelectedItem == null)

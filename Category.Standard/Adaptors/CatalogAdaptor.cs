@@ -12,7 +12,7 @@ namespace Category.Standard.Adaptors
 {
     public class CatalogAdaptor : ICatalog
     {
-        private const int ExpirationSeconds = 60;
+        private const int ExpirationSeconds = 300;
         private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, ExpirationSeconds, () => {
             return new FilmFileHandler(BaseConstants.FilmPath);
         });
@@ -25,6 +25,7 @@ namespace Category.Standard.Adaptors
         private ExtensionFileHandler ExtensionFileHandler => CacheManager.GetOrCreate(CacheKey.ExtensionFileHandler, ExpirationSeconds, () => {
             return new ExtensionFileHandler(BaseConstants.ExtensionPath);
         });
+        
         private ClassificationDefineFileHandler ClassificationDefineFileHandler => CacheManager.GetOrCreate(CacheKey.ClassificationDefineFileHandler, ExpirationSeconds, () => {
             return new ClassificationDefineFileHandler(BaseConstants.ClassificationDefinePath);
         });
@@ -34,9 +35,9 @@ namespace Category.Standard.Adaptors
             BaseConstants.SetExportPath(path);
         }
 
-        public IList<Film> FilmInfos => FilmFileHandler.Items;
-        public IList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
-        public IList<string> EmptyDirs => EmptyDirFileHandler.Items;
+        public IReadOnlyList<Film> FilmInfos => FilmFileHandler.Items;
+        public IReadOnlyList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
+        public IReadOnlyList<string> EmptyDirs => EmptyDirFileHandler.Items;
         public Extension Extensions => ExtensionFileHandler.Item;
         public ClassificationDefine ClassificationDefine => ClassificationDefineFileHandler.Item;
 
@@ -52,7 +53,7 @@ namespace Category.Standard.Adaptors
         public string FindDistributor(string keyword)
         {
             var result = from x in DistributorCats.AsParallel()
-                         where x.Category.IncludeText(keyword)
+                         where x.Category.SameText(keyword)
                          select x;
             return result.FirstOrDefault()?.Distributor;
         }
@@ -62,7 +63,25 @@ namespace Category.Standard.Adaptors
             ExtensionFileHandler.SaveItemToJson();
         }
 
-        public void SaveClassificationDefine()
+        public void AddClassificationDefine(EClassificationDefine classificationDefine, string item)
+        {
+            if (string.IsNullOrEmpty(item))
+                return;
+
+            ClassificationDefine.AddItem(classificationDefine, item);
+            SaveClassificationDefine();
+        }
+
+        public void DeleteClassificationDefine(EClassificationDefine classificationDefine, string item)
+        {
+            if (string.IsNullOrEmpty(item))
+                return;
+
+            ClassificationDefine.DeleteItem(classificationDefine, item);
+            SaveClassificationDefine();
+        }
+
+        private void SaveClassificationDefine()
         {
             ClassificationDefineFileHandler.SaveItemToJson();
         }
