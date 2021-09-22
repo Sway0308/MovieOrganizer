@@ -10,7 +10,7 @@ namespace Category.Standard.Cache
         public static TItem GetOrCreate<TItem>(object key, int expirationSeconds, Func<TItem> factory)
         {
             return MemoryCache.GetOrCreate(key, x => { 
-                x.AbsoluteExpiration = DateTimeOffset.FromUnixTimeSeconds(expirationSeconds);
+                x.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(expirationSeconds);
                 return factory.Invoke(); 
             });
         }

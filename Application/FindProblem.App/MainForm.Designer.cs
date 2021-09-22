@@ -82,6 +82,7 @@ namespace FindProblem.App
             this.SuggestionListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SuggestionListBox.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.SuggestionListBox.FormattingEnabled = true;
+            this.SuggestionListBox.HorizontalScrollbar = true;
             this.SuggestionListBox.ItemHeight = 16;
             this.SuggestionListBox.Location = new System.Drawing.Point(578, 153);
             this.SuggestionListBox.Name = "SuggestionListBox";

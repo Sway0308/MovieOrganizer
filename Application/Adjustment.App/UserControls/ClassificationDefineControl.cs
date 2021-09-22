@@ -1,4 +1,5 @@
 ﻿using Adjustment.App.Interfaces;
+using Category.Standard.Configs;
 using Category.Standard.Interfaces;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,9 +9,9 @@ namespace Adjustment.App.UserControls
     public partial class ClassificationDefineControl : UserControl, IInitControls
     {
         private ICatalog Catalog;
-        private IList<string> Distributors => Catalog.ClassificationDefine.Distributors;
-        private IList<string> Genres => Catalog.ClassificationDefine.Genres;
-        private IList<string> Actors => Catalog.ClassificationDefine.Actors;
+        private IReadOnlyList<string> Distributors => Catalog.ClassificationDefine.Distributors;
+        private IReadOnlyList<string> Genres => Catalog.ClassificationDefine.Genres;
+        private IReadOnlyList<string> Actors => Catalog.ClassificationDefine.Actors;
 
         public ClassificationDefineControl()
         {
@@ -20,21 +21,16 @@ namespace Adjustment.App.UserControls
         private void FilmDefineControl_Load(object sender, System.EventArgs e)
         {
             LbDistributor.DoubleClick += (s, ev) => ShowSelectedItem(LbDistributor, TxtDistributor);
-            BtnAddDistributor.Click += (s, ev) => AddItem(Distributors, TxtDistributor);
-            BtnDelDistributor.Click += (s, ev) => DeleteItem(Distributors, TxtDistributor);
+            BtnAddDistributor.Click += (s, ev) => AddItem(EClassificationDefine.Distributors, TxtDistributor);
+            BtnDelDistributor.Click += (s, ev) => DeleteItem(EClassificationDefine.Distributors, TxtDistributor);
 
             LbGenre.DoubleClick += (s, ev) => ShowSelectedItem(LbGenre, TxtGenre);
-            BtnAddGenre.Click += (s, ev) => AddItem(Genres, TxtGenre);
-            BtnDelGenre.Click += (s, ev) => DeleteItem(Genres, TxtGenre);
+            BtnAddGenre.Click += (s, ev) => AddItem(EClassificationDefine.Genres, TxtGenre);
+            BtnDelGenre.Click += (s, ev) => DeleteItem(EClassificationDefine.Genres, TxtGenre);
 
             LbActor.DoubleClick += (s, ev) => ShowSelectedItem(LbActor, TxtActor);
-            BtnAddActor.Click += (s, ev) => AddItem(Actors, TxtActor);
-            BtnDelActor.Click += (s, ev) => DeleteItem(Actors, TxtActor);
-
-            ExportButton.Click += (s, ev) => {
-                Catalog.SaveClassificationDefine();
-                MessageBox.Show("Done");
-            };
+            BtnAddActor.Click += (s, ev) => AddItem(EClassificationDefine.Actors, TxtActor);
+            BtnDelActor.Click += (s, ev) => DeleteItem(EClassificationDefine.Actors, TxtActor);
         }
 
         private void ShowSelectedItem(ListBox listBox, TextBox textBox)
@@ -45,35 +41,22 @@ namespace Adjustment.App.UserControls
             Clipboard.SetText(textBox.Text);
         }
 
-        private void AddItem(IList<string> list, TextBox textBox)
+        private void AddItem(EClassificationDefine classificationDefine, TextBox textBox)
         {
             var item = textBox.Text.Trim();
             if (string.IsNullOrEmpty(item))
                 return;
-
-            var allPhrases = item.Split(' ');
-            foreach (var phrase in allPhrases)
-            {
-                if (list.IndexOf(phrase) >= 0)
-                    continue;
-
-                list.Add(phrase);
-            }
-            Catalog.SaveClassificationDefine();
+            Catalog.AddClassificationDefine(classificationDefine, item);
             LoadListControl();
         }
 
-        private void DeleteItem(IList<string> list, TextBox textBox)
+        private void DeleteItem(EClassificationDefine classificationDefine, TextBox textBox)
         {
             var item = textBox.Text.Trim();
             if (string.IsNullOrEmpty(item))
                 return;
 
-            if (list.IndexOf(item) < 0)
-                return;
-            list.Remove(item);
-            textBox.Clear();
-            Catalog.SaveClassificationDefine();
+            Catalog.DeleteClassificationDefine(classificationDefine, item);
             LoadListControl();
         }
 
