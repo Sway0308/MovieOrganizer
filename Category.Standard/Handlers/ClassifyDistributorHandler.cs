@@ -8,7 +8,7 @@ namespace Category.Standard.Handlers
 {
     public class ClassifyDistributorHandler
     {
-        public void ClassifyAndExportDefines(IList<DistributorCat> distributorCats)
+        public void ClassifyAndExportDefines(IReadOnlyList<DistributorCat> distributorCats)
         {
             var currentClassification = BaseConstants.LoadInfo<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
             foreach (var item in distributorCats)
