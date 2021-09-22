@@ -11,7 +11,7 @@ namespace Category.Standard.Handlers
     {
         private readonly char[] SplitChars = { ' ', '。' };
 
-        public void ClassifyAndExportDefines(IList<Film> filmInfos, ClassificationDefine classificationDefine)
+        public void ClassifyAndExportDefines(IReadOnlyList<Film> filmInfos, ClassificationDefine classificationDefine)
         {
             var list = new List<Phrases>();
             foreach (var item in filmInfos)
