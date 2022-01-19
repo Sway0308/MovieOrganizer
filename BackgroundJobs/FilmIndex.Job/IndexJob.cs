@@ -1,11 +1,11 @@
-﻿using Category.Standard.Configs;
+﻿using Category.Standard.Adaptors;
+using Category.Standard.Configs;
 using Category.Standard.Handlers;
 using Category.Standard.Interfaces;
+using Category.Standard.Models;
+using Gatchan.Base.Standard.Base;
 using System.Collections.Generic;
 using System.Linq;
-using Gatchan.Base.Standard.Base;
-using Category.Standard.Adaptors;
-using Category.Standard.Models;
 
 namespace FilmIndex.Job
 {

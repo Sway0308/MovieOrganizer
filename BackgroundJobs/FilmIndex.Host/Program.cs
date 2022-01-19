@@ -1,11 +1,13 @@
-﻿namespace FilmIndex.Host
+﻿using System.Threading.Tasks;
+
+namespace FilmIndex.Host
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var host = new FilmIndexHost();
-            host.Start();
+            await host.Start();
         }
     }
 }
