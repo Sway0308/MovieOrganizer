@@ -33,11 +33,12 @@ namespace DistributorSearcher.App
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtDistributor = new System.Windows.Forms.TextBox();
             this.txtCategory = new System.Windows.Forms.TextBox();
+            this.cbCht = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(296, 27);
+            this.btnSearch.Location = new System.Drawing.Point(301, 34);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(103, 33);
             this.btnSearch.TabIndex = 5;
@@ -48,7 +49,7 @@ namespace DistributorSearcher.App
             // txtDistributor
             // 
             this.txtDistributor.Font = new System.Drawing.Font("新細明體", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtDistributor.Location = new System.Drawing.Point(428, 12);
+            this.txtDistributor.Location = new System.Drawing.Point(424, 12);
             this.txtDistributor.Name = "txtDistributor";
             this.txtDistributor.ReadOnly = true;
             this.txtDistributor.Size = new System.Drawing.Size(265, 55);
@@ -64,11 +65,22 @@ namespace DistributorSearcher.App
             this.txtCategory.TabIndex = 3;
             this.txtCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCategory_KeyPress);
             // 
+            // cbCht
+            // 
+            this.cbCht.AutoSize = true;
+            this.cbCht.Location = new System.Drawing.Point(301, 12);
+            this.cbCht.Name = "cbCht";
+            this.cbCht.Size = new System.Drawing.Size(72, 16);
+            this.cbCht.TabIndex = 6;
+            this.cbCht.Text = "中文字幕";
+            this.cbCht.UseVisualStyleBackColor = true;
+            // 
             // FmDistributorSearcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 78);
+            this.ClientSize = new System.Drawing.Size(713, 78);
+            this.Controls.Add(this.cbCht);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtDistributor);
             this.Controls.Add(this.txtCategory);
@@ -87,6 +99,7 @@ namespace DistributorSearcher.App
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtDistributor;
         private System.Windows.Forms.TextBox txtCategory;
+        private System.Windows.Forms.CheckBox cbCht;
     }
 }
 
