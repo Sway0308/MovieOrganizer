@@ -41,8 +41,9 @@ namespace DistributorSearcher.App
                 return;
 
             var result = FilmHelper.GetSuggestFilmName(Catalog, searchText);
+            var cht = cbCht.Checked ? "(中文字幕)" : string.Empty;
             txtDistributor.Text = result.distributor;
-            Clipboard.SetText(result.suggestName);
+            Clipboard.SetText(result.suggestName + cht);
         }
 
         private void txtDistributor_DoubleClick(object sender, EventArgs e)
