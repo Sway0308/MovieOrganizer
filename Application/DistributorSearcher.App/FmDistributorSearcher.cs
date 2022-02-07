@@ -1,8 +1,10 @@
 ﻿using Category.Standard.Adaptors;
 using Category.Standard.Helpers;
 using Category.Standard.Interfaces;
+using Gatchan.Base.Standard.Base;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DistributorSearcher.App
@@ -40,7 +42,8 @@ namespace DistributorSearcher.App
             if (string.IsNullOrEmpty(searchText))
                 return;
 
-            var result = FilmHelper.GetSuggestFilmName(Catalog, searchText);
+            var film = Catalog.FilmInfos.FirstOrDefault(x => x.FileName.SameText(searchText));
+            var result = film != null ? (distributor: film.Distributor, suggestName: film.FileName) : FilmHelper.GetSuggestFilmName(Catalog, searchText);
             var cht = cbCht.Checked ? "(中文字幕)" : string.Empty;
             txtDistributor.Text = result.distributor;
             Clipboard.SetText(result.suggestName + cht);
