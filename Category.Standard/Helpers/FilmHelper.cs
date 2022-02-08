@@ -11,13 +11,14 @@ namespace Category.Standard.Helpers
         public static (string Title, string Category, string Identity, int DashIndex) ExtractSearchText(string searchText)
         {
             var dashIndex = searchText.IndexOf("-");
-            if (dashIndex < 0)
+            var blankIndex = searchText.IndexOf(" ");
+            if (dashIndex < 0 || blankIndex < 0)
                 return (string.Empty, searchText, string.Empty, -1);
             if (!searchText.StartsWith("("))
             {
                 var category = searchText.Substring(0, dashIndex);
-                var identity = searchText.Substring(0, searchText.IndexOf(" "));
-                var title = searchText.Substring(searchText.IndexOf(" ") + 1, searchText.Length - identity.Length - 1);
+                var identity = searchText.Substring(0, blankIndex);
+                var title = searchText.Substring(blankIndex + 1, searchText.Length - identity.Length - 1);
                 return (title, category, identity, dashIndex);
             }
             else
