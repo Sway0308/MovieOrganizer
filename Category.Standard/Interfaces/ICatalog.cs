@@ -9,11 +9,13 @@ namespace Category.Standard.Interfaces
     public interface ICatalog
     {
         IReadOnlyList<Film> FilmInfos { get; }
+        IReadOnlyList<FilmItem> HistoryFilmInfos { get; }
         IReadOnlyList<DistributorCat> DistributorCats { get; }
         IReadOnlyList<string> EmptyDirs { get; }
         Extension Extensions { get; }
         ClassificationDefine ClassificationDefine { get; }
         IList<Film> FindFilms(string keyword);
+        IList<FilmItem> FindHistoryFilms(string keyword);
 
         string FindDistributor(string keyword);
 

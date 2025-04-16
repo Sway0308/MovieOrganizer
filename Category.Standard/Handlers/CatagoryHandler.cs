@@ -12,6 +12,13 @@ namespace Category.Standard.Handlers
         }
     }
 
+    public class HistoryFilmFileHandler : JsonListFileHandler<FilmItem>
+    {
+        public HistoryFilmFileHandler(string filePath) : base(filePath)
+        {
+        }
+    }
+
     public class DistributorCatFileHandler : JsonListFileHandler<DistributorCat>
     {
         public DistributorCatFileHandler(string filePath) : base(filePath)

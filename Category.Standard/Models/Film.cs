@@ -4,6 +4,18 @@ using System.IO;
 
 namespace Category.Standard.Models
 {
+    public struct FilmItem
+    {
+        public FilmItem(string filePath, string fileName)
+        {
+            FilePath = filePath;
+            FileName = fileName;
+        }
+
+        public string FilePath { get; }
+        public string FileName { get; }
+    }
+
     /// <summary>
     /// 影片設定
     /// </summary>

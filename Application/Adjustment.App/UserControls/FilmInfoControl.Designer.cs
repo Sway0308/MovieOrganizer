@@ -72,15 +72,15 @@ namespace Adjustment.App.UserControls
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 632);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 685);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label7
@@ -88,9 +88,9 @@ namespace Adjustment.App.UserControls
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(50, 371);
+            this.label7.Location = new System.Drawing.Point(51, 402);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 16);
+            this.label7.Size = new System.Drawing.Size(48, 16);
             this.label7.TabIndex = 12;
             this.label7.Text = "Actors";
             // 
@@ -99,9 +99,9 @@ namespace Adjustment.App.UserControls
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label6.Location = new System.Drawing.Point(37, 539);
+            this.label6.Location = new System.Drawing.Point(38, 584);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 16);
+            this.label6.Size = new System.Drawing.Size(61, 16);
             this.label6.TabIndex = 11;
             this.label6.Text = "Brackets";
             // 
@@ -110,9 +110,9 @@ namespace Adjustment.App.UserControls
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(64, 9);
+            this.label1.Location = new System.Drawing.Point(65, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 16);
+            this.label1.Size = new System.Drawing.Size(34, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Path";
             // 
@@ -121,9 +121,9 @@ namespace Adjustment.App.UserControls
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(54, 41);
+            this.label2.Location = new System.Drawing.Point(55, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 16);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Name";
             // 
@@ -132,9 +132,9 @@ namespace Adjustment.App.UserControls
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(24, 73);
+            this.label3.Location = new System.Drawing.Point(25, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.Size = new System.Drawing.Size(74, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "Distributor";
             // 
@@ -143,9 +143,9 @@ namespace Adjustment.App.UserControls
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(8, 105);
+            this.label4.Location = new System.Drawing.Point(9, 112);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 16);
+            this.label4.Size = new System.Drawing.Size(90, 16);
             this.label4.TabIndex = 3;
             this.label4.Text = "Identification";
             // 
@@ -154,9 +154,9 @@ namespace Adjustment.App.UserControls
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(47, 204);
+            this.label5.Location = new System.Drawing.Point(48, 220);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 16);
+            this.label5.Size = new System.Drawing.Size(51, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "Genres";
             // 
@@ -164,7 +164,7 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtName.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtName.Location = new System.Drawing.Point(107, 37);
+            this.TxtName.Location = new System.Drawing.Point(107, 39);
             this.TxtName.Name = "TxtName";
             this.TxtName.Size = new System.Drawing.Size(398, 27);
             this.TxtName.TabIndex = 6;
@@ -173,7 +173,7 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtDistributor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtDistributor.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtDistributor.Location = new System.Drawing.Point(107, 69);
+            this.TxtDistributor.Location = new System.Drawing.Point(107, 73);
             this.TxtDistributor.Name = "TxtDistributor";
             this.TxtDistributor.Size = new System.Drawing.Size(398, 27);
             this.TxtDistributor.TabIndex = 7;
@@ -182,7 +182,7 @@ namespace Adjustment.App.UserControls
             // 
             this.TxtIdentification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtIdentification.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.TxtIdentification.Location = new System.Drawing.Point(107, 101);
+            this.TxtIdentification.Location = new System.Drawing.Point(107, 107);
             this.TxtIdentification.Name = "TxtIdentification";
             this.TxtIdentification.Size = new System.Drawing.Size(398, 27);
             this.TxtIdentification.TabIndex = 8;
@@ -194,9 +194,9 @@ namespace Adjustment.App.UserControls
             this.LbBrackets.FormattingEnabled = true;
             this.LbBrackets.HorizontalScrollbar = true;
             this.LbBrackets.ItemHeight = 16;
-            this.LbBrackets.Location = new System.Drawing.Point(107, 467);
+            this.LbBrackets.Location = new System.Drawing.Point(107, 505);
             this.LbBrackets.Name = "LbBrackets";
-            this.LbBrackets.Size = new System.Drawing.Size(398, 160);
+            this.LbBrackets.Size = new System.Drawing.Size(398, 175);
             this.LbBrackets.TabIndex = 9;
             // 
             // TxtPath
@@ -215,9 +215,9 @@ namespace Adjustment.App.UserControls
             this.LbGenres.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.LbGenres.FormattingEnabled = true;
             this.LbGenres.ItemHeight = 16;
-            this.LbGenres.Location = new System.Drawing.Point(107, 133);
+            this.LbGenres.Location = new System.Drawing.Point(107, 141);
             this.LbGenres.Name = "LbGenres";
-            this.LbGenres.Size = new System.Drawing.Size(398, 159);
+            this.LbGenres.Size = new System.Drawing.Size(398, 174);
             this.LbGenres.TabIndex = 13;
             // 
             // LbActors
@@ -226,18 +226,18 @@ namespace Adjustment.App.UserControls
             this.LbActors.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.LbActors.FormattingEnabled = true;
             this.LbActors.ItemHeight = 16;
-            this.LbActors.Location = new System.Drawing.Point(107, 300);
+            this.LbActors.Location = new System.Drawing.Point(107, 323);
             this.LbActors.Name = "LbActors";
-            this.LbActors.Size = new System.Drawing.Size(398, 159);
+            this.LbActors.Size = new System.Drawing.Size(398, 174);
             this.LbActors.TabIndex = 14;
             // 
             // FilmInfoControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FilmInfoControl";
-            this.Size = new System.Drawing.Size(510, 632);
+            this.Size = new System.Drawing.Size(510, 685);
             this.Load += new System.EventHandler(this.FilmInfoControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

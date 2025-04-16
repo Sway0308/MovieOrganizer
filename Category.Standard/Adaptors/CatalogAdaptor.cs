@@ -16,6 +16,9 @@ namespace Category.Standard.Adaptors
         private FilmFileHandler FilmFileHandler => CacheManager.GetOrCreate(CacheKey.FilmFileHandler, ExpirationSeconds, () => {
             return new FilmFileHandler(BaseConstants.FilmPath);
         });
+        private HistoryFilmFileHandler HistoryFilmFileHandler => CacheManager.GetOrCreate(CacheKey.HistoryFilmFileHandler, ExpirationSeconds, () => {
+            return new HistoryFilmFileHandler(BaseConstants.HistoryFilmPath);
+        });
         private DistributorCatFileHandler DistributorCatFileHandler => CacheManager.GetOrCreate(CacheKey.DistributorCatFileHandler, ExpirationSeconds, () => {
             return new DistributorCatFileHandler(BaseConstants.DistributorCatPath);
         });
@@ -36,6 +39,7 @@ namespace Category.Standard.Adaptors
         }
 
         public IReadOnlyList<Film> FilmInfos => FilmFileHandler.Items;
+        public IReadOnlyList<FilmItem> HistoryFilmInfos => HistoryFilmFileHandler.Items;
         public IReadOnlyList<DistributorCat> DistributorCats => DistributorCatFileHandler.Items;
         public IReadOnlyList<string> EmptyDirs => EmptyDirFileHandler.Items;
         public Extension Extensions => ExtensionFileHandler.Item;
@@ -45,6 +49,15 @@ namespace Category.Standard.Adaptors
         {
             var result = from x in FilmInfos.AsParallel()
                          where x.FileName.IncludeText(keyword) || x.DirectoryPath.IncludeText(keyword)
+                         select x;
+
+            return result.ToList();
+        }
+
+        public IList<FilmItem> FindHistoryFilms(string keyword)
+        {
+            var result = from x in HistoryFilmInfos.AsParallel()
+                         where x.FileName.IncludeText(keyword) || x.FilePath.IncludeText(keyword)
                          select x;
 
             return result.ToList();

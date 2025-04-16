@@ -37,6 +37,7 @@ namespace Adjustment.App.UserControls
             if (string.IsNullOrEmpty(keyword))
             {
                 ListBoxFilm.DataSource = null;
+                listBoxHistory.DataSource = null;
                 NotifyAction.Invoke(null);
                 return;
             }
@@ -44,6 +45,10 @@ namespace Adjustment.App.UserControls
             var films = Catalog.FindFilms(keyword);
             ListBoxFilm.DataSource = films.Select(x => x.FilePath).ToList();
             LabTotal.Text = $"Total: {ListBoxFilm.Items.Count}";
+
+            var historys = Catalog.FindHistoryFilms(keyword);
+            listBoxHistory.DataSource = historys.Select(x => x.FilePath).ToList();
+
             var film = ListBoxFilm.Items.Count == 0 ? new Film(string.Empty) : films.ElementAt(0);
             NotifyAction.Invoke(film);
         }

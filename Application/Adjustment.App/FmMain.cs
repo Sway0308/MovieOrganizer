@@ -38,10 +38,10 @@ namespace Adjustment.App
 
             var filmInfoControl = new FilmInfoControl { Dock = DockStyle.Fill };
             UserControls.Add(filmInfoControl);
+            TlDefineSetting.Controls.Add(filmInfoControl, 1, 1);
             var filmSearchControl = new FilmSearcherControl(filmInfoControl.ShowFilmInfo) { Dock = DockStyle.Fill };
             UserControls.Add(filmSearchControl);
             TlDefineSetting.Controls.Add(filmSearchControl, 0, 1);
-            TlDefineSetting.Controls.Add(filmInfoControl, 1, 1);
 
             ReCatalogAdaptor();
         }

@@ -238,6 +238,7 @@ namespace Category.Standard.Handlers
         {
             BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(FilmInfos.Select(x => new FilmItem(x.FilePath, x.FileName)), BaseConstants.HistoryFilmPath, true);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
     }
