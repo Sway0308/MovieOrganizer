@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessFunc.cs" />
+    <Compile Include="ExportSettings.cs" />
     <Compile Include="FilmIndexHost.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
