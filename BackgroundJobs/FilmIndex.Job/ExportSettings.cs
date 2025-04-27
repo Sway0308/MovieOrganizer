@@ -6,5 +6,6 @@ namespace FilmIndex.Host
     {
         public IList<string> SearchPath { get; set; }
         public IList<string> SamplePath { get; set; }
+        public IList<string> HistoryExcludeRules { get; set; }
     }
 }

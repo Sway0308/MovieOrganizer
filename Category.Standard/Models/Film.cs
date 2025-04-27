@@ -35,6 +35,7 @@ namespace Category.Standard.Models
         public string DirectoryName => IsFilePathEmpty ? string.Empty : Directory.GetParent(FilePath).Name;
         public string DirectoryPath => IsFilePathEmpty ? string.Empty : Directory.GetParent(FilePath).FullName;
         public string FileName => IsFilePathEmpty ? string.Empty : Path.GetFileNameWithoutExtension(FilePath);
+        public string PureFileName => IsFilePathEmpty ? string.Empty : Path.GetFileName(FilePath);
         public string Extension => IsFilePathEmpty ? string.Empty : Path.GetExtension(FilePath);
         public string Distributor { get; set; } = string.Empty;
         public string Identification { get; set; } = string.Empty;

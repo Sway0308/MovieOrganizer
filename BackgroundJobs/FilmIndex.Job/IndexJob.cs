@@ -6,24 +6,24 @@ using System.Linq;
 using Gatchan.Base.Standard.Base;
 using Category.Standard.Adaptors;
 using Category.Standard.Models;
+using FilmIndex.Host;
 
 namespace FilmIndex.Job
 {
     public class IndexJob : IJobExecuter
     {
         public string AppDataPath { get; set; }
-        public IList<string> FilmPaths { get; set; }
-        public IList<string> SamplePaths { get; set; }
+        public ExportSettings ExportSettings { get; set; }
 
         public void Execute()
         {
-            BaseConstants.SetExportPath(AppDataPath);
+            BaseConstants.SetExportPath(AppDataPath, ExportSettings.HistoryExcludeRules);
 
             ReDefine();
-            for (int i = 0; i < FilmPaths.Count; i++)
+            for (int i = 0; i < ExportSettings.SearchPath.Count; i++)
             {
-                var path = FilmPaths[i];
-                var isRecongnized = SamplePaths.Any(x => x.SameText(path));
+                var path = ExportSettings.SearchPath[i];
+                var isRecongnized = ExportSettings.SamplePath.Any(x => x.SameText(path));
                 var exportAndIncludeSource = i != 0;
 
                 var filmHandler = new FilmInDirHandler(exportAndIncludeSource, isRecongnized);

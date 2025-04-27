@@ -19,10 +19,17 @@ namespace Category.Standard.Configs
         public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string MoviePhrasePath => Path.Combine(AppDataPath, "movie_phrase.json");
         public static string PhrasePath => Path.Combine(AppDataPath, "phrases.json");
+        public static IList<string> HistoryExcludeRules { get; private set; } = new List<string>();
 
         public static void SetExportPath(string appDataPath)
         {
             AppDataPath = appDataPath;
+        }
+
+        public static void SetExportPath(string appDataPath, IList<string> historyExcludeRules)
+        {
+            AppDataPath = appDataPath;
+            HistoryExcludeRules = historyExcludeRules;
         }
 
         public static T LoadInfo<T>(string filePath) where T : new()

@@ -16,13 +16,43 @@ namespace FilmIndex.Host
 
         public void Start()
         {
+            try
+            {
+                Execute();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "FilmIndexHost Error");
+            }
+#if DEBUG
+            Console.ReadKey();
+#endif
+        }
+
+        private void Execute()
+        {
             Logger.LogInformation("FilmIndexHost Starting...");
             var appDataPath = ConfigurationManager.AppSettings["ExportPath"];
             Logger.LogInformation($"AppDataPath: {appDataPath}");
 
-            var (filmPaths, samplePaths) = GetExportPaths(appDataPath);
+            var exportSettings = GetExportPaths(appDataPath);
 
-            var indexJob = new IndexJob { AppDataPath = appDataPath, FilmPaths = filmPaths, SamplePaths = samplePaths };
+            foreach (var item in exportSettings.SearchPath)
+            {
+                Logger.LogInformation($"SearchPath: {item}");
+            }
+
+            foreach (var item in exportSettings.SamplePath)
+            {
+                Logger.LogInformation($"SamplePath: {item}");
+            }
+
+            foreach (var item in exportSettings.HistoryExcludeRules)
+            {
+                Logger.LogInformation($"HistoryExcludeRules: {item}");
+            }
+
+            var indexJob = new IndexJob { AppDataPath = appDataPath, ExportSettings = exportSettings };
             Logger.LogInformation($"Start Indexing...");
             var sw = new Stopwatch();
             sw.Start();
@@ -31,12 +61,9 @@ namespace FilmIndex.Host
             Logger.LogInformation($"End Indexing...");
             Logger.LogInformation($"elapse time: {sw.ElapsedMilliseconds}");
             Logger.LogInformation("----------------------------------------------------------------");
-#if DEBUG
-            Console.ReadKey();
-#endif
         }
 
-        private (IList<string> filmPaths, IList<string> samplePaths) GetExportPaths(string exportPath)
+        private ExportSettings GetExportPaths(string exportPath)
         {
             if (!Directory.Exists(exportPath))
                 return GetDefaultExportPaths(exportPath);
@@ -57,27 +84,16 @@ namespace FilmIndex.Host
                 return GetDefaultExportPaths(exportPath);
             }
 
-            foreach (var item in exportSettings.SearchPath)
-            {
-                Logger.LogInformation($"SearchPath: {item}");
-            }
-
-            foreach (var item in exportSettings.SamplePath)
-            {
-                Logger.LogInformation($"SamplePath: {item}");
-            }
-
-            return (exportSettings.SearchPath, exportSettings.SamplePath);
+            return exportSettings;
         }
 
-        private (IList<string> filmPaths, IList<string> samplePaths) GetDefaultExportPaths(string exportPath)
+        private ExportSettings GetDefaultExportPaths(string exportPath)
         {
             var filmPaths = new List<string>();
             var searchPaths = ConfigurationManager.GetSection("indexInfo/searchPath") as NameValueCollection;
             for (int i = 0; i < searchPaths.Count; i++)
             {
                 filmPaths.Add(searchPaths[i]);
-                Logger.LogInformation($"SearchPath: {searchPaths[i]}");
             }
 
             var paths = new List<string>();
@@ -85,10 +101,16 @@ namespace FilmIndex.Host
             for (int i = 0; i < samplePaths.Count; i++)
             {
                 paths.Add(samplePaths[i]);
-                Logger.LogInformation($"SamplePath: {samplePaths[i]}");
             }
 
-            return (filmPaths, paths);
+            var excludeRules = new List<string>();
+            var excludeRulePaths = ConfigurationManager.GetSection("indexInfo/excludeRulePaths") as NameValueCollection;
+            for (int i = 0; i < excludeRulePaths.Count; i++)
+            {
+                excludeRules.Add(excludeRulePaths[i]);
+            }
+
+            return new ExportSettings { SearchPath = filmPaths, SamplePath = paths, HistoryExcludeRules = excludeRules };
             
         }
     }

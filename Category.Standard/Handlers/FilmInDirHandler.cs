@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Category.Standard.Handlers
@@ -238,8 +239,32 @@ namespace Category.Standard.Handlers
         {
             BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
-            BusinessFunc.ExportListToFile(FilmInfos.Select(x => new FilmItem(x.FilePath, x.FileName)), BaseConstants.HistoryFilmPath, true);
+            BusinessFunc.ExportListToFile(ExtractHistoryFilmItems(), BaseConstants.HistoryFilmPath, true);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
+        }
+
+        private IList<FilmItem> ExtractHistoryFilmItems()
+        {
+            var result = new List<FilmItem>();
+            foreach (var film in FilmInfos)
+            {
+                var check = true;
+                foreach (var item in BaseConstants.HistoryExcludeRules)
+                {
+                    // 將模式中的 '*' 替換為正規表達式的 '.*'
+                    string regexPattern = "^" + Regex.Escape("*.txt").Replace("\\*", ".*") + "$";
+
+                    // 使用 Regex.IsMatch 進行比對
+                    if (Regex.IsMatch(film.PureFileName, regexPattern, RegexOptions.IgnoreCase))
+                    {
+                        check = false;
+                        break;
+                    }
+                }
+                if (check)
+                    result.Add(new FilmItem(film.FilePath, film.FileName));
+            }
+            return result;
         }
     }
 }
