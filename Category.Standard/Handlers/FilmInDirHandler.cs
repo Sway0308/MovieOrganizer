@@ -252,7 +252,9 @@ namespace Category.Standard.Handlers
                 foreach (var item in BaseConstants.HistoryExcludeRules)
                 {
                     // 將模式中的 '*' 替換為正規表達式的 '.*'
-                    string regexPattern = "^" + Regex.Escape("*.txt").Replace("\\*", ".*") + "$";
+                    string regexPattern = "^" + Regex.Escape(item)
+                                      .Replace("\\*", ".*")
+                                      .Replace("\\?", ".") + "$";
 
                     // 使用 Regex.IsMatch 進行比對
                     if (Regex.IsMatch(film.PureFileName, regexPattern, RegexOptions.IgnoreCase))
