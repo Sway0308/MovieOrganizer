@@ -8,7 +8,6 @@ namespace FilmIndex.Host
         {
             try
             {
-                LogManager.Setup().LoadConfigurationFromFile("NLog.config");
                 var host = new FilmIndexHost();
                 host.Start();
             }
