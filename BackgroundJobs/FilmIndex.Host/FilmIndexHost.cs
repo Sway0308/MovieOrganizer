@@ -59,7 +59,7 @@ namespace FilmIndex.Host
             indexJob.Execute();
             sw.Stop();
             Logger.LogInformation($"End Indexing...");
-            Logger.LogInformation($"elapse time: {sw.ElapsedMilliseconds}");
+            Logger.LogInformation($"elapse milliseconds: {sw.ElapsedMilliseconds}");
             Logger.LogInformation("----------------------------------------------------------------");
         }
 
