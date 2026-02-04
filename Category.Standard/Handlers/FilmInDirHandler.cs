@@ -1,4 +1,4 @@
-﻿using Category.Standard.Configs;
+using Category.Standard.Configs;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
 using Gatchan.Base.Standard.Base;
@@ -14,28 +14,35 @@ namespace Category.Standard.Handlers
     public partial class FilmInDirHandler : DirRecursiveHandler
     {
         /// <summary>
-        /// 匯出時是否保留來源資料
+        /// 是否匯出包含來源
         /// </summary>
         private readonly bool ExportAndIncludeSource = false;
 
         /// <summary>
-        /// 是否為受認可的範本路徑
+        /// 是否為可識別的路徑格式
         /// </summary>
         private readonly bool IsRecognizedPath = false;
         /// <summary>
-        /// 副檔名資訊
+        /// 擴充檔名
         /// </summary>
         private readonly Extension Extensions;
 
         private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
+        private readonly JsonListFileHandler<ParserSetting> ParserSettingHandler = new ParserSettingFileHandler(BaseConstants.ParserSettingsPath);
 
         public FilmInDirHandler(bool exportAndIncludeSource, bool isRecognizedPath)
         {
             ExportAndIncludeSource = exportAndIncludeSource;
             IsRecognizedPath = isRecognizedPath;
-            
+
             Extensions = BaseConstants.LoadInfo<Extension>(BaseConstants.ExtensionPath);
             BaseConstants.LoadInfos(BaseConstants.DistributorCatPath, DistributorCats);
+
+            if (ParserSettingHandler.Items.Count == 0)
+            {
+                ParserSettingHandler.Items.Add(new ParserSetting("Default", @"^\((?<distributor>[^)]+)\)\((?<id>[^)]+)\)"));
+                ParserSettingHandler.SaveItemsToJson();
+            }
         }
 
         public IList<string> EmptyFileDirs { get; } = new List<string>();
@@ -66,6 +73,31 @@ namespace Category.Standard.Handlers
         private Film ExtractFilmInfo(string file)
         {
             var model = new Film(file);
+
+            foreach (var setting in ParserSettingHandler.Items)
+            {
+                if (string.IsNullOrWhiteSpace(setting.Pattern)) continue;
+                try
+                {
+                    var regex = new Regex(setting.Pattern, RegexOptions.IgnoreCase);
+                    var match = regex.Match(model.FileName);
+                    if (match.Success)
+                    {
+                        var distGroup = match.Groups["distributor"];
+                        var idGroup = match.Groups["id"];
+
+                        if (distGroup != null && distGroup.Success)
+                            model.Distributor = distGroup.Value;
+
+                        if (idGroup != null && idGroup.Success)
+                            model.Identification = idGroup.Value;
+
+                        break;
+                    }
+                }
+                catch { }
+            }
+
             var brackets = new List<Bracket>();
             ExtractBrackets(model.FileName, brackets);
             model.AddBrackets(brackets);
@@ -101,7 +133,8 @@ namespace Category.Standard.Handlers
         {
             #region Pipeline way
 
-            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
+            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos)))))
+            ;
 
             #endregion
         }
@@ -164,27 +197,60 @@ namespace Category.Standard.Handlers
 
         private void ClassifyDistributorAndCategoryFromFilmWithTwoBrackets(Film model)
         {
-            if (model.Brackets.Count < 2)
-                return;
+            bool regexMatched = !string.IsNullOrEmpty(model.Distributor) && !string.IsNullOrEmpty(model.Identification);
 
-            var distributorBracket = model.Brackets[0];
-            distributorBracket.Type = CategoryType.Distributor;
-            model.Distributor = distributorBracket.Text;
+            if (regexMatched)
+            {
+                // Sync Regex results to Brackets for UI consistency
+                if (model.Brackets.Count > 0 && model.Brackets[0].Text.Contains(model.Distributor))
+                {
+                    model.Brackets[0].Type = CategoryType.Distributor;
+                }
+                
+                if (model.Brackets.Count > 1 && model.Brackets[1].Text.Contains(model.Identification))
+                {
+                    model.Brackets[1].Type = CategoryType.Identification;
+                }
+            }
 
-            var identifyBracket = model.Brackets[1];
-            identifyBracket.Type = CategoryType.Identification;
-            model.Identification = identifyBracket.Text;
+            if (!regexMatched)
+            {
+                if (model.Brackets.Count < 2)
+                    return;
+
+                var distributorBracket = model.Brackets[0];
+                distributorBracket.Type = CategoryType.Distributor;
+                model.Distributor = distributorBracket.Text;
+
+                var identifyBracket = model.Brackets[1];
+                identifyBracket.Type = CategoryType.Identification;
+                model.Identification = identifyBracket.Text;
+            }
 
             if (!IsRecognizedPath)
                 return;
 
-            var identify = identifyBracket.Text;
-            var index = identify.IndexOf('-');
-            if (index < 0)
+            var identify = model.Identification;
+            string category;
+            
+            if (identify.StartsWith("(") && identify.Contains("-"))
+            {
+                var index = identify.IndexOf('-');
+                if (index < 0) return;
+                category = identify.Substring(1, index - 1);
+            }
+            else if (identify.Contains("-"))
+            {
+                 var index = identify.IndexOf('-');
+                 if (index < 0) return; 
+                 category = identify.Substring(0, index);
+            }
+            else 
+            {
                 return;
+            }
 
-            var category = identify.Substring(1, index - 1);
-            var distributor = distributorBracket.Text.RemoveCharToEmptyStr("(", ")");
+            var distributor = model.Distributor.RemoveCharToEmptyStr("(", ")");
 
             if (!DistributorCats.Any(x => x.Distributor.SameText(distributor) && x.Category.SameText(category)))
                 DistributorCats.Add(new DistributorCat { Distributor = distributor, Category = category });
@@ -237,8 +303,8 @@ namespace Category.Standard.Handlers
 
         public void ExportJson()
         {
-            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);
-            BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);
+            BusinessFunc.ExportListToFile(DistributorCats, BaseConstants.DistributorCatPath, true);       
+            BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);     
             BusinessFunc.ExportListToFile(ExtractHistoryFilmItems(), BaseConstants.HistoryFilmPath, true);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
@@ -251,12 +317,10 @@ namespace Category.Standard.Handlers
                 var check = true;
                 foreach (var item in BaseConstants.HistoryExcludeRules)
                 {
-                    // 將模式中的 '*' 替換為正規表達式的 '.*'
                     string regexPattern = "^" + Regex.Escape(item)
-                                      .Replace("\\*", ".*")
-                                      .Replace("\\?", ".") + "$";
+                                      .Replace("*", ".*")
+                                      .Replace("?", ".") + "$";
 
-                    // 使用 Regex.IsMatch 進行比對
                     if (Regex.IsMatch(film.PureFileName, regexPattern, RegexOptions.IgnoreCase))
                     {
                         check = false;

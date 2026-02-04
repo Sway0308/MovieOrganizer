@@ -1,4 +1,4 @@
-﻿using Gatchan.Base.Standard.Base;
+using Gatchan.Base.Standard.Base;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -19,7 +19,8 @@ namespace Category.Standard.Configs
         public static string BracketPath => Path.Combine(AppDataPath, "bracket.json");
         public static string MoviePhrasePath => Path.Combine(AppDataPath, "movie_phrase.json");
         public static string PhrasePath => Path.Combine(AppDataPath, "phrases.json");
-        public static IList<string> HistoryExcludeRules { get; private set; } = new List<string>();
+        public static string ParserSettingsPath => Path.Combine(AppDataPath, "parser_settings.json");
+        public static IList<string> HistoryExcludeRules { get; private set; } = new List<string>();       
 
         public static void SetExportPath(string appDataPath)
         {
@@ -96,6 +97,7 @@ namespace Category.Standard.Configs
         EmptyDirFileHandler,
         ExtensionFileHandler,
         ClassificationDefineFileHandler,
+        ParserSettingFileHandler,
     }
 
     [JsonConverter(typeof(StringEnumConverter))]

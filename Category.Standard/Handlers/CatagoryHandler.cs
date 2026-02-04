@@ -1,4 +1,4 @@
-﻿using Category.Standard.Models;
+using Category.Standard.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,6 +40,13 @@ namespace Category.Standard.Handlers
     public class ClassificationDefineFileHandler : JsonFileHandler<ClassificationDefine>
     {
         public ClassificationDefineFileHandler(string filePath) : base(filePath)
+        {
+        }
+    }
+
+    public class ParserSettingFileHandler : JsonListFileHandler<ParserSetting>
+    {
+        public ParserSettingFileHandler(string filePath) : base(filePath)
         {
         }
     }
