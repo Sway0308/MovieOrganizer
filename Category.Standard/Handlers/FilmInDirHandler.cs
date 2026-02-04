@@ -1,4 +1,5 @@
 using Category.Standard.Configs;
+using Category.Standard.Helpers;
 using Category.Standard.Models;
 using Gatchan.Base.Standard.Abstracts;
 using Gatchan.Base.Standard.Base;
@@ -30,6 +31,9 @@ namespace Category.Standard.Handlers
         private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
         private readonly JsonListFileHandler<ParserSetting> ParserSettingHandler = new ParserSettingFileHandler(BaseConstants.ParserSettingsPath);
 
+        private AhoCorasick _genreSearcher;
+        private AhoCorasick _actorSearcher;
+
         public FilmInDirHandler(bool exportAndIncludeSource, bool isRecognizedPath)
         {
             ExportAndIncludeSource = exportAndIncludeSource;
@@ -54,6 +58,9 @@ namespace Category.Standard.Handlers
         {
             EmptyFileDirs.Clear();
             FilmInfos.Clear();
+
+            _genreSearcher = new AhoCorasick(ClassificationDefine.Genres);
+            _actorSearcher = new AhoCorasick(ClassificationDefine.Actors);
         }
 
         protected override void ProcessFiles(string path, IEnumerable<string> files)
@@ -201,7 +208,6 @@ namespace Category.Standard.Handlers
 
             if (regexMatched)
             {
-                // Sync Regex results to Brackets for UI consistency
                 if (model.Brackets.Count > 0 && model.Brackets[0].Text.Contains(model.Distributor))
                 {
                     model.Brackets[0].Type = CategoryType.Distributor;
@@ -279,9 +285,7 @@ namespace Category.Standard.Handlers
 
         private void ClassifyGenres(Film model)
         {
-            var genres = from x in ClassificationDefine.Genres.AsParallel()
-                         where model.FileName.IncludeText(x)
-                         select x;
+            var genres = _genreSearcher.Search(model.FileName);
 
             foreach (var genre in genres)
             {
@@ -291,13 +295,11 @@ namespace Category.Standard.Handlers
 
         private void ClassifyActors(Film model)
         {
-            var actors = from x in ClassificationDefine.Actors.AsParallel()
-                         where model.FileName.IncludeText(x)
-                         select x;
+            var actors = _actorSearcher.Search(model.FileName);
 
-            foreach (var genre in actors)
+            foreach (var actor in actors)
             {
-                model.Actors.Add(genre);
+                model.Actors.Add(actor);
             }
         }
 
