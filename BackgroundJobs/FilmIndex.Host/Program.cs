@@ -6,6 +6,7 @@ namespace FilmIndex.Host
         {
             try
             {
+                NLog.LogManager.LoadConfiguration("NLog.config");
                 var host = new FilmIndexHost();
                 host.Start();
             }

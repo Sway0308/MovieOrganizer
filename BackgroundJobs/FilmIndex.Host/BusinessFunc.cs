@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace FilmIndex.Host
             {
                 _LoggerFactory = LoggerFactory.Create(builder =>
                 {
+                    builder.SetMinimumLevel(LogLevel.Trace);
                     builder.AddNLog();
-                    ;
                 });
             }
             return _LoggerFactory;
