@@ -14,18 +14,8 @@ namespace Category.Standard.Handlers
 {
     public partial class FilmInDirHandler : DirRecursiveHandler
     {
-        /// <summary>
-        /// 是否匯出包含來源
-        /// </summary>
         private readonly bool ExportAndIncludeSource = false;
-
-        /// <summary>
-        /// 是否為可識別的路徑格式
-        /// </summary>
         private readonly bool IsRecognizedPath = false;
-        /// <summary>
-        /// 擴充檔名
-        /// </summary>
         private readonly Extension Extensions;
 
         private readonly JsonFileHandler<ClassificationDefine> ClassificationDefineHandler = new JsonFileHandler<ClassificationDefine>(BaseConstants.ClassificationDefinePath);
@@ -77,6 +67,7 @@ namespace Category.Standard.Handlers
                 FilmInfos.Add(model);
             }
         }
+
         private Film ExtractFilmInfo(string file)
         {
             var model = new Film(file);
@@ -140,10 +131,17 @@ namespace Category.Standard.Handlers
         {
             #region Pipeline way
 
-            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos)))))
-            ;
+            foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
 
             #endregion
+        }
+
+        protected override async Task AfterRecusiveSearchAsync(string path)
+        {
+            await Task.Run(() => 
+            {
+                foreach (var _ in BlockCollectionPhase4(BlockCollectionPhase3(BlockCollectionPhase2(BlockCollectionPhase1(FilmInfos))))) ;
+            });
         }
 
         private IEnumerable<Film> BlockCollectionPhase1(IEnumerable<Film> filmInfos)
@@ -286,7 +284,6 @@ namespace Category.Standard.Handlers
         private void ClassifyGenres(Film model)
         {
             var genres = _genreSearcher.Search(model.FileName);
-
             foreach (var genre in genres)
             {
                 model.Genres.Add(genre);
@@ -296,7 +293,6 @@ namespace Category.Standard.Handlers
         private void ClassifyActors(Film model)
         {
             var actors = _actorSearcher.Search(model.FileName);
-
             foreach (var actor in actors)
             {
                 model.Actors.Add(actor);
@@ -309,6 +305,14 @@ namespace Category.Standard.Handlers
             BusinessFunc.ExportListToFile(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);     
             BusinessFunc.ExportListToFile(ExtractHistoryFilmItems(), BaseConstants.HistoryFilmPath, true);
             BusinessFunc.ExportListToFile(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
+        }
+
+        public async Task ExportJsonAsync()
+        {
+            await BusinessFunc.ExportListToFileAsync(DistributorCats, BaseConstants.DistributorCatPath, true);       
+            await BusinessFunc.ExportListToFileAsync(FilmInfos, BaseConstants.FilmPath, ExportAndIncludeSource);     
+            await BusinessFunc.ExportListToFileAsync(ExtractHistoryFilmItems(), BaseConstants.HistoryFilmPath, true);
+            await BusinessFunc.ExportListToFileAsync(EmptyFileDirs, BaseConstants.EmptyDirPath, ExportAndIncludeSource);
         }
 
         private IList<FilmItem> ExtractHistoryFilmItems()

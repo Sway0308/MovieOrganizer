@@ -1,7 +1,8 @@
-﻿using Category.Standard.Configs;
+using Category.Standard.Configs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Category.Standard.Handlers
 {
@@ -20,6 +21,11 @@ namespace Category.Standard.Handlers
         public void SaveItemsToJson(bool isIncludeSource = false)
         {
             BusinessFunc.ExportListToFile(Items, _FilePath, isIncludeSource);
+        }
+
+        public async Task SaveItemsToJsonAsync(bool isIncludeSource = false)
+        {
+            await BusinessFunc.ExportListToFileAsync(Items, _FilePath, isIncludeSource);
         }
     }
 }

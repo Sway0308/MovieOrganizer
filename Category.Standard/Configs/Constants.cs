@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Category.Standard.Configs
 {
@@ -42,6 +43,19 @@ namespace Category.Standard.Configs
             return JsonConvert.DeserializeObject<T>(json);
         }
 
+        public static async Task<T> LoadInfoAsync<T>(string filePath) where T : new()
+        {
+            if (!File.Exists(filePath))
+                return new T();
+
+            string json;
+            using (var reader = new StreamReader(filePath))
+            {
+                json = await reader.ReadToEndAsync();
+            }
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+
         public static void LoadInfos<T>(string filePath, IList<T> infos)
         {
             infos.Clear();
@@ -50,41 +64,45 @@ namespace Category.Standard.Configs
 
             var json = File.ReadAllText(filePath);
             var items = JsonConvert.DeserializeObject<IList<T>>(json);
-            items.ForEach(x => { infos.Add(x); });
+            if (items != null)
+            {
+                foreach (var x in items) { infos.Add(x); }
+            }
+        }
+
+        public static async Task LoadInfosAsync<T>(string filePath, IList<T> infos)
+        {
+            infos.Clear();
+            if (!File.Exists(filePath))
+                return;
+
+            string json;
+            using (var reader = new StreamReader(filePath))
+            {
+                json = await reader.ReadToEndAsync();
+            }
+            
+            var items = JsonConvert.DeserializeObject<IList<T>>(json);
+            if (items != null)
+            {
+                foreach (var x in items) { infos.Add(x); }
+            }
         }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CategoryType
     {
-        /// <summary>
-        /// 未定義
-        /// </summary>
         Undefined,
-        /// <summary>
-        /// 發行商
-        /// </summary>
         Distributor,
-        /// <summary>
-        /// 類別
-        /// </summary>
         Identification
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PhraseType
     {
-        /// <summary>
-        /// 未定義
-        /// </summary>
         Undefined,
-        /// <summary>
-        /// 女演員
-        /// </summary>
         Actress,
-        /// <summary>
-        /// 標題
-        /// </summary>
         Subject
     }
 
