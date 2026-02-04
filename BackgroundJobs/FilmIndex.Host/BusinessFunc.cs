@@ -1,26 +1,34 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using NLog;
 using NLog.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace FilmIndex.Host
 {
     public static class BussinessFunc
     {
         private static ILoggerFactory _LoggerFactory;
+        private static IConfiguration _Configuration;
+
+        public static IConfiguration GetConfiguration()
+        {
+            if (_Configuration == null)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                _Configuration = builder.Build();
+            }
+            return _Configuration;
+        }
+
         private static ILoggerFactory GetLogFactory()
         {
-            LogManager.Setup().LoadConfigurationFromFile("NLog.config");
             if (_LoggerFactory == null)
             {
                 _LoggerFactory = LoggerFactory.Create(builder =>
                 {
-                    builder.ClearProviders();
-                    builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                    builder.SetMinimumLevel(LogLevel.Trace);
                     builder.AddNLog();
                 });
             }

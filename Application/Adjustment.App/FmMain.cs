@@ -1,10 +1,11 @@
-﻿using Adjustment.App.Interfaces;
+using Adjustment.App.Interfaces;
 using Adjustment.App.UserControls;
 using Category.Standard.Adaptors;
 using Category.Standard.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Adjustment.App
@@ -17,7 +18,13 @@ namespace Adjustment.App
         public FmMain()
         {
             InitializeComponent();
-            var exportPath = ConfigurationManager.AppSettings["ExportPath"];
+            
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var config = builder.Build();
+            var exportPath = config["ExportPath"];
+
             Catalog = new CatalogAdaptor(exportPath);
         }
 

@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NLog" Version="6.1.0" />
+    <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
@@ -33,6 +33,12 @@
     <ProjectReference Include="..\..\Category.Standard\Category.Standard.csproj" />
     <ProjectReference Include="..\..\Gatchan.Base.Standard\Gatchan.Base.Standard.csproj" />
     <ProjectReference Include="..\FilmIndex.Job\FilmIndex.Job.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
