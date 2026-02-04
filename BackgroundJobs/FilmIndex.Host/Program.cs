@@ -1,3 +1,5 @@
+using NLog;
+
 namespace FilmIndex.Host
 {
     class Program
@@ -6,13 +8,13 @@ namespace FilmIndex.Host
         {
             try
             {
-                NLog.LogManager.LoadConfiguration("NLog.config");
+                LogManager.Setup().LoadConfigurationFromFile("NLog.config");
                 var host = new FilmIndexHost();
                 host.Start();
             }
             finally
             {
-                NLog.LogManager.Shutdown();
+                LogManager.Shutdown();
             }
         }
     }
