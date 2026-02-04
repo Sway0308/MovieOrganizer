@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Configuration;
+using System.Configuration; // Can remove? Maybe used for fallback? No, replacing.
 using System.Diagnostics;
 using System.IO;
 using FilmIndex.Job;
+using Microsoft.Extensions.Configuration; // Added
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace FilmIndex.Host
 {
     public class FilmIndexHost
     {
-        private readonly ILogger<FilmIndexHost> Logger = BussinessFunc.GetLogger<FilmIndexHost>();
+        private readonly ILogger<FilmIndexHost> Logger = BussinessFunc.GetLogger<FilmIndexHost>();        
 
         public void Start()
         {
@@ -32,7 +33,10 @@ namespace FilmIndex.Host
         private void Execute()
         {
             Logger.LogInformation("FilmIndexHost Starting...");
-            var appDataPath = ConfigurationManager.AppSettings["ExportPath"];
+            
+            var config = BussinessFunc.GetConfiguration();
+            var appDataPath = config["ExportPath"];
+            
             Logger.LogInformation($"AppDataPath: {appDataPath}");
 
             var exportSettings = GetExportPaths(appDataPath);
@@ -52,7 +56,7 @@ namespace FilmIndex.Host
                 Logger.LogInformation($"HistoryExcludeRules: {item}");
             }
 
-            var indexJob = new IndexJob { AppDataPath = appDataPath, ExportSettings = exportSettings };
+            var indexJob = new IndexJob { AppDataPath = appDataPath, ExportSettings = exportSettings };   
             Logger.LogInformation($"Start Indexing...");
             var sw = new Stopwatch();
             sw.Start();
@@ -60,14 +64,14 @@ namespace FilmIndex.Host
             sw.Stop();
             Logger.LogInformation($"End Indexing...");
             Logger.LogInformation($"elapse milliseconds: {sw.ElapsedMilliseconds}");
-            Logger.LogInformation("----------------------------------------------------------------");
+            Logger.LogInformation("----------------------------------------------------------------");    
         }
 
         private ExportSettings GetExportPaths(string exportPath)
         {
             if (!Directory.Exists(exportPath))
                 return GetDefaultExportPaths(exportPath);
- 
+
             var file = Path.Combine(exportPath, "export_settings.json");
             if (!File.Exists(file))
                 return GetDefaultExportPaths(exportPath);
@@ -89,29 +93,27 @@ namespace FilmIndex.Host
 
         private ExportSettings GetDefaultExportPaths(string exportPath)
         {
+            var config = BussinessFunc.GetConfiguration();
+
             var filmPaths = new List<string>();
-            var searchPaths = ConfigurationManager.GetSection("indexInfo/searchPath") as NameValueCollection;
-            for (int i = 0; i < searchPaths.Count; i++)
+            foreach (var section in config.GetSection("indexInfo:searchPath").GetChildren())
             {
-                filmPaths.Add(searchPaths[i]);
+                filmPaths.Add(section.Value);
             }
 
             var paths = new List<string>();
-            var samplePaths = ConfigurationManager.GetSection("indexInfo/samplePath") as NameValueCollection;
-            for (int i = 0; i < samplePaths.Count; i++)
+            foreach (var section in config.GetSection("indexInfo:samplePath").GetChildren())
             {
-                paths.Add(samplePaths[i]);
+                paths.Add(section.Value);
             }
 
             var excludeRules = new List<string>();
-            var excludeRulePaths = ConfigurationManager.GetSection("indexInfo/excludeRulePaths") as NameValueCollection;
-            for (int i = 0; i < excludeRulePaths.Count; i++)
+            foreach (var section in config.GetSection("indexInfo:excludeRulePaths").GetChildren())
             {
-                excludeRules.Add(excludeRulePaths[i]);
+                excludeRules.Add(section.Value);
             }
 
             return new ExportSettings { SearchPath = filmPaths, SamplePath = paths, HistoryExcludeRules = excludeRules };
-            
         }
     }
 }
