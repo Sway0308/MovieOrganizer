@@ -30,118 +30,125 @@ namespace Adjustment.App
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmMain));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageDefineSetting = new System.Windows.Forms.TabPage();
-            this.TlDefineSetting = new System.Windows.Forms.TableLayoutPanel();
-            this.tabPageEmptyDirs = new System.Windows.Forms.TabPage();
-            this.tabPageExtension = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPageDefineSetting.SuspendLayout();
-            this.SuspendLayout();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPageDefineSetting = new System.Windows.Forms.TabPage();
+            TlDefineSetting = new System.Windows.Forms.TableLayoutPanel();
+            tabPageEmptyDirs = new System.Windows.Forms.TabPage();
+            tabPageExtension = new System.Windows.Forms.TabPage();
+            button1 = new System.Windows.Forms.Button();
+            tableLayoutPanel1.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPageDefineSetting.SuspendLayout();
+            SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1045, 729);
-            this.tableLayoutPanel1.TabIndex = 1;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(tabControl1, 0, 0);
+            tableLayoutPanel1.Controls.Add(button1, 1, 1);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(1426, 850);
+            tableLayoutPanel1.TabIndex = 1;
             // 
             // tabControl1
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.tabControl1, 2);
-            this.tabControl1.Controls.Add(this.tabPageDefineSetting);
-            this.tabControl1.Controls.Add(this.tabPageEmptyDirs);
-            this.tabControl1.Controls.Add(this.tabPageExtension);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1039, 693);
-            this.tabControl1.TabIndex = 1;
+            tableLayoutPanel1.SetColumnSpan(tabControl1, 2);
+            tabControl1.Controls.Add(tabPageDefineSetting);
+            tabControl1.Controls.Add(tabPageEmptyDirs);
+            tabControl1.Controls.Add(tabPageExtension);
+            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl1.Location = new System.Drawing.Point(4, 5);
+            tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(1418, 792);
+            tabControl1.TabIndex = 1;
             // 
             // tabPageDefineSetting
             // 
-            this.tabPageDefineSetting.Controls.Add(this.TlDefineSetting);
-            this.tabPageDefineSetting.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDefineSetting.Name = "tabPageDefineSetting";
-            this.tabPageDefineSetting.Size = new System.Drawing.Size(1031, 667);
-            this.tabPageDefineSetting.TabIndex = 3;
-            this.tabPageDefineSetting.Text = "Category Define";
-            this.tabPageDefineSetting.UseVisualStyleBackColor = true;
+            tabPageDefineSetting.Controls.Add(TlDefineSetting);
+            tabPageDefineSetting.Location = new System.Drawing.Point(4, 28);
+            tabPageDefineSetting.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabPageDefineSetting.Name = "tabPageDefineSetting";
+            tabPageDefineSetting.Size = new System.Drawing.Size(1410, 760);
+            tabPageDefineSetting.TabIndex = 3;
+            tabPageDefineSetting.Text = "Category Define";
+            tabPageDefineSetting.UseVisualStyleBackColor = true;
             // 
             // TlDefineSetting
             // 
-            this.TlDefineSetting.ColumnCount = 2;
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TlDefineSetting.Location = new System.Drawing.Point(0, 0);
-            this.TlDefineSetting.Name = "TlDefineSetting";
-            this.TlDefineSetting.RowCount = 2;
-            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlDefineSetting.Size = new System.Drawing.Size(1031, 667);
-            this.TlDefineSetting.TabIndex = 1;
+            TlDefineSetting.ColumnCount = 2;
+            TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            TlDefineSetting.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            TlDefineSetting.Dock = System.Windows.Forms.DockStyle.Fill;
+            TlDefineSetting.Location = new System.Drawing.Point(0, 0);
+            TlDefineSetting.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            TlDefineSetting.Name = "TlDefineSetting";
+            TlDefineSetting.RowCount = 2;
+            TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.4444427F));
+            TlDefineSetting.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.5555573F));
+            TlDefineSetting.Size = new System.Drawing.Size(1410, 760);
+            TlDefineSetting.TabIndex = 1;
             // 
             // tabPageEmptyDirs
             // 
-            this.tabPageEmptyDirs.Location = new System.Drawing.Point(4, 22);
-            this.tabPageEmptyDirs.Name = "tabPageEmptyDirs";
-            this.tabPageEmptyDirs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEmptyDirs.Size = new System.Drawing.Size(1031, 657);
-            this.tabPageEmptyDirs.TabIndex = 0;
-            this.tabPageEmptyDirs.Text = "EmptyDirs";
-            this.tabPageEmptyDirs.UseVisualStyleBackColor = true;
+            tabPageEmptyDirs.Location = new System.Drawing.Point(4, 28);
+            tabPageEmptyDirs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabPageEmptyDirs.Name = "tabPageEmptyDirs";
+            tabPageEmptyDirs.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabPageEmptyDirs.Size = new System.Drawing.Size(1410, 760);
+            tabPageEmptyDirs.TabIndex = 0;
+            tabPageEmptyDirs.Text = "EmptyDirs";
+            tabPageEmptyDirs.UseVisualStyleBackColor = true;
             // 
             // tabPageExtension
             // 
-            this.tabPageExtension.Location = new System.Drawing.Point(4, 22);
-            this.tabPageExtension.Name = "tabPageExtension";
-            this.tabPageExtension.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExtension.Size = new System.Drawing.Size(1031, 657);
-            this.tabPageExtension.TabIndex = 1;
-            this.tabPageExtension.Text = "Extensions";
-            this.tabPageExtension.UseVisualStyleBackColor = true;
+            tabPageExtension.Location = new System.Drawing.Point(4, 28);
+            tabPageExtension.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabPageExtension.Name = "tabPageExtension";
+            tabPageExtension.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tabPageExtension.Size = new System.Drawing.Size(1410, 760);
+            tabPageExtension.TabIndex = 1;
+            tabPageExtension.Text = "Extensions";
+            tabPageExtension.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Location = new System.Drawing.Point(967, 702);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            button1.Location = new System.Drawing.Point(1310, 808);
+            button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(112, 36);
+            button1.TabIndex = 2;
+            button1.Text = "Refresh";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // FmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 729);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gatchan";
-            this.Load += new System.EventHandler(this.FmMain_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPageDefineSetting.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1426, 850);
+            Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "FmMain";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Gatchan";
+            Load += FmMain_Load;
+            tableLayoutPanel1.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            tabPageDefineSetting.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 
